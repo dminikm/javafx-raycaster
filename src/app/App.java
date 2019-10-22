@@ -8,6 +8,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -79,11 +81,16 @@ public class App extends Application {
 
         new AnimationTimer()
         {
+            private long lastNanoTime = System.nanoTime();
+
             public void handle(long currentNanoTime)
             {
                 PixelWriter pw = gc.getPixelWriter();
 
-                double delta = (currentNanoTime - startNanoTime) / 1000000000.0; 
+                double timeDiff = (currentNanoTime - startNanoTime) / 1000000000.0; 
+                double delta = (currentNanoTime - lastNanoTime) / 1000000000.0;
+                lastNanoTime = currentNanoTime;
+
                 gc.setFill(Color.BLACK);
                 gc.fillRect(0, 0, width, height);
 
@@ -91,8 +98,8 @@ public class App extends Application {
                 Vec2 dir = new Vec2(-1, 0);
                 Vec2 plane = new Vec2(0, 0.66);
 
-                dir = Vec2.fromAngle(dir.toAngle() + 60 * delta);
-                plane = Vec2.fromAngle(plane.toAngle() + 60 * delta);
+                dir = Vec2.fromAngle(dir.toAngle() + 60 * timeDiff);
+                plane = Vec2.fromAngle(plane.toAngle() + 60 * timeDiff).mul(plane.len());
 
                 for (int x = 0; x < width; x++) {
                     double cameraX = 2 * x / width - 1;
@@ -188,15 +195,16 @@ public class App extends Application {
                     for (int y = drawStart; y < drawEnd; y++) {
                         int d = (int)(y * 256 - height * 128 + lineHeigth * 128);
                         int texY = ((d * t.height) / lineHeigth) / 256;
-                        Color c = t.getColor(texX, texY);
-                        
-                        //gc.setFill(c);
-                        //gc.setLineWidth(1.0);
-
-                        //gc.fillRect(x, y, 1, 1);
-                        pw.setColor(x, y, c);
+                        int c = t.getColor(texX, texY);
+                        pw.setArgb(x, y, c);
                     }
                 }
+
+                gc.setFill( Color.WHITE );
+                gc.setLineWidth(2);
+                Font theFont = Font.font( "Consolas", FontWeight.NORMAL, 12);
+                gc.setFont( theFont );
+                gc.fillText( "FPS: " + (1 / delta), 60, 50 );
             }
         }.start();
         

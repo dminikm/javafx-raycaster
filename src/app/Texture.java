@@ -4,14 +4,13 @@ import java.io.File;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
-import javafx.scene.paint.Color;
 
 class Texture {
     private Texture() {
         
     }
     
-    public Color getColor(int x, int y) {
+    public int getColor(int x, int y) {
         return this.data[this.height * y + x];
     }
 
@@ -30,13 +29,13 @@ class Texture {
         Texture t = new Texture();
         PixelReader r = img.getPixelReader();
 
-        t.data = new Color[(int)(img.getWidth() * img.getHeight())];
+        t.data = new int[(int)(img.getWidth() * img.getHeight())];
         t.width = (int)img.getWidth();
         t.height = (int)img.getHeight();
 
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
-                t.data[(int)(y * img.getWidth() + x)] = r.getColor(x, y);
+                t.data[(int)(y * img.getWidth() + x)] = r.getArgb(x, y);//r.getColor(x, y);
             }
         }
 
@@ -44,7 +43,7 @@ class Texture {
     }
 
 
-    protected Color data[];
+    protected int data[];
     protected int width;
     protected int height;
 }
