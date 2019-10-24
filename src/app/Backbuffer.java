@@ -17,7 +17,7 @@ public class Backbuffer {
     }
 
     public int getPixel(int x, int y) {
-        return this.data[(y * this.height) + x];
+        return this.data[y * this.width + x];
     }
 
     public void setPixel(int x, int y, int color) {
