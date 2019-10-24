@@ -28,14 +28,14 @@ class Texture {
     static Texture from_image(Image img) {
         Texture t = new Texture();
         PixelReader r = img.getPixelReader();
-
-        t.data = new int[(int)(img.getWidth() * img.getHeight())];
+        
         t.width = (int)img.getWidth();
         t.height = (int)img.getHeight();
+        t.data = new int[t.width * t.height];
 
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
-                t.data[(int)(y * img.getWidth() + x)] = r.getArgb(x, y);//r.getColor(x, y);
+                t.data[y * t.width + x] = r.getArgb(x, y);
             }
         }
 
