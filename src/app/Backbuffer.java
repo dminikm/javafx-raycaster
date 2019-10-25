@@ -16,6 +16,14 @@ public class Backbuffer {
         }
     }
 
+    public void clearRect(int x, int y, int w, int h) {
+        for (int i = y; i < y + h; i++) {
+            for (int o = x; o < x + w; o++) {
+                this.data[i * this.width + o] = 0xFF000000;
+            }
+        }
+    }
+
     public int getPixel(int x, int y) {
         return this.data[y * this.width + x];
     }
