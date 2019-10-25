@@ -9,24 +9,20 @@ public class Renderer {
 
         try {
             this.textures = new Texture[] {
-                Texture.from_image_path("data/eagle.png"),
-                Texture.from_image_path("data/redbrick.png"),
-                Texture.from_image_path("data/purplestone.png"),
-                Texture.from_image_path("data/greystone.png"),
-                Texture.from_image_path("data/bluestone.png"),
-                Texture.from_image_path("data/mossy.png"),
-                Texture.from_image_path("data/wood.png"),
-                Texture.from_image_path("data/colorstone.png")
+                Texture.from_image_path("data/img/eagle.png"),
+                Texture.from_image_path("data/img/redbrick.png"),
+                Texture.from_image_path("data/img/purplestone.png"),
+                Texture.from_image_path("data/img/greystone.png"),
+                Texture.from_image_path("data/img/bluestone.png"),
+                Texture.from_image_path("data/img/mossy.png"),
+                Texture.from_image_path("data/img/wood.png"),
+                Texture.from_image_path("data/img/colorstone.png")
             };
         } catch (Exception e) {};
 
         this.world = world;
 
-        this.pos = new Vec2(22, 12);
-        this.dir = new Vec2(-1, 0);
-        this.plane = new Vec2(0, 0.66);
-
-        this.multicoreRendering = true;
+        this.multicoreRendering = false;
     }
 
     public Backbuffer render(double delta) {
@@ -61,6 +57,10 @@ public class Renderer {
 
     public void renderPart(double delta, int start, int end) {
         buffer.clearRect(start, 0, end - start, buffer.getHeight());
+
+        Vec2 dir = this.world.getPlayer().getDirection();
+        Vec2 pos = this.world.getPlayer().getPosition();
+        Vec2 plane = Vec2.fromAngle(dir.toAngle() - 90).mul(0.66);
 
         for (int x = start; x < end; x++) {
             double cameraX = 2 * x / (double)this.internalWidth - 1;
@@ -131,10 +131,6 @@ public class Renderer {
         private int end;
         private double delta;
     }
-
-    private Vec2 pos;
-    private Vec2 dir;
-    private Vec2 plane;
 
     private int internalWidth;
     private int internalHeight;

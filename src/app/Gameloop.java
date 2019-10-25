@@ -17,7 +17,7 @@ public class Gameloop extends AnimationTimer {
         this.canvasWidth = (int)cv.getWidth();
         this.canvasHeight = (int)cv.getHeight();
 
-        this.world = World.fromFile("");
+        this.world = World.fromFile("data/levels/level01.json");
         this.renderer = new Renderer(canvasWidth, canvasHeight, this.world);
 
 
@@ -46,6 +46,8 @@ public class Gameloop extends AnimationTimer {
     private void udpate(double delta) {
         //dir = Vec2.fromAngle(dir.toAngle() + 60 * delta);
         //plane = Vec2.fromAngle(plane.toAngle() + 60 * delta).mul(plane.len());
+
+        this.world.update(delta);
     }
 
     private long lastNanoTime;

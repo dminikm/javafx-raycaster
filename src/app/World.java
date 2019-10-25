@@ -1,5 +1,12 @@
 package app;
 
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 class RayResult {
     public boolean hit;
     public double distance;
@@ -27,12 +34,44 @@ enum RaycastMode {
 }
 
 public class World {
-    private World() {
+    private World(int[][] worldMap, Player p) {
+        this.worldMap = worldMap;
 
+        this.entities = new ArrayList();
+        this.player = p;
+        this.entities.add(this.player);
     }
 
     public static World fromFile(String fileName) {
-        return new World();
+        FileReader file;
+        JSONObject json;
+        try {
+            file = new FileReader(fileName);
+            json = (JSONObject)(new JSONParser().parse(file));
+        } catch (Exception e) {
+            json = new JSONObject();
+        }
+        
+        var map = (JSONObject)json.get("map");
+        var level = (List<List<Number>>)(map.get("level"));
+
+        int[][] levelData = new int[level.size()][0];
+
+        for (int i = 0; i < levelData.length; i++) {
+            levelData[i] = new int[level.get(i).size()];
+            for (int o = 0; o < levelData[i].length; o++) {
+                levelData[i][o] = level.get(i).get(o).intValue();
+            }
+        }
+
+        var player = (JSONObject)json.get("player");
+        var start = (JSONObject)player.get("start");
+        var position = new Vec2(((Number)start.get("x")).doubleValue(), ((Number)start.get("y")).doubleValue());
+
+        var dir = (JSONObject)player.get("dir");
+        var direction = new Vec2(((Number)dir.get("x")).doubleValue(), ((Number)dir.get("y")).doubleValue());
+        
+        return new World(levelData, new Player(position, direction, new Vec2()));
     }
 
     public RayResult castRay(RaycastMode mode, Vec2 start, Vec2 dir) {
@@ -82,7 +121,7 @@ public class World {
                     side = 1;
                 }
 
-                if (worldMap[mapY][mapX] > 0) {
+                if (this.worldMap[mapY][mapX] > 0) {
                     hit = 1;
                 }
             }
@@ -104,33 +143,21 @@ public class World {
     }
 
     public int getBlockFromRayResult(RayResult r) {
-        return worldMap[(int)r.worldPositition.y][(int)r.worldPositition.x];
+        return this.worldMap[(int)r.worldPositition.y][(int)r.worldPositition.x];
     }
 
-    private final static int worldMap[][] = {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-    };
+    public void update(double delta) {
+        for (Entity ent : this.entities) {
+            ent.update(delta);
+        }
+    }
+
+    public Entity getPlayer() {
+        return this.player;
+    }
+
+    private int[][] worldMap;
+
+    private Entity player;
+    private List<Entity> entities;
 }
