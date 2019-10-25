@@ -27,8 +27,11 @@ public class App extends Application {
         Canvas canvas = new Canvas( width, height );
         root.getChildren().add( canvas );
 
+        Keyregistry r = Keyregistry.constructInstance(scene);
+
         Gameloop g = new Gameloop(canvas);
         g.start();
+
 
         stage.show();
     }

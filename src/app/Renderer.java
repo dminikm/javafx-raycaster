@@ -1,11 +1,14 @@
 package app;
 
+import java.util.List;
+
 public class Renderer {
     public Renderer(int width, int height, World world) {
         this.internalWidth = width;
         this.internalHeight = height;
 
         this.buffer = new Backbuffer(width, height);
+        this.zBuffer = new double[width];
 
         try {
             this.textures = new Texture[] {
@@ -16,7 +19,11 @@ public class Renderer {
                 Texture.from_image_path("data/img/bluestone.png"),
                 Texture.from_image_path("data/img/mossy.png"),
                 Texture.from_image_path("data/img/wood.png"),
-                Texture.from_image_path("data/img/colorstone.png")
+                Texture.from_image_path("data/img/colorstone.png"),
+
+                Texture.from_image_path("data/img/barrel.png"),
+                Texture.from_image_path("data/img/pillar.png"),
+                Texture.from_image_path("data/img/greenlight.png")
             };
         } catch (Exception e) {};
 
@@ -52,6 +59,8 @@ public class Renderer {
             }
         }
 
+        this.renderSprites(delta);
+
         return this.buffer;
     }
 
@@ -60,7 +69,8 @@ public class Renderer {
 
         Vec2 dir = this.world.getPlayer().getDirection();
         Vec2 pos = this.world.getPlayer().getPosition();
-        Vec2 plane = Vec2.fromAngle(dir.toAngle() - 90).mul(0.66);
+        Vec2 plane = this.getPlane();
+        
 
         for (int x = start; x < end; x++) {
             double cameraX = 2 * x / (double)this.internalWidth - 1;
@@ -98,7 +108,70 @@ public class Renderer {
 
                 buffer.setPixel(x, y, c);
             }
+
+            this.zBuffer[x] = res.distance;
         }
+    }
+
+    private void renderSprites(double delta) {
+        List<StaticSprite> sprites = this.world.getAllSprites();
+        Vec2 pos = this.world.getPlayer().getPosition();
+        Vec2 dir = this.world.getPlayer().getDirection();
+        Vec2 plane = this.getPlane();
+
+        sprites.sort((final StaticSprite s1, final StaticSprite s2) -> {
+            Double s1Distance = s1.pos.distance(pos);
+            Double s2Distance = s2.pos.distance(pos);
+
+            return s2Distance.compareTo(s1Distance);
+        });
+
+        for (StaticSprite sprite : sprites) {
+            Vec2 spritePos = sprite.pos.sub(pos);
+
+            double invDet = 1.0 / (plane.x * dir.y - dir.x * plane.y);
+
+            double transformX = invDet * (dir.y * spritePos.x - dir.x * spritePos.y);
+            double transformY = invDet * (-plane.y * spritePos.x + plane.x * spritePos.y);
+
+            int spriteScreenX = (int)((this.internalWidth / 2) * (1 + transformX / transformY));
+
+            int spriteHeight = Math.abs((int)(this.internalHeight / transformY));
+            int drawStartY = Math.max(0, -spriteHeight / 2 + this.internalHeight / 2);
+            int drawEndY = Math.min(this.internalHeight - 1, spriteHeight / 2 + this.internalHeight / 2);
+
+            int spriteWidth = Math.abs((int)(this.internalHeight / transformY));
+            int drawStartX = Math.max(0, -spriteWidth / 2 + spriteScreenX);
+            int drawEndX = Math.min(this.internalWidth - 1, spriteWidth /2 + spriteScreenX);
+
+            Texture tex = this.textures[sprite.textureId];
+
+            for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
+                int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tex.width / spriteWidth) / 256;
+
+                if (transformY > 0 &&                           // In front of the camer
+                    stripe > 0 &&                               // On the screen
+                    stripe < this.internalWidth &&              //
+                    transformY < this.zBuffer[stripe]           // not behind the wall
+                ) {
+                    for (int y = drawStartY; y < drawEndY; y++) {
+                        int d = (y) * 256 - this.internalHeight * 128 + spriteHeight * 128;
+                        int texY = ((d * tex.height) / spriteHeight) / 256;
+
+                        int color = tex.getColor(texX, texY);
+                        if ((color & 0x00FFFFFF) != 0) {
+                            this.buffer.setPixel(stripe, y, color);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    private Vec2 getPlane() {
+        Vec2 dir = this.world.getPlayer().getDirection();
+        return Vec2.fromAngle(dir.toAngle() - 90).mul(0.66);
     }
 
     private Thread[] getThreads() {
@@ -135,7 +208,9 @@ public class Renderer {
     private int internalWidth;
     private int internalHeight;
     private Texture[] textures;
+    
     private Backbuffer buffer;
+    private double[] zBuffer;
 
     private World world;
 

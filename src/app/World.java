@@ -33,13 +33,53 @@ enum RaycastMode {
     }
 }
 
+class StaticSprite {
+    public Vec2     pos;
+    public int      textureId;
+    public boolean  solid;
+}
+
 public class World {
     private World(int[][] worldMap, Player p) {
         this.worldMap = worldMap;
 
-        this.entities = new ArrayList();
+        this.entities = new ArrayList<Entity>();
+        this.sprites = new ArrayList<StaticSprite>();
+        
         this.player = p;
         this.entities.add(this.player);
+    }
+
+    private static int[][] parseLevel(JSONObject json) {
+        List<List<Number>> level = JSONUtils.getFromComplexPath(json, "map.level");
+
+        int[][] levelData = new int[level.size()][0];
+
+        for (int i = 0; i < levelData.length; i++) {
+            levelData[i] = new int[level.get(i).size()];
+            for (int o = 0; o < levelData[i].length; o++) {
+                levelData[i][o] = level.get(i).get(o).intValue();
+            }
+        }
+
+        return levelData;
+    }
+
+    private static List<StaticSprite> parseSprites(JSONObject json) {
+        List<JSONObject> sprites = JSONUtils.getFromComplexPath(json, "map.sprites");
+
+        var parsedSprites = new ArrayList<StaticSprite>();
+        for (JSONObject sprite : sprites) {
+            StaticSprite spr = new StaticSprite();
+
+            spr.pos = JSONUtils.vecFromJson(sprite, "position");
+            spr.textureId = ((Number)sprite.get("textureId")).intValue();
+            spr.solid = (boolean)sprite.get("solid");
+
+            parsedSprites.add(spr);
+        }
+
+        return parsedSprites;
     }
 
     public static World fromFile(String fileName) {
@@ -52,26 +92,11 @@ public class World {
             json = new JSONObject();
         }
         
-        var map = (JSONObject)json.get("map");
-        var level = (List<List<Number>>)(map.get("level"));
+        var w = new World(parseLevel(json), Player.fromJSON(json));
 
-        int[][] levelData = new int[level.size()][0];
+        w.sprites = parseSprites(json);
 
-        for (int i = 0; i < levelData.length; i++) {
-            levelData[i] = new int[level.get(i).size()];
-            for (int o = 0; o < levelData[i].length; o++) {
-                levelData[i][o] = level.get(i).get(o).intValue();
-            }
-        }
-
-        var player = (JSONObject)json.get("player");
-        var start = (JSONObject)player.get("start");
-        var position = new Vec2(((Number)start.get("x")).doubleValue(), ((Number)start.get("y")).doubleValue());
-
-        var dir = (JSONObject)player.get("dir");
-        var direction = new Vec2(((Number)dir.get("x")).doubleValue(), ((Number)dir.get("y")).doubleValue());
-        
-        return new World(levelData, new Player(position, direction, new Vec2()));
+        return w;
     }
 
     public RayResult castRay(RaycastMode mode, Vec2 start, Vec2 dir) {
@@ -156,8 +181,13 @@ public class World {
         return this.player;
     }
 
+    public List<StaticSprite> getAllSprites() {
+        return this.sprites;
+    }
+
     private int[][] worldMap;
 
-    private Entity player;
-    private List<Entity> entities;
+    private Entity              player;
+    private List<Entity>        entities;
+    private List<StaticSprite>  sprites;
 }

@@ -36,7 +36,11 @@ public class Vec2 {
     }
 
     public double len() {
-        return Math.sqrt(this.x * this.x + this.y / this.y);
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+
+    public double distance(Vec2 other) {
+        return this.sub(other).len();
     }
     
     public Vec2 normalize() {
