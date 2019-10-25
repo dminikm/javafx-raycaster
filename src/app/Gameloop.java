@@ -37,6 +37,8 @@ public class Gameloop extends AnimationTimer {
         this.dir = new Vec2(-1, 0);
         this.plane = new Vec2(0, 0.66);
 
+        this.world = World.fromFile("");
+
     }
 
     @Override
@@ -62,76 +64,26 @@ public class Gameloop extends AnimationTimer {
             double cameraX = 2 * x / (double)this.canvasWidth - 1;
             Vec2 rayDir = dir.add(plane.mul(cameraX));
 
-            int mapX = (int)pos.x;
-            int mapY = (int)pos.y;
+            RayResult res = this.world.castRay(RaycastMode.RaycastWorld, pos, rayDir);
 
-            Vec2 sideDist = new Vec2();
-
-            Vec2 deltaDist = new Vec2(Math.abs(1 / rayDir.x), Math.abs(1 / rayDir.y));
-            double perpWallDist;
-
-            int stepX;
-            int stepY;
-
-            int hit = 0;
-            int side = 0;
-
-            if (rayDir.x < 0) {
-                stepX = -1;
-                sideDist.x = (pos.x - mapX) * deltaDist.x;
-            } else {
-                stepX = 1;
-                sideDist.x = (mapX + 1.0 - pos.x) * deltaDist.x;
-            }
-
-            if (rayDir.y < 0) {
-                stepY = -1;
-                sideDist.y = (pos.y - mapY) * deltaDist.y;
-            } else {
-                stepY = 1;
-                sideDist.y = (mapY + 1.0 - pos.y) * deltaDist.y;
-            }
-
-            while (hit == 0) {
-                if (sideDist.x < sideDist.y) {
-                    sideDist.x += deltaDist.x;
-                    mapX += stepX;
-                    side = 0;
-                } else {
-                    sideDist.y += deltaDist.y;
-                    mapY += stepY;
-                    side = 1;
-                }
-
-                if (worldMap[mapY][mapX] > 0) {
-                    hit = 1;
-                }
-            }
-
-            if (side == 0) {
-                perpWallDist = (mapX - pos.x + (1 - stepX) / 2) / rayDir.x;
-            } else {
-                perpWallDist = (mapY - pos.y + (1 - stepY) / 2) / rayDir.y;
-            }
-
-            int lineHeigth = (int)(this.canvasHeight / perpWallDist);
+            int lineHeigth = (int)(this.canvasHeight / res.distance);
             int drawStart = Math.max(0, -lineHeigth / 2 + this.canvasHeight / 2);
             int drawEnd = Math.min(this.canvasHeight - 1, lineHeigth / 2 + this.canvasHeight / 2);
 
-            int texNum = worldMap[mapY][mapX] - 1;
+            int texNum = this.world.getBlockFromRayResult(res) - 1;
             double wallX;
-            if (side == 0) {
-                wallX = pos.y + perpWallDist * rayDir.y;
+            if (res.side == 0) {
+                wallX = pos.y + res.distance * rayDir.y;
             } else {
-                wallX = pos.x + perpWallDist * rayDir.x;
+                wallX = pos.x + res.distance * rayDir.x;
             }
 
             wallX -= Math.floor(wallX);
 
             Texture t = textures[texNum];
             int texX = (int)(wallX * (double)(t.width));
-            if ((side == 0 && rayDir.x > 0) ||
-                (side == 1 && rayDir.y < 0)) {
+            if ((res.side == 0 && rayDir.x > 0) ||
+                (res.side == 1 && rayDir.y < 0)) {
                 texX = t.width - texX - 1;
             }
 
@@ -139,6 +91,9 @@ public class Gameloop extends AnimationTimer {
                 int d = (int)(y * 256 - this.canvasHeight * 128 + lineHeigth * 128);
                 int texY = ((d * t.height) / lineHeigth) / 256;
                 int c = t.getColor(texX, texY);
+                
+                if(res.side == 1) c = 0xFF000000 | (((c & 0xFFFFFF) >> 1) & 8355711);
+
                 buffer.setPixel(x, y, c);
             }
         }
@@ -150,33 +105,7 @@ public class Gameloop extends AnimationTimer {
     }
 
     private long lastNanoTime;
-    final static int worldMap[][] = {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-    };
-
+    
     private Texture[] textures;
     private Backbuffer buffer;
     private GraphicsContext gc;
@@ -189,4 +118,6 @@ public class Gameloop extends AnimationTimer {
     private Vec2 pos;
     private Vec2 dir;
     private Vec2 plane;
+
+    World world;
 }
