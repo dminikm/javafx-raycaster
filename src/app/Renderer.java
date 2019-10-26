@@ -104,7 +104,7 @@ public class Renderer {
                 int texY = ((d * t.height) / lineHeigth) / 256;
                 int c = t.getColor(texX, texY);
                 
-                if(res.side == 1) c = 0xFF000000 | (((c & 0xFFFFFF) >> 1) & 8355711);
+                if(res.side == 1) c = 0xFF000000 | (((c & 0xFFFFFF) >>> 1) & 8355711);
 
                 buffer.setPixel(x, y, c);
             }
@@ -159,9 +159,7 @@ public class Renderer {
                         int texY = ((d * tex.height) / spriteHeight) / 256;
 
                         int color = tex.getColor(texX, texY);
-                        if ((color & 0x00FFFFFF) != 0) {
-                            this.buffer.setPixel(stripe, y, color);
-                        }
+                        this.buffer.setPixelTransparent(stripe, y, color);
                     }
                 }
             }
