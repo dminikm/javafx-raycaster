@@ -17,6 +17,8 @@ target/
 .vscode/
 .settings/
 
+tools/
+
 # Package Files #
 *.jar
 *.war

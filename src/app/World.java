@@ -40,14 +40,11 @@ class StaticSprite {
 }
 
 public class World {
-    private World(int[][] worldMap, Player p) {
+    private World(int[][] worldMap) {
         this.worldMap = worldMap;
 
         this.entities = new ArrayList<Entity>();
         this.sprites = new ArrayList<StaticSprite>();
-        
-        this.player = p;
-        this.entities.add(this.player);
     }
 
     private static int[][] parseLevel(JSONObject json) {
@@ -92,7 +89,8 @@ public class World {
             json = new JSONObject();
         }
         
-        var w = new World(parseLevel(json), Player.fromJSON(json));
+        var w = new World(parseLevel(json));
+        w.setPlayer(Player.fromJSON(json, w));
 
         w.sprites = parseSprites(json);
 
@@ -167,6 +165,11 @@ public class World {
         return r;
     }
 
+    public boolean isFree(Vec2 pos) {
+        // TODO: Don't do this
+        return this.worldMap[(int)pos.y][(int)pos.x] == 0;
+    }
+
     public int getBlockFromRayResult(RayResult r) {
         return this.worldMap[(int)r.worldPositition.y][(int)r.worldPositition.x];
     }
@@ -175,6 +178,11 @@ public class World {
         for (Entity ent : this.entities) {
             ent.update(delta);
         }
+    }
+
+    private void setPlayer(Player p) {
+        this.entities.add(p);
+        this.player = p;
     }
 
     public Entity getPlayer() {

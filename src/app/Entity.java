@@ -1,10 +1,11 @@
 package app;
 
 public abstract class Entity {
-    public Entity(Vec2 pos, Vec2 dir, Vec2 vel) {
+    public Entity(Vec2 pos, Vec2 dir, Vec2 vel, World world) {
         this.position = pos;
         this.direction = dir;
         this.velocity = vel;
+        this.world = world;
     }
 
     public Vec2 getPosition() {
@@ -24,4 +25,5 @@ public abstract class Entity {
     protected Vec2 position;
     protected Vec2 direction;
     protected Vec2 velocity;
+    protected World world;
 }

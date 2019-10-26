@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +34,9 @@ public class Keyregistry {
     private Keyregistry(Scene scene) {
         this.keys = new HashMap<KeyCode, KeyState>();
         var self = this;
+
+        this.mouseDeltas = new ArrayDeque<Vec2>();
+        this.mousePosition = new Vec2();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -77,5 +82,33 @@ public class Keyregistry {
         }
     }
 
+    public Vec2 getMouseDelta() {
+        return this.mouseDeltas.peekLast().copy();
+    }
+
+    public Vec2 getMouseDeltaSmooth() {
+        Vec2 sum = new Vec2();
+        for (Vec2 delta : this.mouseDeltas) {
+            sum = sum.add(delta);
+        }
+
+        return sum.div(this.mouseDeltas.size() + 1);
+    }
+
+    public Vec2 getMousePosition() {
+        return this.mousePosition.copy();
+    }
+
+    public void handleMouse(Vec2 delta, Vec2 position) {
+        if (this.mouseDeltas.size() > 10) {
+            this.mouseDeltas.pop();
+        }
+
+        this.mouseDeltas.add(delta.copy());
+        this.mousePosition = position.copy();
+    }
+
     private Map<KeyCode, KeyState> keys;
+    private Vec2 mousePosition;
+    private Deque<Vec2> mouseDeltas;
 }
