@@ -4,45 +4,27 @@ import java.nio.IntBuffer;
 import javafx.scene.image.PixelFormat;
 
 class ARGBColor {
-    public ARGBColor(double r, double g, double b, double a) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-    }
+    public static int mixARGBIntColors(int color1, int color2) {
+        double a1 = (double)((color1 & 0xFF000000) >>> 24)  / 255;
+        double r1 = (double)((color1 & 0x00FF0000) >>> 16)  / 255;
+        double g1 = (double)((color1 & 0x0000FF00) >>> 8 )  / 255;
+        double b1 = (double)((color1 & 0x000000FF) >>> 0 )  / 255;
+        double a2 = (double)((color2 & 0xFF000000) >>> 24)  / 255;
+        double r2 = (double)((color2 & 0x00FF0000) >>> 16)  / 255;
+        double g2 = (double)((color2 & 0x0000FF00) >>> 8 )  / 255;
+        double b2 = (double)((color2 & 0x000000FF) >>> 0 )  / 255;
 
-    public int toARGBInt() {
-        int a = (int)(this.a * 255) << 24;
-        int r = (int)(this.r * 255) << 16;
-        int g = (int)(this.g * 255) << 8;
-        int b = (int)(this.b * 255);
+        double dr = r2 * a2 + r1 * a1 * (1 - a2);
+        double dg = g2 * a2 + g1 * a1 * (1 - a2);
+        double db = b2 * a2 + b1 * a1 * (1 - a2);
+        
+        int a = 0xFF << 24;
+        int r = (int)(dr * 255) << 16;
+        int g = (int)(dg * 255) << 8;
+        int b = (int)(db * 255);
 
         return a | r | g | b;
     }
-
-    public static ARGBColor fromARGBInt(int color) {
-        double a = (double)((color & 0xFF000000) >>> 24)  / 255;
-        double r = (double)((color & 0x00FF0000) >>> 16)  / 255;
-        double g = (double)((color & 0x0000FF00) >>> 8 )  / 255;
-        double b = (double)((color & 0x000000FF) >>> 0 )  / 255;
-
-        return new ARGBColor(r, g, b, a);
-    }
-
-    public ARGBColor mix(ARGBColor other) {
-        double a = 1;
-
-        double r = other.r * other.a + this.r * this.a * (1 - other.a);
-        double g = other.g * other.a + this.g * this.a * (1 - other.a);
-        double b = other.b * other.a + this.b * this.a * (1 - other.a);
-
-        return new ARGBColor(r, g, b, a);
-    }
-
-    public double r;
-    public double g;
-    public double b;
-    public double a;
 }
 
 public class Backbuffer {
@@ -81,12 +63,8 @@ public class Backbuffer {
             this.setPixel(x, y, color); return;
         }
 
-        var oldColor = ARGBColor.fromARGBInt(this.getPixel(x, y));
-        oldColor.a = 1;
-
-        var newColor = ARGBColor.fromARGBInt(color);
-
-        this.setPixel(x, y, oldColor.mix(newColor).toARGBInt());
+        int newColor = ARGBColor.mixARGBIntColors(this.getPixel(x, y), color);
+        this.setPixel(x, y, newColor);
     }
 
     public int getWidth() {

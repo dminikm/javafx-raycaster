@@ -79,7 +79,7 @@ public class World {
         return parsedSprites;
     }
 
-    public static World fromFile(String fileName) {
+    public static World fromFile(String fileName, Textureregistry textureregistry) {
         FileReader file;
         JSONObject json;
         try {
@@ -88,6 +88,8 @@ public class World {
         } catch (Exception e) {
             json = new JSONObject();
         }
+
+        textureregistry.loadTexturesFromJSON(json);
         
         var w = new World(parseLevel(json));
         w.setPlayer(Player.fromJSON(json, w));

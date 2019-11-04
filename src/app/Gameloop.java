@@ -19,8 +19,9 @@ public class Gameloop extends AnimationTimer {
         this.canvasWidth = (int)cv.getWidth();
         this.canvasHeight = (int)cv.getHeight();
 
-        this.world = World.fromFile("data/levels/level01.json");
-        this.renderer = new Renderer(canvasWidth, canvasHeight, this.world);
+        this.textureRegistry = new Textureregistry();
+        this.world = World.fromFile("data/levels/level01.json", textureRegistry);
+        this.renderer = new Renderer(canvasWidth, canvasHeight, this.world, textureRegistry);
 
         this.mouseLocked = true;
     }
@@ -77,24 +78,22 @@ public class Gameloop extends AnimationTimer {
     }
 
     private void udpate(double delta) {
-        //dir = Vec2.fromAngle(dir.toAngle() + 60 * delta);
-        //plane = Vec2.fromAngle(plane.toAngle() + 60 * delta).mul(plane.len());
-
         this.world.update(delta);
     }
 
     private long lastNanoTime;
     
     private Canvas sc;
-    private Renderer renderer;
     private GraphicsContext gc;
     private PixelWriter pw;
-
-
+    
+    
     private int canvasWidth;
     private int canvasHeight;
-
+    
     private boolean mouseLocked;
-
-    World world;
+    
+    private Textureregistry textureRegistry;
+    private Renderer renderer;
+    private World world;
 }

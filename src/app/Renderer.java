@@ -3,31 +3,15 @@ package app;
 import java.util.List;
 
 public class Renderer {
-    public Renderer(int width, int height, World world) {
+    public Renderer(int width, int height, World world, Textureregistry registry) {
         this.internalWidth = width;
         this.internalHeight = height;
 
         this.buffer = new Backbuffer(width, height);
         this.zBuffer = new double[width];
 
-        try {
-            this.textures = new Texture[] {
-                Texture.from_image_path("data/img/eagle.png"),
-                Texture.from_image_path("data/img/redbrick.png"),
-                Texture.from_image_path("data/img/purplestone.png"),
-                Texture.from_image_path("data/img/greystone.png"),
-                Texture.from_image_path("data/img/bluestone.png"),
-                Texture.from_image_path("data/img/mossy.png"),
-                Texture.from_image_path("data/img/wood.png"),
-                Texture.from_image_path("data/img/colorstone.png"),
-
-                Texture.from_image_path("data/img/barrel.png"),
-                Texture.from_image_path("data/img/pillar.png"),
-                Texture.from_image_path("data/img/greenlight.png")
-            };
-        } catch (Exception e) {};
-
         this.world = world;
+        this.textureRegistry = registry;
 
         this.multicoreRendering = false;
     }
@@ -82,7 +66,6 @@ public class Renderer {
             int drawStart = Math.max(0, -lineHeigth / 2 + this.internalHeight / 2);
             int drawEnd = Math.min(this.internalHeight - 1, lineHeigth / 2 + this.internalHeight / 2);
 
-            int texNum = this.world.getBlockFromRayResult(res) - 1;
             double wallX;
             if (res.side == 0) {
                 wallX = pos.y + res.distance * rayDir.y;
@@ -92,7 +75,7 @@ public class Renderer {
 
             wallX -= Math.floor(wallX);
 
-            Texture t = textures[texNum];
+            Texture t = this.textureRegistry.getTextureForId(this.world.getBlockFromRayResult(res));
             int texX = (int)(wallX * (double)(t.width));
             if ((res.side == 0 && rayDir.x > 0) ||
                 (res.side == 1 && rayDir.y < 0)) {
@@ -144,7 +127,7 @@ public class Renderer {
             int drawStartX = Math.max(0, -spriteWidth / 2 + spriteScreenX);
             int drawEndX = Math.min(this.internalWidth - 1, spriteWidth /2 + spriteScreenX);
 
-            Texture tex = this.textures[sprite.textureId];
+            Texture tex = this.textureRegistry.getTextureForId(sprite.textureId);
 
             for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
                 int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tex.width / spriteWidth) / 256;
@@ -205,12 +188,12 @@ public class Renderer {
 
     private int internalWidth;
     private int internalHeight;
-    private Texture[] textures;
     
     private Backbuffer buffer;
     private double[] zBuffer;
 
     private World world;
+    private Textureregistry textureRegistry;
 
     private boolean multicoreRendering;
 
