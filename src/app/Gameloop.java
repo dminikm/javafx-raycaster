@@ -21,7 +21,7 @@ public class Gameloop extends AnimationTimer {
 
         this.textureRegistry = new Textureregistry();
         this.world = World.fromFile("data/levels/level01.json", textureRegistry);
-        this.renderer = new Renderer(canvasWidth, canvasHeight, this.world, textureRegistry);
+        this.renderer = new Renderer2D(canvasWidth, canvasHeight, this.world, textureRegistry, cv.getGraphicsContext2D());
 
         this.mouseLocked = true;
     }
@@ -53,28 +53,30 @@ public class Gameloop extends AnimationTimer {
         double delta = (currentNanoTime - lastNanoTime) / 1000000000.0;
         this.lastNanoTime = currentNanoTime;
 
-        var mouseDelta = this.getMouseDelta();
-        var mousePos = this.getMousePosition();
+        //var mouseDelta = this.getMouseDelta();
+        //var mousePos = this.getMousePosition();
 
-        Keyregistry.getInstance().handleMouse(mouseDelta, mousePos);
+        //Keyregistry.getInstance().handleMouse(mouseDelta, mousePos);
 
         this.udpate(delta);
         this.render(delta);
 
         if (this.mouseLocked) {
-            this.lockMouse();
+           // this.lockMouse();
         }
     }
 
     private void render(double delta) {
-        ColorBuffer buffer = this.renderer.render(delta);
+        this.sc.getGraphicsContext2D().clearRect(0, 0, 9999999, 999999);
+        /*ColorBuffer buffer = */this.renderer.render(delta);
 
-        pw.setPixels(0, 0, this.canvasWidth, this.canvasHeight, buffer.getPixelFormat(), buffer.getData(), 0, buffer.getWidth());
+        //pw.setPixels(0, 0, this.canvasWidth, this.canvasHeight, buffer.getPixelFormat(), buffer.getData(), 0, buffer.getWidth());
         gc.setFill( Color.WHITE );
         gc.setLineWidth(2);
         Font theFont = Font.font( "Consolas", FontWeight.NORMAL, 12);
         gc.setFont( theFont );
         gc.fillText( "FPS: " + (1 / delta), 10, 10 );
+        gc.setFill( Color.BLACK );
     }
 
     private void udpate(double delta) {
@@ -94,6 +96,6 @@ public class Gameloop extends AnimationTimer {
     private boolean mouseLocked;
     
     private Textureregistry textureRegistry;
-    private Renderer renderer;
+    private Renderer2D renderer;
     private World world;
 }

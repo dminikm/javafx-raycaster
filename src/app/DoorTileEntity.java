@@ -9,9 +9,17 @@ public class DoorTileEntity extends TileEntity {
 
     }
 
+    public Vec2 getPoint1() {
+        return this.position.add(new Vec2(0.5, 0.0)); // Line start
+    }
+
+    public Vec2 getPoint2() {
+        return this.position.add(new Vec2(0.5, 1.0)); // Line start
+    }
+
     public RayResult castRay(Vec2 start, Vec2 dir) {
-        Vec2 point1 = this.position.add(new Vec2(0.0, 0.5)); // Line start
-        Vec2 point2 = this.position.add(new Vec2(1.0, 0.5)); // Line end
+        Vec2 point1 = this.getPoint1();
+        Vec2 point2 = this.getPoint2();
 
         Vec2 v1 = start.sub(point1);
         Vec2 v2 = point2.sub(point1);

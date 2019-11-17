@@ -16,6 +16,8 @@ class RayResult {
 
     public Vec2 precisePositition;
     public Vec2 worldPositition;
+
+    public Vec2[] raySteps;
 }
 
 enum RaycastMode {
@@ -108,6 +110,7 @@ public class World {
 
     public RayResult castRay(RaycastMode mode, Vec2 start, Vec2 dir) {
         RayResult r = new RayResult();
+        ArrayList<Vec2> lst = new ArrayList<Vec2>();
 
         if ((mode.getValue() & RaycastMode.RaycastWorld.getValue()) >= 1 ||
             (mode.getValue() & RaycastMode.RaycastAll.getValue()) >= 1) {
@@ -153,6 +156,15 @@ public class World {
                     side = 1;
                 }
 
+                double dst = 0;
+                if (side == 0) {
+                    dst = (mapX - start.x + (1 - stepX) / 2) / dir.x;
+                } else {
+                    dst = (mapY - start.y + (1 - stepY) / 2) / dir.y;
+                }
+
+                lst.add(start.add(dir.mul(dst)));
+
                 if (this.worldMap[mapY][mapX] > 0) {
                     if (this.tileEntityIds.contains(this.worldMap[mapY][mapX])) {
                         TileEntity tent = this.getTileEntityAt(mapX, mapY);
@@ -169,6 +181,10 @@ public class World {
                         RayResult res = tent.castRay(pos, dir);
                         res.distance += dist;
                         res.worldPositition = new Vec2(1, 1);
+
+                        //res.precisePositition = pos.copy();
+
+                        res.raySteps = lst.toArray(new Vec2[lst.size()]);
 
                         if (res.hit) {
                             return res;
@@ -191,6 +207,8 @@ public class World {
             r.side = side;
             r.precisePositition = new Vec2(start.x + perpWallDist * dir.x, start.y + perpWallDist * dir.y);
             r.worldPositition = new Vec2(mapX, mapY);
+
+            r.raySteps = lst.toArray(new Vec2[lst.size()]);
         }
 
         return r;
@@ -262,6 +280,22 @@ public class World {
         }
 
         return null;
+    }
+
+    public TileEntity[] getTileEntities() {
+        return this.tileEntities.toArray(new TileEntity[this.tileEntities.size()]);
+    }
+
+    public int getHeight() {
+        return this.worldMap.length;
+    }
+
+    public int getWidth() {
+        return this.worldMap[0].length;
+    }
+
+    public int getBlockAt(int x, int y) {
+        return this.worldMap[y][x];
     }
 
     private int[][] worldMap;

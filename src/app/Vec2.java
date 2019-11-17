@@ -48,11 +48,11 @@ public class Vec2 {
     }
     
     public double dot(Vec2 other) {
-        return this.x * other.x + this.y + other.y;
+        return (this.x * other.x) + (this.y + other.y);
     }
 
     public double cross(Vec2 other) {
-        return this.x * other.y - this.y * other.x;
+        return (this.x * other.y) - (this.y * other.x);
     }
 
     public double toAngle() {
