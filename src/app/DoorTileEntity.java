@@ -6,12 +6,12 @@ public class DoorTileEntity extends TileEntity {
     }
 
     public void update(double delta) {
-
+        this.elapsedTime += delta;
     }
 
     public RayResult castRay(Vec2 start, Vec2 dir) {
-        Vec2 point1 = this.position.add(new Vec2(0.0, 0.5)); // Line start
-        Vec2 point2 = this.position.add(new Vec2(1.0, 0.5)); // Line end
+        Vec2 point1 = this.position.add(new Vec2(0.5, 0.0)); // Line start
+        Vec2 point2 = this.position.add(new Vec2(0.5, 1.0 * (Math.cos(elapsedTime) + 1) / 2)); // Line end
 
         Vec2 v1 = start.sub(point1);
         Vec2 v2 = point2.sub(point1);
@@ -43,4 +43,6 @@ public class DoorTileEntity extends TileEntity {
         res.hit = false;
         return res;
     }
+
+    double elapsedTime = 0.0;
 }

@@ -238,6 +238,10 @@ public class World {
 
             ent.setPosition(newPos);
         }
+
+        for (TileEntity tent : this.tileEntities) {
+            tent.update(delta);
+        }
     }
 
     private void setPlayer(Player p) {
