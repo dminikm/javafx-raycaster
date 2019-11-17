@@ -5,13 +5,9 @@ import java.io.File;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 
-class Texture {
-    private Texture() {
-        
-    }
-    
-    public int getColor(int x, int y) {
-        return this.data[this.height * y + x];
+class Texture extends ColorBuffer {
+    private Texture(int width, int height) {
+        super(width, height);
     }
 
     static Texture from_image_path(String path) throws Exception {
@@ -26,13 +22,13 @@ class Texture {
     }
 
     static Texture from_image(Image img) {
-        Texture t = new Texture();
         PixelReader r = img.getPixelReader();
         
-        t.width = (int)img.getWidth();
-        t.height = (int)img.getHeight();
-        t.data = new int[t.width * t.height];
-
+        int width = (int)img.getWidth();
+        int height = (int)img.getHeight();
+        
+        Texture t = new Texture(width, height);
+        
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
                 t.data[y * t.width + x] = r.getArgb(x, y);
@@ -41,9 +37,4 @@ class Texture {
 
         return t;
     }
-
-
-    protected int data[];
-    protected int width;
-    protected int height;
 }

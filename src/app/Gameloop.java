@@ -67,7 +67,7 @@ public class Gameloop extends AnimationTimer {
     }
 
     private void render(double delta) {
-        Backbuffer buffer = this.renderer.render(delta);
+        ColorBuffer buffer = this.renderer.render(delta);
 
         pw.setPixels(0, 0, this.canvasWidth, this.canvasHeight, buffer.getPixelFormat(), buffer.getData(), 0, buffer.getWidth());
         gc.setFill( Color.WHITE );

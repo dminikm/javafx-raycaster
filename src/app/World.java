@@ -3,10 +3,12 @@ package app;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import javafx.scene.input.KeyCode;
+
 class RayResult {
     public boolean hit;
     public double distance;
@@ -33,7 +35,7 @@ enum RaycastMode {
     }
 }
 
-class StaticSprite {
+class Sprite {
     public Vec2     pos;
     public int      textureId;
     public boolean  solid;
@@ -44,7 +46,12 @@ public class World {
         this.worldMap = worldMap;
 
         this.entities = new ArrayList<Entity>();
-        this.sprites = new ArrayList<StaticSprite>();
+        this.tileEntities = new ArrayList<>();
+        this.sprites = new ArrayList<Sprite>();
+        this.tileEntityIds = new ArrayList<Integer>();
+
+        this.tileEntities.add(new DoorTileEntity(new Vec2(10, 12), true));
+        this.tileEntityIds.add(99);
     }
 
     private static int[][] parseLevel(JSONObject json) {
@@ -62,12 +69,12 @@ public class World {
         return levelData;
     }
 
-    private static List<StaticSprite> parseSprites(JSONObject json) {
+    private static List<Sprite> parseSprites(JSONObject json) {
         List<JSONObject> sprites = JSONUtils.getFromComplexPath(json, "map.sprites");
 
-        var parsedSprites = new ArrayList<StaticSprite>();
+        var parsedSprites = new ArrayList<Sprite>();
         for (JSONObject sprite : sprites) {
-            StaticSprite spr = new StaticSprite();
+            Sprite spr = new Sprite();
 
             spr.pos = JSONUtils.vecFromJson(sprite, "position");
             spr.textureId = ((Number)sprite.get("textureId")).intValue();
@@ -147,7 +154,29 @@ public class World {
                 }
 
                 if (this.worldMap[mapY][mapX] > 0) {
-                    hit = 1;
+                    if (this.tileEntityIds.contains(this.worldMap[mapY][mapX])) {
+                        TileEntity tent = this.getTileEntityAt(mapX, mapY);
+                        double dist = 0;
+
+                        if (side == 0) {
+                            dist = (mapX - start.x + (1 - stepX) / 2) / dir.x;
+                        } else {
+                            dist = (mapY - start.y + (1 - stepY) / 2) / dir.y;
+                        }
+
+                        Vec2 pos = start.add(dir.mul(dist));
+
+                        RayResult res = tent.castRay(pos, dir);
+                        res.distance += dist;
+                        res.worldPositition = new Vec2(1, 1);
+
+                        if (res.hit) {
+                            return res;
+                        }
+
+                    } else {
+                        hit = 1;
+                    }
                 }
             }
 
@@ -179,6 +208,35 @@ public class World {
     public void update(double delta) {
         for (Entity ent : this.entities) {
             ent.update(delta);
+
+            Vec2 pos = ent.getPosition();
+            Vec2 vel = ent.getVelocity().mul(delta);
+            Vec2 newPos = ent.getPosition().add(vel);
+
+            Rect bbx = ent.getBoundingBox().move(vel);
+            Rect bby = bbx.copy();
+
+            bbx.y = pos.y;
+            bby.x = pos.x;
+
+            for (int i = 0; i < this.worldMap.length; i++) {
+                for (int o = 0; o < this.worldMap[i].length; o++) {
+                    if (!this.isFree(new Vec2(o, i))) {
+                        Rect bbb = new Rect(o, i, 1, 1);
+
+
+                        if (bbx.collidesWith(bbb)) {
+                            newPos.x = pos.x;
+                        }
+
+                        if (bby.collidesWith(bbb)) {
+                            newPos.y = pos.y;
+                        }
+                    }
+                }
+            }
+
+            ent.setPosition(newPos);
         }
     }
 
@@ -191,13 +249,27 @@ public class World {
         return this.player;
     }
 
-    public List<StaticSprite> getAllSprites() {
+    public List<Sprite> getAllSprites() {
         return this.sprites;
+    }
+
+    public TileEntity getTileEntityAt(int x, int y) {
+        for (TileEntity tent : this.tileEntities) {
+            Vec2 pos = tent.getPosition();
+
+            if ((int)pos.x == x && (int)pos.y == y)
+                return tent;
+        }
+
+        return null;
     }
 
     private int[][] worldMap;
 
     private Entity              player;
     private List<Entity>        entities;
-    private List<StaticSprite>  sprites;
+    private List<TileEntity>    tileEntities;
+    private List<Sprite>        sprites;
+    
+    private List<Integer>       tileEntityIds;
 }

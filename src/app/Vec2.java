@@ -47,6 +47,14 @@ public class Vec2 {
         return this.div(this.len());
     }
     
+    public double dot(Vec2 other) {
+        return this.x * other.x + this.y + other.y;
+    }
+
+    public double cross(Vec2 other) {
+        return this.x * other.y - this.y * other.x;
+    }
+
     public double toAngle() {
         return Angle.toDeg(Math.atan2(-this.y, -this.x)) + 180;
     }

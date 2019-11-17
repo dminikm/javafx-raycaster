@@ -7,7 +7,7 @@ public class Renderer {
         this.internalWidth = width;
         this.internalHeight = height;
 
-        this.buffer = new Backbuffer(width, height);
+        this.buffer = new ColorBuffer(width, height);
         this.zBuffer = new double[width];
 
         this.world = world;
@@ -16,7 +16,7 @@ public class Renderer {
         this.multicoreRendering = false;
     }
 
-    public Backbuffer render(double delta) {
+    public ColorBuffer render(double delta) {
         if (!this.multicoreRendering) {
             this.renderPart(delta, 0, internalWidth);
         } else {
@@ -85,7 +85,7 @@ public class Renderer {
             for (int y = drawStart; y < drawEnd; y++) {
                 int d = (int)(y * 256 - this.internalHeight * 128 + lineHeigth * 128);
                 int texY = ((d * t.height) / lineHeigth) / 256;
-                int c = t.getColor(texX, texY);
+                int c = t.getPixel(texX, texY);
                 
                 if(res.side == 1) c = 0xFF000000 | (((c & 0xFFFFFF) >>> 1) & 8355711);
 
@@ -97,19 +97,19 @@ public class Renderer {
     }
 
     private void renderSprites(double delta) {
-        List<StaticSprite> sprites = this.world.getAllSprites();
+        List<Sprite> sprites = this.world.getAllSprites();
         Vec2 pos = this.world.getPlayer().getPosition();
         Vec2 dir = this.world.getPlayer().getDirection();
         Vec2 plane = this.getPlane();
 
-        sprites.sort((final StaticSprite s1, final StaticSprite s2) -> {
+        sprites.sort((final Sprite s1, final Sprite s2) -> {
             Double s1Distance = s1.pos.distance(pos);
             Double s2Distance = s2.pos.distance(pos);
 
             return s2Distance.compareTo(s1Distance);
         });
 
-        for (StaticSprite sprite : sprites) {
+        for (Sprite sprite : sprites) {
             Vec2 spritePos = sprite.pos.sub(pos);
 
             double invDet = 1.0 / (plane.x * dir.y - dir.x * plane.y);
@@ -141,12 +141,11 @@ public class Renderer {
                         int d = (y) * 256 - this.internalHeight * 128 + spriteHeight * 128;
                         int texY = ((d * tex.height) / spriteHeight) / 256;
 
-                        int color = tex.getColor(texX, texY);
+                        int color = tex.getPixel(texX, texY);
                         this.buffer.setPixelTransparent(stripe, y, color);
                     }
                 }
             }
-
         }
     }
 
@@ -189,7 +188,7 @@ public class Renderer {
     private int internalWidth;
     private int internalHeight;
     
-    private Backbuffer buffer;
+    private ColorBuffer buffer;
     private double[] zBuffer;
 
     private World world;
