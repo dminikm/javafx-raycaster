@@ -1,13 +1,8 @@
 package app;
 
-import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import javafx.scene.input.KeyCode;
 
 class RayResult {
     public boolean hit;
@@ -42,7 +37,7 @@ class Sprite {
 }
 
 public class World {
-    private World(int[][] worldMap) {
+    public World(int[][] worldMap, Player p, Integer[] tileEntityIDs, TileEntity[] tileEntities, Entity[] entities, Sprite[] sprites) {
         this.worldMap = worldMap;
 
         this.entities = new ArrayList<Entity>();
@@ -50,60 +45,13 @@ public class World {
         this.sprites = new ArrayList<Sprite>();
         this.tileEntityIds = new ArrayList<Integer>();
 
-        this.tileEntities.add(new DoorTileEntity(new Vec2(10, 12), true));
-        this.tileEntityIds.add(99);
-    }
+        Collections.addAll(this.entities, entities);
+        Collections.addAll(this.tileEntities, tileEntities);
+        Collections.addAll(this.sprites, sprites);
+        Collections.addAll(this.tileEntityIds, tileEntityIDs);
 
-    private static int[][] parseLevel(JSONObject json) {
-        List<List<Number>> level = JSONUtils.getFromComplexPath(json, "map.level");
-
-        int[][] levelData = new int[level.size()][0];
-
-        for (int i = 0; i < levelData.length; i++) {
-            levelData[i] = new int[level.get(i).size()];
-            for (int o = 0; o < levelData[i].length; o++) {
-                levelData[i][o] = level.get(i).get(o).intValue();
-            }
-        }
-
-        return levelData;
-    }
-
-    private static List<Sprite> parseSprites(JSONObject json) {
-        List<JSONObject> sprites = JSONUtils.getFromComplexPath(json, "map.sprites");
-
-        var parsedSprites = new ArrayList<Sprite>();
-        for (JSONObject sprite : sprites) {
-            Sprite spr = new Sprite();
-
-            spr.pos = JSONUtils.vecFromJson(sprite, "position");
-            spr.textureId = ((Number)sprite.get("textureId")).intValue();
-            spr.solid = (boolean)sprite.get("solid");
-
-            parsedSprites.add(spr);
-        }
-
-        return parsedSprites;
-    }
-
-    public static World fromFile(String fileName, Textureregistry textureregistry) {
-        FileReader file;
-        JSONObject json;
-        try {
-            file = new FileReader(fileName);
-            json = (JSONObject)(new JSONParser().parse(file));
-        } catch (Exception e) {
-            json = new JSONObject();
-        }
-
-        textureregistry.loadTexturesFromJSON(json);
-        
-        var w = new World(parseLevel(json));
-        w.setPlayer(Player.fromJSON(json, w));
-
-        w.sprites = parseSprites(json);
-
-        return w;
+        this.player = p;
+        this.entities.add(p);
     }
 
     public RayResult castRay(RaycastMode mode, Vec2 start, Vec2 dir) {
@@ -242,11 +190,6 @@ public class World {
         for (TileEntity tent : this.tileEntities) {
             tent.update(delta);
         }
-    }
-
-    private void setPlayer(Player p) {
-        this.entities.add(p);
-        this.player = p;
     }
 
     public Entity getPlayer() {

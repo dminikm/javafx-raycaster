@@ -1,8 +1,12 @@
 package app;
 
 public class DoorTileEntity extends TileEntity {
-    public DoorTileEntity(Vec2 pos, boolean lr) {
+    public DoorTileEntity(Vec2 pos, Vec2 startOffset, Vec2 endOffset, int textureId) {
         super(pos);
+
+        this.startOffset = startOffset;
+        this.endOffset = endOffset;
+        this.textureId = textureId;
     }
 
     public void update(double delta) {
@@ -10,8 +14,8 @@ public class DoorTileEntity extends TileEntity {
     }
 
     public RayResult castRay(Vec2 start, Vec2 dir) {
-        Vec2 point1 = this.position.add(new Vec2(0.5, 0.0)); // Line start
-        Vec2 point2 = this.position.add(new Vec2(0.5, 1.0 * (Math.cos(elapsedTime) + 1) / 2)); // Line end
+        Vec2 point1 = this.position.add(this.startOffset); // Line start
+        Vec2 point2 = this.position.add(this.endOffset); // Line end
 
         Vec2 v1 = start.sub(point1);
         Vec2 v2 = point2.sub(point1);
@@ -44,5 +48,8 @@ public class DoorTileEntity extends TileEntity {
         return res;
     }
 
-    double elapsedTime = 0.0;
+    private double elapsedTime = 0.0;
+    private Vec2 startOffset;
+    private Vec2 endOffset;
+    private int textureId;
 }

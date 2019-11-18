@@ -58,11 +58,4 @@ public class Player extends Entity {
             0.2
         );
    }
-
-    public static Player fromJSON(JSONObject json, World world) {
-        var position = JSONUtils.vecFromJson(json, "player.start");
-        var direction = JSONUtils.vecFromJson(json, "player.dir");
-
-        return new Player(position, direction);
-    }
 }

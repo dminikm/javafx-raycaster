@@ -38,6 +38,7 @@
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ],
+
         "sprites": [
             {"position": { "x": 11.5 , "y": 20.5 },    "textureId": 11,    "solid": true},
             {"position": { "x": 4.5 , "y": 18.5 },     "textureId": 11,    "solid": true},
@@ -58,6 +59,10 @@
             {"position": { "x": 15.5 , "y": 9.5 },     "textureId":  9,    "solid": true},
             {"position": { "x": 15.1 , "y": 10.0 },    "textureId":  9,     "solid": true},
             {"position": { "x": 15.8 , "y": 10.5 },    "textureId":  9,     "solid": true}
+        ],
+
+        "tileEntities": [
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 1, "startOffset": {"x": 0.5, "y": 0}, "endOffset": {"x": 0.5, "y": 1}}
         ]
     }
 }
