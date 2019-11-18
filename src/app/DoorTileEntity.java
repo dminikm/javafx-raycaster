@@ -13,7 +13,7 @@ public class DoorTileEntity extends TileEntity {
         this.elapsedTime += delta;
     }
 
-    public RayResult castRay(Vec2 start, Vec2 dir) {
+    public TileEntityRayHit castRay(Vec2 start, Vec2 dir) {
         Vec2 point1 = this.position.add(this.startOffset); // Line start
         Vec2 point2 = this.position.add(this.endOffset); // Line end
 
@@ -24,7 +24,7 @@ public class DoorTileEntity extends TileEntity {
         double dot = v2.dot(v3);
         if (Math.abs(dot) < 0.00001) {
             // No hit
-            RayResult res = new RayResult();
+            TileEntityRayHit res = new TileEntityRayHit();
             res.hit = false;
 
             return res;
@@ -34,7 +34,7 @@ public class DoorTileEntity extends TileEntity {
         double t2 = v1.dot(v3) / dot;
 
         if (t1 >= 0.0 && (t2 >= 0.0 && t2 <= 1.0)) {
-            RayResult res = new RayResult();
+            TileEntityRayHit res = new TileEntityRayHit();
             res.hit = true;
             res.distance = t1;
             res.precisePositition = start.add(dir.mul(t1));
@@ -43,9 +43,13 @@ public class DoorTileEntity extends TileEntity {
             return res;
         }
 
-        RayResult res = new RayResult();
+        TileEntityRayHit res = new TileEntityRayHit();
         res.hit = false;
         return res;
+    }
+
+    public int getTextureId() {
+        return this.textureId;
     }
 
     private double elapsedTime = 0.0;

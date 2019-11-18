@@ -14,7 +14,8 @@
         {"id": 2,   "name": "data/img/orange_brick_wall/top_border01.png"},
         {"id": 9,   "name": "data/img/barrel.png"           },
         {"id": 10,  "name": "data/img/pillar.png"           },
-        {"id": 11,  "name": "data/img/greenlight.png"       }
+        {"id": 11,  "name": "data/img/greenlight.png"       },
+        {"id": 99,  "name": "data/img/glass_top_border01.png" }
     ],
 
     "map": {
@@ -26,11 +27,11 @@
             [1, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 99, 1, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 99, 1, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -62,7 +63,13 @@
         ],
 
         "tileEntities": [
-            {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 1, "startOffset": {"x": 0.5, "y": 0}, "endOffset": {"x": 0.5, "y": 1}}
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 11 }, "textureId": 99, "startOffset": {"x": 1.0, "y": 0.0}, "endOffset": {"x": 0.0, "y": 1.0}},
+
+            {"template": "DoorTileEntity", "position": { "x": 3, "y": 7 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 1.0}, "endOffset": {"x": 1.0, "y": 0.0}},
+            {"template": "DoorTileEntity", "position": { "x": 3, "y": 9 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
+            {"template": "DoorTileEntity", "position": { "x": 5, "y": 7 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
+            {"template": "DoorTileEntity", "position": { "x": 5, "y": 9 }, "textureId": 99, "startOffset": {"x": 1.0, "y": 0.0}, "endOffset": {"x": 0.0, "y": 1.0}}
         ]
     }
 }

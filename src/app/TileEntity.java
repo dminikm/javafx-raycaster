@@ -9,5 +9,6 @@ public abstract class TileEntity extends Entity {
         return false;
     }
 
-    public abstract RayResult castRay(Vec2 start, Vec2 dir);
+    public abstract TileEntityRayHit castRay(Vec2 start, Vec2 dir);
+    public abstract int getTextureId();
 }
