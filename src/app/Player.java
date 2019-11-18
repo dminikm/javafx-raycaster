@@ -30,21 +30,21 @@ public class Player extends Entity {
 
         Vec2 svel;
         if (r.isKeyDown(KeyCode.A)) {
-            svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(speed);
-        } else if (r.isKeyDown(KeyCode.D)) {
             svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(-speed);
+        } else if (r.isKeyDown(KeyCode.D)) {
+            svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(speed);
         } else {
             svel = new Vec2();
         }
 
         if (r.isKeyDown(KeyCode.LEFT)) {
-            this.direction = Vec2.fromAngle(this.direction.toAngle() + 100 * delta);
-        } else if (r.isKeyDown(KeyCode.RIGHT)) {
             this.direction = Vec2.fromAngle(this.direction.toAngle() - 100 * delta);
+        } else if (r.isKeyDown(KeyCode.RIGHT)) {
+            this.direction = Vec2.fromAngle(this.direction.toAngle() + 100 * delta);
         }
 
         var mouseDelta = r.getMouseDeltaSmooth();
-        this.direction = Vec2.fromAngle(this.direction.toAngle() + -mouseDelta.x * 7 * delta);
+        this.direction = Vec2.fromAngle(this.direction.toAngle() + mouseDelta.x * 7 * delta);
 
         this.velocity = fvel.add(svel);
     }

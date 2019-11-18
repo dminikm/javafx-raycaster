@@ -151,7 +151,7 @@ public class Renderer {
 
     private Vec2 getPlane() {
         Vec2 dir = this.world.getPlayer().getDirection();
-        return Vec2.fromAngle(dir.toAngle() - 90).mul(0.66);
+        return Vec2.fromAngle(dir.toAngle() + 90).mul(0.66);
     }
 
     private Thread[] getThreads() {
