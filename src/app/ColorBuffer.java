@@ -5,25 +5,28 @@ import javafx.scene.image.PixelFormat;
 
 class ARGBColor {
     public static int mixARGBIntColors(int color1, int color2) {
-        double a1 = (double)((color1 & 0xFF000000) >>> 24)  / 255;
-        double r1 = (double)((color1 & 0x00FF0000) >>> 16)  / 255;
-        double g1 = (double)((color1 & 0x0000FF00) >>> 8 )  / 255;
-        double b1 = (double)((color1 & 0x000000FF) >>> 0 )  / 255;
-        double a2 = (double)((color2 & 0xFF000000) >>> 24)  / 255;
-        double r2 = (double)((color2 & 0x00FF0000) >>> 16)  / 255;
-        double g2 = (double)((color2 & 0x0000FF00) >>> 8 )  / 255;
-        double b2 = (double)((color2 & 0x000000FF) >>> 0 )  / 255;
+        byte a1 = (byte)((color1 & 0xFF000000) >>> 24);
+        byte r1 = (byte)((color1 & 0x00FF0000) >>> 16);
+        byte g1 = (byte)((color1 & 0x0000FF00) >>> 8 );
+        byte b1 = (byte)((color1 & 0x000000FF) >>> 0 );
+        byte a2 = (byte)((color2 & 0xFF000000) >>> 24);
+        byte r2 = (byte)((color2 & 0x00FF0000) >>> 16);
+        byte g2 = (byte)((color2 & 0x0000FF00) >>> 8 );
+        byte b2 = (byte)((color2 & 0x000000FF) >>> 0 );
 
-        double dr = r2 * a2 + r1 * a1 * (1 - a2);
-        double dg = g2 * a2 + g1 * a1 * (1 - a2);
-        double db = b2 * a2 + b1 * a1 * (1 - a2);
+        int alpha = a1 + 1;
+        int inv_alpha = 256 - alpha;
+
+        byte r = (byte)((alpha * r2 + inv_alpha * r1) >> 8);
+        byte g = (byte)((alpha * g2 + inv_alpha * g1) >> 8);
+        byte b = (byte)((alpha * b2 + inv_alpha * b1) >> 8);
         
-        int a = 0xFF << 24;
-        int r = (int)(dr * 255) << 16;
-        int g = (int)(dg * 255) << 8;
-        int b = (int)(db * 255);
+        int ra = 0xFF << 24;
+        int rr = r << 16;
+        int rg = g << 8;
+        int rb = b;
 
-        return a | r | g | b;
+        return ra | rr | rg | rb;
     }
 }
 
