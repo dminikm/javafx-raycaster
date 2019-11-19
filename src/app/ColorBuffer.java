@@ -81,14 +81,7 @@ public class ColorBuffer {
     }
 
     public void setPixelTransparent(int x, int y, int color) {
-        // If pixel is fully opaque, just write it
-        int alpha = (color & 0xFF000000) >>> 24;
-        if (alpha == 255) {
-            this.setPixel(x, y, color); return;
-        }
-
-        int newColor = ARGBColor.mixARGBIntColors(this.getPixel(x, y), color);
-        this.setPixel(x, y, newColor);
+        this.setPixel(x, y, ARGBColor.mixARGBIntColors(this.getPixel(x, y), color));
     }
 
     public int getWidth() {
