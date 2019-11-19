@@ -5,28 +5,20 @@ import javafx.scene.image.PixelFormat;
 
 class ARGBColor {
     public static int mixARGBIntColors(int color1, int color2) {
-        byte a1 = (byte)((color1 & 0xFF000000) >>> 24);
-        byte r1 = (byte)((color1 & 0x00FF0000) >>> 16);
-        byte g1 = (byte)((color1 & 0x0000FF00) >>> 8 );
-        byte b1 = (byte)((color1 & 0x000000FF) >>> 0 );
-        byte a2 = (byte)((color2 & 0xFF000000) >>> 24);
-        byte r2 = (byte)((color2 & 0x00FF0000) >>> 16);
-        byte g2 = (byte)((color2 & 0x0000FF00) >>> 8 );
-        byte b2 = (byte)((color2 & 0x000000FF) >>> 0 );
+        int alpha = (color2 & 0xFF000000) >>> 24;
 
-        int alpha = a1 + 1;
-        int inv_alpha = 256 - alpha;
+        int rb = (
+            (( color2 & 0xFF00FF ) * alpha) +
+            (( color1 & 0xFF00FF) * (0xFF - alpha))
+        ) & 0xFF00FF00;
 
-        byte r = (byte)((alpha * r2 + inv_alpha * r1) >> 8);
-        byte g = (byte)((alpha * g2 + inv_alpha * g1) >> 8);
-        byte b = (byte)((alpha * b2 + inv_alpha * b1) >> 8);
-        
-        int ra = 0xFF << 24;
-        int rr = r << 16;
-        int rg = g << 8;
-        int rb = b;
+        int g = (
+            ((color2 & 0xFF00) * alpha) + 
+            ((color1 & 0xFF00) * (0xFF - alpha))
+        ) & 0x00FF0000;
 
-        return ra | rr | rg | rb;
+        int a = 0xFF000000;
+        return a | (rb | g) >>> 8;
     }
 }
 
