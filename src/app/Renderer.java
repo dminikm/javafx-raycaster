@@ -60,28 +60,33 @@ public class Renderer {
             double cameraX = 2 * x / (double)this.internalWidth - 1;
             Vec2 rayDir = dir.add(plane.mul(cameraX));
 
-            RayResult rayResult = this.world.castRay(pos, rayDir);
-            RayHit res = rayResult.blockHit;
-            
+            RaycastResult res = this.world.castRay(pos, rayDir);
+                        
             if (res.hit) {
                 int lineHeigth = (int)(this.internalHeight / res.distance);
                 int drawStart = Math.max(0, -lineHeigth / 2 + this.internalHeight / 2);
                 int drawEnd = Math.min(this.internalHeight - 1, lineHeigth / 2 + this.internalHeight / 2);
 
-                double wallX;
-                if (res.side == 0) {
-                    wallX = pos.y + res.distance * rayDir.y;
-                } else {
-                    wallX = pos.x + res.distance * rayDir.x;
+                Texture t = null;
+
+                boolean applyShading = true;
+                if (res instanceof TileEntityRaycastResult) {
+                    t = this.textureRegistry.getTextureForId(((TileEntityRaycastResult)res).entity.getTextureId());
+                    applyShading = false;
                 }
 
-                wallX -= Math.floor(wallX);
+                if (res instanceof BlockRaycastResult) {
+                    t = this.textureRegistry.getTextureForId(((BlockRaycastResult)res).blockId);
+                }
 
-                Texture t = this.textureRegistry.getTextureForId(this.world.getBlockFromRayResult(rayResult));
-                int texX = (int)(wallX * (double)(t.width));
-                if ((res.side == 0 && rayDir.x > 0) ||
-                    (res.side == 1 && rayDir.y < 0)) {
-                    texX = t.width - texX - 1;
+                int texX = (int)(res.startOffset * (double)(t.width));
+                //if ((res.side == 0 && rayDir.x > 0) ||
+                //    (res.side == 1 && rayDir.y < 0)) {
+                //    texX = t.width - texX - 1;
+                //}
+
+                if (texX > 0) {
+                    texX -= 1;
                 }
 
                 for (int y = drawStart; y < drawEnd; y++) {
@@ -89,55 +94,12 @@ public class Renderer {
                     int texY = ((d * t.height) / lineHeigth) / 256;
                     int c = t.getPixel(texX, texY);
                     
-                    if(res.side == 1) c = 0xFF000000 | (((c & 0xFFFFFF) >>> 1) & 8355711);
+                    if(res.side == 1 && applyShading) c = 0xFF000000 | (((c & 0xFFFFFF) >>> 1) & 8355711);
 
                     buffer.setPixel(x, y, c);
                 }
 
                 this.zBuffer[x] = res.distance;
-            }
-
-            rayResult.tileEntitiesHit.sort((final TileEntityRayHit t1, final TileEntityRayHit t2) -> {
-                Double s1Distance = t1.distance;
-                Double s2Distance = t2.distance;
-    
-                return s2Distance.compareTo(s1Distance);
-            });
-
-            for (TileEntityRayHit terh : rayResult.tileEntitiesHit) {
-                if (terh.hit && terh.distance < this.zBuffer[x]) {
-                    int lineHeigth = (int)(this.internalHeight / terh.distance);
-                    int drawStart = Math.max(0, -lineHeigth / 2 + this.internalHeight / 2);
-                    int drawEnd = Math.min(this.internalHeight - 1, lineHeigth / 2 + this.internalHeight / 2);
-    
-                    double wallX;
-                    if (terh.side == 0) {
-                        wallX = pos.y + terh.distance * rayDir.y;
-                    } else {
-                        wallX = pos.x + terh.distance * rayDir.x;
-                    }
-    
-                    wallX -= Math.floor(wallX);
-    
-                    Texture t = this.textureRegistry.getTextureForId(terh.entity.getTextureId());
-                    int texX = (int)(wallX * (double)(t.width));
-                    if ((terh.side == 0 && rayDir.x > 0) ||
-                        (terh.side == 1 && rayDir.y < 0)) {
-                        texX = t.width - texX - 1;
-                    }
-    
-                    for (int y = drawStart; y < drawEnd; y++) {
-                        int d = (int)(y * 256 - this.internalHeight * 128 + lineHeigth * 128);
-                        int texY = ((d * t.height) / lineHeigth) / 256;
-                        int c = t.getPixel(texX, texY);
-                        
-                        //if(terh.side == 1) c = 0xFF000000 | (((c & 0xFFFFFF) >>> 1) & 8355711);
-    
-                        buffer.setPixelTransparent(x, y, c);
-                    }
-    
-                    this.zBuffer[x] = terh.distance;
-                }
             }
         }
     }
@@ -187,7 +149,12 @@ public class Renderer {
                         int d = (y) * 256 - this.internalHeight * 128 + spriteHeight * 128;
                         int texY = ((d * tex.height) / spriteHeight) / 256;
 
+                        if (texY * tex.width + texX < 0) {
+                            var asd = 0;
+                        }
+
                         int color = tex.getPixel(texX, texY);
+
                         this.buffer.setPixelTransparent(stripe, y, color);
                     }
                 }

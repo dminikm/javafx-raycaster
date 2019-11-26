@@ -23,7 +23,7 @@ public class Gameloop extends AnimationTimer {
         this.world = LevelLoader.loadLevel("data/levels/level01.json", textureRegistry);
         this.renderer = new Renderer(canvasWidth, canvasHeight, this.world, textureRegistry);
 
-        this.mouseLocked = true;
+        this.mouseLocked = false;
     }
 
     private Vec2 getScreenCenter() {

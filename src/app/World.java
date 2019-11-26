@@ -4,22 +4,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class RayResult {
-    RayHit blockHit                         = new RayHit();
-    List<TileEntityRayHit> tileEntitiesHit  = new ArrayList<TileEntityRayHit>();
-}
-
-class RayHit {
+class RaycastResult {
     public boolean hit              = false;
     public double distance          = 0.0;
     public int side                 = 0;
 
+    public double startOffset       = 0;
     public Vec2 precisePositition   = new Vec2();
     public Vec2 worldPositition     = new Vec2();
 }
 
-class TileEntityRayHit extends RayHit {
+class TileEntityRaycastResult extends RaycastResult {
     public TileEntity entity = null;
+}
+
+class EntityRaycastResult extends RaycastResult {
+    public Entity entity = null;
+}
+
+class BlockRaycastResult extends RaycastResult {
+    public int blockId = 0;
 }
 
 class Sprite {
@@ -35,19 +39,17 @@ public class World {
         this.entities = new ArrayList<Entity>();
         this.tileEntities = new ArrayList<>();
         this.sprites = new ArrayList<Sprite>();
-        this.tileEntityIds = new ArrayList<Integer>();
 
         Collections.addAll(this.entities, entities);
         Collections.addAll(this.tileEntities, tileEntities);
         Collections.addAll(this.sprites, sprites);
-        Collections.addAll(this.tileEntityIds, tileEntityIDs);
 
         this.player = p;
         this.entities.add(p);
     }
 
-    public RayResult castRay(Vec2 start, Vec2 dir) {
-        RayResult r = new RayResult();
+    public RaycastResult castRay(Vec2 start, Vec2 dir) {
+        ArrayList<RaycastResult> results = new ArrayList<RaycastResult>();
 
         int mapX = (int)start.x;
         int mapY = (int)start.y;
@@ -60,7 +62,7 @@ public class World {
         int stepX;
         int stepY;
 
-        int hit = 0;
+        boolean hit = false;
         int side = 0;
 
         if (dir.x < 0) {
@@ -79,7 +81,7 @@ public class World {
             sideDist.y = (mapY + 1.0 - start.y) * deltaDist.y;
         }
 
-        while (hit == 0) {
+        while (!hit) {
             if (sideDist.x < sideDist.y) {
                 sideDist.x += deltaDist.x;
                 mapX += stepX;
@@ -90,8 +92,8 @@ public class World {
                 side = 1;
             }
 
-            if (this.worldMap[mapY][mapX] > 0) {
-                if (this.tileEntityIds.contains(this.worldMap[mapY][mapX])) {
+            if (this.worldMap[mapY][mapX] != 0) {
+                if (this.worldMap[mapY][mapX] == -1) {
                     TileEntity tent = this.getTileEntityAt(mapX, mapY);
                     double dist = 0;
 
@@ -103,45 +105,61 @@ public class World {
 
                     Vec2 pos = start.add(dir.mul(dist));
 
-                    TileEntityRayHit res = tent.castRay(pos, dir);
+                    TileEntityRaycastResult res = tent.castRay(pos, dir);
                     res.distance += dist;
                     res.worldPositition = new Vec2(mapX, mapY);
                     res.entity = tent;
                     res.side = side;
-                    r.tileEntitiesHit.add(res);
 
-                    //if (res.hit) {
-                    //    return res;
-                    //}
+                    if (res.hit) {
+                        results.add(res);
+                        hit = false;
+                    }
 
                 } else {
-                    hit = 1;
+                    hit = true;
                 }
             }
         }
 
-        if (side == 0) {
-            perpWallDist = (mapX - start.x + (1 - stepX) / 2) / dir.x;
-        } else {
-            perpWallDist = (mapY - start.y + (1 - stepY) / 2) / dir.y;
+        if (this.worldMap[mapY][mapX] != -1) {
+            if (side == 0) {
+                perpWallDist = (mapX - start.x + (1 - stepX) / 2) / dir.x;
+            } else {
+                perpWallDist = (mapY - start.y + (1 - stepY) / 2) / dir.y;
+            }
+    
+            BlockRaycastResult r = new BlockRaycastResult();
+            r.hit = true;
+            r.distance = perpWallDist;
+            r.side = side;
+            r.precisePositition = new Vec2(start.x + perpWallDist * dir.x, start.y + perpWallDist * dir.y);
+            r.worldPositition = new Vec2(mapX, mapY);
+            r.blockId = this.worldMap[mapY][mapX];
+            
+            if (r.side == 0) {
+                r.startOffset = r.precisePositition.y - Math.floor(r.precisePositition.y);
+            } else {
+                r.startOffset = r.precisePositition.x - Math.floor(r.precisePositition.x);
+            }
+    
+            results.add(r);
         }
 
-        r.blockHit.hit = true;
-        r.blockHit.distance = perpWallDist;
-        r.blockHit.side = side;
-        r.blockHit.precisePositition = new Vec2(start.x + perpWallDist * dir.x, start.y + perpWallDist * dir.y);
-        r.blockHit.worldPositition = new Vec2(mapX, mapY);
+        RaycastResult smallest = results.get(0);
 
-        return r;
+        for (RaycastResult res : results) {
+            if (res.distance < smallest.distance && !(res instanceof EntityRaycastResult)) {
+                smallest = res;
+            }
+        }
+
+        return smallest;
     }
 
     public boolean isFree(Vec2 pos) {
         // TODO: Don't do this
         return this.worldMap[(int)pos.y][(int)pos.x] == 0;
-    }
-
-    public int getBlockFromRayResult(RayResult r) {
-        return this.worldMap[(int)r.blockHit.worldPositition.y][(int)r.blockHit.worldPositition.x];
     }
 
     public void update(double delta) {
@@ -208,6 +226,4 @@ public class World {
     private List<Entity>        entities;
     private List<TileEntity>    tileEntities;
     private List<Sprite>        sprites;
-    
-    private List<Integer>       tileEntityIds;
 }

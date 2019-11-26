@@ -44,7 +44,7 @@ public class Player extends Entity {
         }
 
         var mouseDelta = r.getMouseDeltaSmooth();
-        this.direction = Vec2.fromAngle(this.direction.toAngle() + mouseDelta.x * 7 * delta);
+        //this.direction = Vec2.fromAngle(this.direction.toAngle() + mouseDelta.x * 7 * delta);
 
         this.velocity = fvel.add(svel);
     }
