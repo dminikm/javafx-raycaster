@@ -148,7 +148,6 @@ public class Renderer {
                     for (int y = drawStartY; y < drawEndY; y++) {
                         int d = (y) * 256 - this.internalHeight * 128 + spriteHeight * 128;
                         int texY = ((d * tex.height) / spriteHeight) / 256;
-
                         int color = tex.getPixel(texX, texY);
 
                         this.buffer.setPixelTransparent(stripe, y, color);

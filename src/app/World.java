@@ -170,28 +170,22 @@ public class World {
             Vec2 vel = ent.getVelocity().mul(delta);
             Vec2 newPos = ent.getPosition().add(vel);
 
-            Rect bbx = ent.getBoundingBox().move(vel);
-            Rect bby = bbx.copy();
+            Rect boundingBox = ent.getBoundingBox();
+            Rect bbx = boundingBox.move(vel);
+            Rect bby = boundingBox.move(vel);
 
             bbx.y = pos.y;
             bby.x = pos.x;
 
-            for (int i = 0; i < this.worldMap.length; i++) {
-                for (int o = 0; o < this.worldMap[i].length; o++) {
-                    if (!this.isFree(new Vec2(o, i))) {
-                        Rect bbb = new Rect(o, i, 1, 1);
+            newPos.x = (this.isFree(new Vec2(
+                (vel.x >= 0) ? pos.x + 1 : pos.x - 1,
+                pos.y
+            ))) ? newPos.x : ((vel.x >= 0) ? Math.floor(pos.x) + (boundingBox.w / 2) : Math.ceil(pos.x) - (boundingBox.w / 2));
 
-
-                        if (bbx.collidesWith(bbb)) {
-                            newPos.x = pos.x;
-                        }
-
-                        if (bby.collidesWith(bbb)) {
-                            newPos.y = pos.y;
-                        }
-                    }
-                }
-            }
+            newPos.y = (this.isFree(new Vec2(
+                pos.x,
+                (vel.y >= 0) ? pos.y + 1 : pos.y - 1
+            ))) ? newPos.y : ((vel.y >= 0) ? Math.floor(pos.y) + (boundingBox.h / 2) : Math.ceil(pos.y) - (boundingBox.h / 2));
 
             ent.setPosition(newPos);
         }
