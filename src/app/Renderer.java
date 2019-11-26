@@ -149,10 +149,6 @@ public class Renderer {
                         int d = (y) * 256 - this.internalHeight * 128 + spriteHeight * 128;
                         int texY = ((d * tex.height) / spriteHeight) / 256;
 
-                        if (texY * tex.width + texX < 0) {
-                            var asd = 0;
-                        }
-
                         int color = tex.getPixel(texX, texY);
 
                         this.buffer.setPixelTransparent(stripe, y, color);
