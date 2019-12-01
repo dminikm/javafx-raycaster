@@ -29,6 +29,7 @@ public class DoorTileEntity extends TileEntity {
         return res;
     }
 
+    @Override
     public int getTextureId() {
         return this.textureId;
     }
@@ -43,12 +44,11 @@ public class DoorTileEntity extends TileEntity {
         this.opening = !this.opening;
     }
 
+    private int textureId;
+    private Vec2 endOffset;
+    private Vec2 startOffset;
+    private Vec2 doorDirection;
+    
     private boolean opening = true;
     private double openedState = 0.0;
-
-    private Vec2 startOffset;
-    private Vec2 endOffset;
-    private int textureId;
-
-    private Vec2 doorDirection;
 }

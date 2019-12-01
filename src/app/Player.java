@@ -65,5 +65,5 @@ public class Player extends Entity {
             0.2,
             0.2
         );
-   }
+    }
 }

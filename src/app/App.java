@@ -27,7 +27,7 @@ public class App extends Application {
         Canvas canvas = new Canvas( width, height );
         root.getChildren().add( canvas );
 
-        KeyRegistry r = KeyRegistry.constructInstance(scene);
+        KeyRegistry.constructInstance(scene);
 
         Gameloop g = new Gameloop(canvas);
         g.start();

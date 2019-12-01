@@ -22,13 +22,13 @@ public class TurretEntity extends MonsterEntity {
         this.elapsedTime += delta;
 
         if (!firing) {
-            Vec2 dir = this.player.getPosition().sub(this.position).normalize();
+            Vec2 dir = world.getPlayer().getPosition().sub(this.position).normalize();
             RaycastResult res = world.castRayEntity(this.position, dir, this);
 
             if (res.hit) {
                 this.firing = true;
                 this.firingTime = this.elapsedTime;
-                this.target = this.player.getPosition().copy();
+                this.target = world.getPlayer().getPosition().copy();
             }
         }
 

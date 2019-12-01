@@ -318,7 +318,7 @@ public class World {
     }
 
     public List<Sprite> getAllSprites() {
-        List<Sprite> sprites = new ArrayList(this.sprites);
+        List<Sprite> sprites = new ArrayList<Sprite>(this.sprites);
         List<Sprite> entitySprites = this.entities.stream().filter((final Entity entity) -> {
             return entity instanceof MonsterEntity;
         }).map((final Entity entity) -> {
