@@ -64,6 +64,8 @@ public class Gameloop extends AnimationTimer {
         if (this.mouseLocked) {
             this.lockMouse();
         }
+
+        KeyRegistry.getInstance().update(delta);
     }
 
     private void render(double delta) {

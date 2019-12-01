@@ -23,7 +23,7 @@ public class Player extends Entity {
             speed *= 1.8;
         }
 
-        if (r.isKeyDown(KeyCode.E)) {
+        if (r.hasKeyBeenReleased(KeyCode.E)) {
             world.interactRay(this.position, this.direction);
         }
 

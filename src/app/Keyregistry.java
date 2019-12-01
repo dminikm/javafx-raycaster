@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 
 enum KeyState {
     KeyStateUp,
+    KeyStateReleased,
     KeyStatePressed,
     KeyStateHeld
 }
@@ -58,7 +59,16 @@ public class KeyRegistry {
             this.keys.put(key, KeyState.KeyStateUp);
         }
 
-        return this.keys.get(key) != KeyState.KeyStateUp;
+        var keyState = this.keys.get(key);
+        return keyState != KeyState.KeyStateUp && keyState != KeyState.KeyStateReleased;
+    }
+
+    public boolean hasKeyBeenReleased(KeyCode key) {
+        if (!this.keys.containsKey(key)) {
+            this.keys.put(key, KeyState.KeyStateUp);
+        }
+
+        return this.keys.get(key) == KeyState.KeyStateReleased;
     }
 
     public KeyState getKeyState(KeyCode key) {
@@ -78,7 +88,7 @@ public class KeyRegistry {
                 this.keys.put(e.getCode(), KeyState.KeyStateHeld);
             }
         } else {
-            this.keys.put(e.getCode(), KeyState.KeyStateUp);
+            this.keys.put(e.getCode(), KeyState.KeyStateReleased);
         }
     }
 
@@ -106,6 +116,14 @@ public class KeyRegistry {
 
         this.mouseDeltas.add(delta.copy());
         this.mousePosition = position.copy();
+    }
+
+    public void update(double delta) {
+        for (Map.Entry<KeyCode, KeyState> key : this.keys.entrySet()) {
+            if (key.getValue() == KeyState.KeyStateReleased) {
+                this.keys.put(key.getKey(), KeyState.KeyStateUp);
+            }
+        }
     }
 
     private Map<KeyCode, KeyState> keys;
