@@ -10,7 +10,7 @@ class Texture extends ColorBuffer {
         super(width, height);
     }
 
-    static Texture from_image_path(String path) throws Exception {
+    static Texture loadFromImagePath(String path) throws Exception {
         File f = new File(path);
         
         if (!f.exists()) {
@@ -18,10 +18,10 @@ class Texture extends ColorBuffer {
         }
 
         String pth = f.toURI().toString();
-        return Texture.from_image(new Image(pth));
+        return Texture.loadFromImage(new Image(pth));
     }
 
-    static Texture from_image(Image img) {
+    static Texture loadFromImage(Image img) {
         PixelReader r = img.getPixelReader();
         
         int width = (int)img.getWidth();

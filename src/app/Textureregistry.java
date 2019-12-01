@@ -45,7 +45,7 @@ public class TextureRegistry {
                 this.textures.add(null);
             }
 
-            try { this.textures.set(id, Texture.from_image_path(name)); } catch(Exception e) {};
+            try { this.textures.set(id, Texture.loadFromImagePath(name)); } catch(Exception e) {};
         }
     }
 
