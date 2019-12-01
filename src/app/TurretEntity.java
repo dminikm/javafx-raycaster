@@ -50,8 +50,19 @@ public class TurretEntity extends MonsterEntity {
 
         if (timeDiff > 0.2 * (this.shotsFired + 1) && timeDiff < 0.7) {
             this.shotsFired++;
-            //fire
+            this.fire(world);
         }
+    }
+
+    private void fire(World world) {
+        Vec2 dir = this.target.sub(this.position).normalize();
+        EntityRaycastResult res = world.castRayEntity(this.position, dir, this);
+
+        if (res.hit) {
+            res.entity.takeDamage(5);
+        }
+
+        // queue sound
     }
 
     @Override

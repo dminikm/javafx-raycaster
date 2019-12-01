@@ -72,9 +72,10 @@ public class Gameloop extends AnimationTimer {
         pw.setPixels(0, 0, this.canvasWidth, this.canvasHeight, buffer.getPixelFormat(), buffer.getData(), 0, buffer.getWidth());
         gc.setFill( Color.WHITE );
         gc.setLineWidth(2);
-        Font theFont = Font.font( "Consolas", FontWeight.NORMAL, 12);
+        Font theFont = Font.font("Consolas", FontWeight.NORMAL, 12);
         gc.setFont( theFont );
-        gc.fillText( "FPS: " + (1 / delta), 10, 10 );
+        gc.fillText("FPS: " + (1 / delta), 10, 10 );
+        gc.fillText("Health: " + this.world.getPlayer().health, 10, 50);
     }
 
     private void udpate(double delta) {
