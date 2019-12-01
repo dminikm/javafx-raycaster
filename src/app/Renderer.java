@@ -3,7 +3,7 @@ package app;
 import java.util.List;
 
 public class Renderer {
-    public Renderer(int width, int height, World world, Textureregistry registry) {
+    public Renderer(int width, int height, World world, TextureRegistry registry) {
         this.internalWidth = width;
         this.internalHeight = height;
 
@@ -200,7 +200,7 @@ public class Renderer {
     private double[] zBuffer;
 
     private World world;
-    private Textureregistry textureRegistry;
+    private TextureRegistry textureRegistry;
 
     private boolean multicoreRendering;
 

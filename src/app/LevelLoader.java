@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 public class LevelLoader
 {
-    public static World loadLevel(String fileName, Textureregistry textureregistry) {
+    public static World loadLevel(String fileName, TextureRegistry textureregistry) {
         FileReader file;
         JSONObject json;
         try {

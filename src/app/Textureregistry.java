@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class Textureregistry {
-    public Textureregistry() {
+public class TextureRegistry {
+    public TextureRegistry() {
         this.mapping = new HashMap<String, Integer>();
         this.textures = new ArrayList<Texture>();
     }

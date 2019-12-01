@@ -19,7 +19,7 @@ public class Gameloop extends AnimationTimer {
         this.canvasWidth = (int)cv.getWidth();
         this.canvasHeight = (int)cv.getHeight();
 
-        this.textureRegistry = new Textureregistry();
+        this.textureRegistry = new TextureRegistry();
         this.world = LevelLoader.loadLevel("data/levels/level01.json", textureRegistry);
         this.renderer = new Renderer(canvasWidth, canvasHeight, this.world, textureRegistry);
 
@@ -96,7 +96,7 @@ public class Gameloop extends AnimationTimer {
     
     private boolean mouseLocked;
     
-    private Textureregistry textureRegistry;
+    private TextureRegistry textureRegistry;
     private Renderer renderer;
     private World world;
 }
