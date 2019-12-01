@@ -168,25 +168,30 @@ public class World {
 
             Vec2 pos = ent.getPosition();
             Vec2 vel = ent.getVelocity().mul(delta);
-            Vec2 newPos = ent.getPosition().add(vel);
-
+            
+            Vec2 velX = ent.getVelocity().mul(delta);
+            velX.y = 0;
+            
+            Vec2 velY = ent.getVelocity().mul(delta);
+            velY.x = 0;
+            
             Rect boundingBox = ent.getBoundingBox();
-            Rect bbx = boundingBox.move(vel);
-            Rect bby = boundingBox.move(vel);
+            Rect bbx = boundingBox.move(velX);
+            Rect bby = boundingBox.move(velY);
+            
+            if (vel.x > 0 && !this.isFree(new Vec2((int)pos.x + 1, (int)pos.y))) {
+                vel.x = Math.min(((int)pos.x + 1) - pos.x - bbx.w, vel.x);
+            } else if (vel.x < 0 && !this.isFree(new Vec2((int)pos.x - 1, (int)pos.y))) {
+                vel.x = Math.max(((int)pos.x) - pos.x + bbx.w, vel.x);
+            }
+            
+            if (vel.y > 0 && !this.isFree(new Vec2((int)pos.x, (int)pos.y + 1))) {
+                vel.y = Math.min(((int)pos.y + 1) - pos.y - bbx.h, vel.y);
+            } else if (vel.y < 0 && !this.isFree(new Vec2((int)pos.x, (int)pos.y - 1))) {
+                vel.y = Math.max(((int)pos.y) - pos.y + bby.h, vel.y);
+            }
 
-            bbx.y = pos.y;
-            bby.x = pos.x;
-
-            newPos.x = (this.isFree(new Vec2(
-                (vel.x >= 0) ? pos.x + 1 : pos.x - 1,
-                pos.y
-            ))) ? newPos.x : ((vel.x >= 0) ? Math.floor(pos.x) + (boundingBox.w / 2) : Math.ceil(pos.x) - (boundingBox.w / 2));
-
-            newPos.y = (this.isFree(new Vec2(
-                pos.x,
-                (vel.y >= 0) ? pos.y + 1 : pos.y - 1
-            ))) ? newPos.y : ((vel.y >= 0) ? Math.floor(pos.y) + (boundingBox.h / 2) : Math.ceil(pos.y) - (boundingBox.h / 2));
-
+            Vec2 newPos = ent.getPosition().add(vel);
             ent.setPosition(newPos);
         }
 
