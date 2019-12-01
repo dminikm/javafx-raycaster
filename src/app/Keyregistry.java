@@ -16,22 +16,22 @@ enum KeyState {
     KeyStateHeld
 }
 
-public class Keyregistry {
-    private static Keyregistry instance = null;
+public class KeyRegistry {
+    private static KeyRegistry instance = null;
 
-    public static Keyregistry getInstance() {
+    public static KeyRegistry getInstance() {
         return instance;
     }
 
-    public static Keyregistry constructInstance(Scene scene) {
+    public static KeyRegistry constructInstance(Scene scene) {
         if (instance == null) {
-            instance = new Keyregistry(scene);
+            instance = new KeyRegistry(scene);
         }
 
         return instance;
     }
 
-    private Keyregistry(Scene scene) {
+    private KeyRegistry(Scene scene) {
         this.keys = new HashMap<KeyCode, KeyState>();
         var self = this;
 

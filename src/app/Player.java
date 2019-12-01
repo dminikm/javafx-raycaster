@@ -15,7 +15,7 @@ public class Player extends Entity {
 
     @Override
     public void update(double delta) {
-        Keyregistry r = Keyregistry.getInstance();
+        KeyRegistry r = KeyRegistry.getInstance();
 
         final int speed = 16;
 

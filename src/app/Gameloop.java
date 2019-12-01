@@ -56,7 +56,7 @@ public class Gameloop extends AnimationTimer {
         var mouseDelta = this.getMouseDelta();
         var mousePos = this.getMousePosition();
 
-        Keyregistry.getInstance().handleMouse(mouseDelta, mousePos);
+        KeyRegistry.getInstance().handleMouse(mouseDelta, mousePos);
 
         this.udpate(delta);
         this.render(delta);
