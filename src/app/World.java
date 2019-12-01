@@ -6,8 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class RaycastResult {
+    public RaycastResult() {}
+
+    public RaycastResult(RaycastResult res) {
+        this.hit = res.hit;
+        this.distance = res.distance;
+        this.side = res.side;
+        this.startOffset = res.startOffset;
+        this.precisePositition = res.precisePositition;
+        this.worldPositition = res.worldPositition;
+    }
+
     public boolean hit              = false;
-    public double distance          = 0.0;
+    public double distance          = Double.MAX_VALUE;
     public int side                 = 0;
 
     public double startOffset       = 0;
@@ -16,10 +27,16 @@ class RaycastResult {
 }
 
 class TileEntityRaycastResult extends RaycastResult {
+    public TileEntityRaycastResult() {}
+    public TileEntityRaycastResult(RaycastResult res) { super(res); }
+
     public TileEntity entity = null;
 }
 
 class EntityRaycastResult extends RaycastResult {
+    public EntityRaycastResult() {}
+    public EntityRaycastResult(RaycastResult res) { super(res); }
+
     public Entity entity = null;
 }
 
@@ -156,6 +173,32 @@ public class World {
         }
 
         return smallest;
+    }
+
+    public EntityRaycastResult castRayEntity(Vec2 start, Vec2 dir, Entity ignore) {
+        double closestDistance = 99999;
+        EntityRaycastResult result = new EntityRaycastResult();
+
+        for (Entity ent : this.entities) {
+            if (ent == ignore) { continue; }
+
+            Rect bb = ent.getBoundingBox();
+            RaycastResult res = bb.castRay(start, dir);
+
+            if (res.hit && res.distance < closestDistance) {
+                closestDistance = res.distance;
+                result = new EntityRaycastResult(res);
+                result.entity = ent;
+            }
+        }
+
+        RaycastResult worldRes = this.castRay(start, dir);
+
+        if (worldRes.distance < result.distance) {
+            return new EntityRaycastResult();
+        }
+
+        return result;
     }
 
     public boolean isFree(Vec2 pos) {

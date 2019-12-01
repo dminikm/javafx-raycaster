@@ -5,6 +5,7 @@ public abstract class Entity {
         this.position = pos;
         this.direction = dir;
         this.velocity = vel;
+        this.health = 100;
     }
 
     public Vec2 getPosition() {
@@ -41,9 +42,14 @@ public abstract class Entity {
         return r;
     }
 
+    public void takeDamage(double damage) {
+        this.health -= damage;
+    }
+
     public abstract void update(double delta, World world);
 
     protected Vec2 position;
     protected Vec2 direction;
     protected Vec2 velocity;
+    protected double health;
 }
