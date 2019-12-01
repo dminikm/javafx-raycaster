@@ -14,10 +14,14 @@ public class Player extends Entity {
     }
 
     @Override
-    public void update(double delta) {
+    public void update(double delta, World world) {
         KeyRegistry r = KeyRegistry.getInstance();
 
-        final int speed = 16;
+        int speed = 4;
+
+        if (r.isKeyDown(KeyCode.SHIFT)) {
+            speed *= 1.8;
+        }
 
         Vec2 fvel;
         if (r.isKeyDown(KeyCode.W)) {

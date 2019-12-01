@@ -44,7 +44,7 @@ public class Textureregistry {
             while (this.textures.size() - 1 < id) {
                 this.textures.add(null);
             }
-            
+
             try { this.textures.set(id, Texture.from_image_path(name)); } catch(Exception e) {};
         }
     }

@@ -3,6 +3,7 @@ package app;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class RaycastResult {
     public boolean hit              = false;
@@ -33,7 +34,7 @@ class Sprite {
 }
 
 public class World {
-    public World(int[][] worldMap, Player p, Integer[] tileEntityIDs, TileEntity[] tileEntities, Entity[] entities, Sprite[] sprites) {
+    public World(int[][] worldMap, Player p, TileEntity[] tileEntities, Entity[] entities, Sprite[] sprites) {
         this.worldMap = worldMap;
 
         this.entities = new ArrayList<Entity>();
@@ -164,31 +165,22 @@ public class World {
 
     public void update(double delta) {
         for (Entity ent : this.entities) {
-            ent.update(delta);
+            ent.update(delta, this);
 
             Vec2 pos = ent.getPosition();
             Vec2 vel = ent.getVelocity().mul(delta);
-            
-            Vec2 velX = ent.getVelocity().mul(delta);
-            velX.y = 0;
-            
-            Vec2 velY = ent.getVelocity().mul(delta);
-            velY.x = 0;
-            
-            Rect boundingBox = ent.getBoundingBox();
-            Rect bbx = boundingBox.move(velX);
-            Rect bby = boundingBox.move(velY);
+            Rect bb = ent.getBoundingBox();
             
             if (vel.x > 0 && !this.isFree(new Vec2((int)pos.x + 1, (int)pos.y))) {
-                vel.x = Math.min(((int)pos.x + 1) - pos.x - bbx.w, vel.x);
+                vel.x = Math.min(((int)pos.x + 1) - pos.x - bb.w, vel.x);
             } else if (vel.x < 0 && !this.isFree(new Vec2((int)pos.x - 1, (int)pos.y))) {
-                vel.x = Math.max(((int)pos.x) - pos.x + bbx.w, vel.x);
+                vel.x = Math.max(((int)pos.x) - pos.x + bb.w, vel.x);
             }
             
             if (vel.y > 0 && !this.isFree(new Vec2((int)pos.x, (int)pos.y + 1))) {
-                vel.y = Math.min(((int)pos.y + 1) - pos.y - bbx.h, vel.y);
+                vel.y = Math.min(((int)pos.y + 1) - pos.y - bb.h, vel.y);
             } else if (vel.y < 0 && !this.isFree(new Vec2((int)pos.x, (int)pos.y - 1))) {
-                vel.y = Math.max(((int)pos.y) - pos.y + bby.h, vel.y);
+                vel.y = Math.max(((int)pos.y) - pos.y + bb.h, vel.y);
             }
 
             Vec2 newPos = ent.getPosition().add(vel);
@@ -196,7 +188,7 @@ public class World {
         }
 
         for (TileEntity tent : this.tileEntities) {
-            tent.update(delta);
+            tent.update(delta, this);
         }
     }
 
@@ -205,7 +197,15 @@ public class World {
     }
 
     public List<Sprite> getAllSprites() {
-        return this.sprites;
+        List<Sprite> sprites = new ArrayList(this.sprites);
+        List<Sprite> entitySprites = this.entities.stream().filter((final Entity entity) -> {
+            return entity instanceof MonsterEntity;
+        }).map((final Entity entity) -> {
+            return ((MonsterEntity)entity).getSprite();
+        }).collect(Collectors.toList());
+
+        sprites.addAll(entitySprites);
+        return sprites;
     }
 
     public TileEntity getTileEntityAt(int x, int y) {

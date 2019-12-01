@@ -14,7 +14,11 @@
         {"id": 2,   "name": "data/img/orange_brick_wall/top_border01.png"},
         {"id": 9,   "name": "data/img/barrel.png"           },
         {"id": 10,  "name": "data/img/pillar.png"           },
-        {"id": 11,  "name": "data/img/greenlight.png"       },
+        {"id": 11,  "name": "data/img/turret/turret_idle.png"       },
+		{"id": 12,  "name": "data/img/turret/turret_firing01.png"       },
+		{"id": 13,  "name": "data/img/turret/turret_firing02.png"       },
+		{"id": 14,  "name": "data/img/turret/turret_firing03.png"       },
+		{"id": 15,  "name": "data/img/turret/turret_firing04.png"       },
         {"id": 99,  "name": "data/img/glass_top_border01.png" }
     ],
 
@@ -70,6 +74,20 @@
             {"template": "DoorTileEntity", "position": { "x": 3, "y": 9 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
             {"template": "DoorTileEntity", "position": { "x": 5, "y": 7 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
             {"template": "DoorTileEntity", "position": { "x": 5, "y": 9 }, "textureId": 99, "startOffset": {"x": 1.0, "y": 0.0}, "endOffset": {"x": 0.0, "y": 1.0}}
+        ],
+
+        "entities": [
+            {
+                "template": "TurretEntity",
+                "position": {"x": 15, "y": 15},
+                "textures": {
+                    "idleTexture": 11,
+                    "firingTexture1": 12,
+                    "firingTexture2": 13,
+                    "firingTexture3": 14,
+                    "firingTexture4": 15
+                }
+            }
         ]
     }
 }

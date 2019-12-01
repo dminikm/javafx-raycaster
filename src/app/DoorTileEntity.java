@@ -11,7 +11,7 @@ public class DoorTileEntity extends TileEntity {
         this.doorDirection = startOffset.sub(endOffset).normalize();
     }
 
-    public void update(double delta) {
+    public void update(double delta, World world) {
         this.elapsedTime += delta;
     }
 

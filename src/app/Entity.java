@@ -32,10 +32,16 @@ public abstract class Entity {
     }
 
     public Rect getBoundingBox() {
-        return new Rect();
+        Rect r = new Rect();
+        r.w = 0.1;
+        r.h = 0.1;
+        r.x = this.position.x - 0.5;
+        r.y = this.position.y - 0.5;
+
+        return r;
     }
 
-    public abstract void update(double delta);
+    public abstract void update(double delta, World world);
 
     protected Vec2 position;
     protected Vec2 direction;

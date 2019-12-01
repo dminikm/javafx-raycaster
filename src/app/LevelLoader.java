@@ -24,16 +24,15 @@ public class LevelLoader
 
         textureregistry.loadTexturesFromJSON(json);
         
-        Integer[] tileEntityIDs = { 99 };
         TileEntity[] tileEntities = {};
         Entity[] entities = {};
-        
+        Player p = parsePlayer(json);
+
         var w = new World(
             parseLevel(json),
-            parsePlayer(json),
-            tileEntityIDs,
-            parseTileEntities(json),
-            parseEntities(json),
+            p,
+            parseTileEntities(json, p),
+            parseEntities(json, p),
             parseSprites(json)
         );
 
@@ -81,11 +80,34 @@ public class LevelLoader
         return new Player(position, direction);
     }
 
-    private static Entity[] parseEntities(JSONObject json) {
-        return new Entity[0];
+    private static Entity[] parseEntities(JSONObject json, Player p) {
+        List<JSONObject> entities = JSONUtils.getFromComplexPath(json, "map.entities");
+        var parsedEntities = new ArrayList<Entity>();
+
+        for (JSONObject entity : entities) {
+            String template = JSONUtils.getFromComplexPath(entity, "template");
+            Entity ent = null;
+
+            switch (template.toLowerCase())
+            {
+                case "turretentity":
+                    ent = parseTurretEntity(entity, p);
+                    break;
+
+                default:
+                    break;
+            };
+
+            parsedEntities.add(ent);
+        }
+
+        Entity[] res = new Entity[parsedEntities.size()];
+        parsedEntities.toArray(res);
+
+        return res;
     }
 
-    private static TileEntity[] parseTileEntities(JSONObject json) {
+    private static TileEntity[] parseTileEntities(JSONObject json, Player p) {
         List<JSONObject> tileEntities = JSONUtils.getFromComplexPath(json, "map.tileEntities");
         var parsedTileEntities = new ArrayList<TileEntity>();
 
@@ -96,7 +118,7 @@ public class LevelLoader
             switch (template.toLowerCase())
             {
                 case "doortileentity":
-                    tent = parseDoorTileEntity(tileEntity);
+                    tent = parseDoorTileEntity(tileEntity, p);
                     break;
 
                 default:
@@ -113,12 +135,19 @@ public class LevelLoader
     }
 
     // Individual tile entity parsers
-    private static TileEntity parseDoorTileEntity(JSONObject json) {
+    private static TileEntity parseDoorTileEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         Vec2 startOffset = JSONUtils.vecFromJson(json, "startOffset");
         Vec2 endOffset = JSONUtils.vecFromJson(json, "endOffset");
         Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
 
         return new DoorTileEntity(position, startOffset, endOffset, textureId.intValue());
+    }
+
+    private static Entity parseTurretEntity(JSONObject json, Player p) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        HashMap<String, Number> textures = JSONUtils.getFromComplexPath(json, "textures");
+
+        return new TurretEntity(position, p, textures);
     }
 }
