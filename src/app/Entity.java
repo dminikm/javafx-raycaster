@@ -46,6 +46,8 @@ public abstract class Entity {
         this.health -= damage;
     }
 
+
+    public abstract void onInteract();
     public abstract void update(double delta, World world);
 
     protected Vec2 position;

@@ -201,9 +201,87 @@ public class World {
         return result;
     }
 
-    public boolean isFree(Vec2 pos) {
-        // TODO: Don't do this
-        return this.worldMap[(int)pos.y][(int)pos.x] == 0;
+    public void interactRay(Vec2 start, Vec2 dir) {
+        int mapX = (int)start.x;
+        int mapY = (int)start.y;
+        Vec2 sideDist = new Vec2();
+        Vec2 deltaDist = new Vec2(Math.abs(1 / dir.x), Math.abs(1 / dir.y));
+        int stepX;
+        int stepY;
+        int side = 0;
+
+        if (dir.x < 0) {
+            stepX = -1;
+            sideDist.x = (start.x - mapX) * deltaDist.x;
+        } else {
+            stepX = 1;
+            sideDist.x = (mapX + 1.0 - start.x) * deltaDist.x;
+        }
+
+        if (dir.y < 0) {
+            stepY = -1;
+            sideDist.y = (start.y - mapY) * deltaDist.y;
+        } else {
+            stepY = 1;
+            sideDist.y = (mapY + 1.0 - start.y) * deltaDist.y;
+        }
+
+        while (true) {
+            if (sideDist.x < sideDist.y) {
+                sideDist.x += deltaDist.x;
+                mapX += stepX;
+                side = 0;
+            } else {
+                sideDist.y += deltaDist.y;
+                mapY += stepY;
+                side = 1;
+            }
+
+            if (this.worldMap[mapY][mapX] == -1) {
+                TileEntity tent = this.getTileEntityAt(mapX, mapY);
+                
+                if (tent != null) {
+                    double dist = 0;
+
+                    if (side == 0) {
+                        dist = (mapX - start.x + (1 - stepX) / 2) / dir.x;
+                    } else {
+                        dist = (mapY - start.y + (1 - stepY) / 2) / dir.y;
+                    }
+
+                    if (dist < 0.6) {
+                        tent.onInteract();
+                        return;
+                    } 
+                }
+            }
+
+            if (this.worldMap[mapY][mapX] != 0) {
+                return;
+            }
+        }
+    }
+
+    public boolean isFree(Vec2 pos) {        
+        if (this.worldMap[(int)pos.y][(int)pos.x] == -1) {
+            TileEntity tent = this.getTileEntityAt((int)pos.x, (int)pos.y);
+
+            if (tent != null && tent.isSolid()) {
+                return false;
+            }
+        } else if (this.worldMap[(int)pos.y][(int)pos.x] == 0) { // Check for entities and sprites
+            List<Sprite> sprites = this.getAllSprites();
+            
+            for (Sprite sprite : sprites) {
+                if ((int)sprite.pos.x == (int)pos.x && (int)sprite.pos.y == (int)pos.y && sprite.solid) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
     public void update(double delta) {

@@ -23,6 +23,10 @@ public class Player extends Entity {
             speed *= 1.8;
         }
 
+        if (r.isKeyDown(KeyCode.E)) {
+            world.interactRay(this.position, this.direction);
+        }
+
         Vec2 fvel;
         if (r.isKeyDown(KeyCode.W)) {
             fvel = Vec2.fromAngle(this.direction.toAngle()).mul(speed);
