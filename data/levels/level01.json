@@ -25,7 +25,7 @@
     "map": {
         "level": [
             [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 1],
+            [1, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, -1, 1],
             [1, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 1],
             [1, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 2, 0, 1],
             [1, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1],
@@ -73,7 +73,9 @@
             {"template": "DoorTileEntity", "position": { "x": 3, "y": 7 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 1.0}, "endOffset": {"x": 1.0, "y": 0.0}},
             {"template": "DoorTileEntity", "position": { "x": 3, "y": 9 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
             {"template": "DoorTileEntity", "position": { "x": 5, "y": 7 }, "textureId": 99, "startOffset": {"x": 0.0, "y": 0.0}, "endOffset": {"x": 1.0, "y": 1.0}},
-            {"template": "DoorTileEntity", "position": { "x": 5, "y": 9 }, "textureId": 99, "startOffset": {"x": 1.0, "y": 0.0}, "endOffset": {"x": 0.0, "y": 1.0}}
+            {"template": "DoorTileEntity", "position": { "x": 5, "y": 9 }, "textureId": 99, "startOffset": {"x": 1.0, "y": 0.0}, "endOffset": {"x": 0.0, "y": 1.0}},
+
+            {"template": "GameEndTileEntity", "position": {"x": 17, "y": 1}, "textureId": 99}
         ],
 
         "entities": [
