@@ -434,7 +434,7 @@ public class World {
 
         this.toPlayerPaths[(int)playerPos.y][(int)playerPos.x] = null;
 
-        System.out.println("Path to player");
+        /*System.out.println("Path to player");
         for (int y = 0; y < this.toPlayerPaths.length; y++) {
             for (int x = 0; x < this.toPlayerPaths[y].length; x++) {
                 Vec2 path = this.toPlayerPaths[y][x];
@@ -454,16 +454,14 @@ public class World {
                 }
             }
             System.out.println("");
-        }
+        }*/
     }
 
     public List<Vec2> getPathToPlayer(Vec2 pos) {
         List<Vec2> path = new ArrayList<Vec2>(0);
         if (this.toPlayerPaths[(int)pos.y][(int)pos.x] != null) {   // Can get to player
-            path.add(pos.floor());
-
             Vec2 currentPos = pos.floor();
-            while (!currentPos.equals(this.getPlayer().getPosition().floor())) {    // We havent reached the player
+            while (!currentPos.eqi(this.getPlayer().getPosition())) {    // We havent reached the player
                 Vec2 cameFrom = this.toPlayerPaths[(int)currentPos.y][(int)currentPos.x];   // Where this cell came from
                 path.add(cameFrom.floor());
                 currentPos = cameFrom.floor();

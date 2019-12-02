@@ -1,6 +1,7 @@
 package app;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class TurretEntity extends MonsterEntity {
     TurretEntity(Vec2 pos, Player player, HashMap<String, Number> textures) {
@@ -51,6 +52,16 @@ public class TurretEntity extends MonsterEntity {
         if (timeDiff > 0.2 * (this.shotsFired + 1) && timeDiff < 0.7) {
             this.shotsFired++;
             this.fire(world);
+        }
+
+        // Pathfinding test
+        List<Vec2> path = world.getPathToPlayer(this.position);
+
+        if (path.size() >= 2) {
+            Vec2 dir = path.get(1).add(new Vec2(0.5, 0.5)).sub(this.position).normalize();
+            this.velocity = dir.mul(1);
+        } else {
+            this.velocity = new Vec2();
         }
     }
 

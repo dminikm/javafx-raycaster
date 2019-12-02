@@ -72,6 +72,14 @@ public class Vec2 {
         return new Vec2(Math.cos(rad), Math.sin(rad)).normalize();
     }
 
+    public boolean eq(Vec2 other) {
+        return this.x == other.x && this.y == other.y;
+    }
+
+    public boolean eqi(Vec2 other) {
+        return (int)this.x == (int)other.x && (int)this.y == (int)other.y;
+    }
+
     public double x;
     public double y;
 }
