@@ -58,13 +58,11 @@ public class LevelLoader
 
         var parsedSprites = new ArrayList<Sprite>();
         for (JSONObject sprite : sprites) {
-            Sprite spr = new Sprite();
-
-            spr.pos = JSONUtils.vecFromJson(sprite, "position");
-            spr.textureId = ((Number)sprite.get("textureId")).intValue();
-            spr.solid = (boolean)sprite.get("solid");
-
-            parsedSprites.add(spr);
+            parsedSprites.add(new Sprite(
+                JSONUtils.vecFromJson(sprite, "position"),
+                ((Number)sprite.get("textureId")).intValue(),
+                (boolean)sprite.get("solid")
+            ));
         }
 
         Sprite[] arr = new Sprite[parsedSprites.size()];
@@ -91,6 +89,10 @@ public class LevelLoader
             {
                 case "turretentity":
                     ent = parseTurretEntity(entity, p);
+                    break;
+
+                case "ammopickupentity":
+                    ent = parseAmmoPickupEntity(entity, p);
                     break;
 
                 default:
@@ -150,29 +152,29 @@ public class LevelLoader
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         Vec2 startOffset = JSONUtils.vecFromJson(json, "startOffset");
         Vec2 endOffset = JSONUtils.vecFromJson(json, "endOffset");
-        Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
 
-        return new DoorTileEntity(position, startOffset, endOffset, textureId.intValue());
+        return new DoorTileEntity(position, startOffset, endOffset, textureId);
     }
 
     private static TileEntity parseGameEndTileEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
-        Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
 
-        return new GameEndTileEntity(position, textureId.intValue());
+        return new GameEndTileEntity(position, textureId);
     }
 
     private static TileEntity parseLevelChangeTileEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
-        Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
         String nextLevel = JSONUtils.getFromComplexPath(json, "nextLevel");
 
-        return new LevelChangeTileEntity(position, nextLevel, textureId.intValue());
+        return new LevelChangeTileEntity(position, nextLevel, textureId);
     }
 
     private static TileEntity parseSecretDoorTileEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
-        Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
 
         List<JSONObject> pathJSON = JSONUtils.getFromComplexPath(json, "path");
         List<Vec2> path = pathJSON.stream().map((final JSONObject vec) -> {
@@ -182,13 +184,22 @@ public class LevelLoader
             );
         }).collect(Collectors.toList());
 
-        return new SecretDoorTileEntity(position, textureId.intValue(), path);
+        return new SecretDoorTileEntity(position, textureId, path);
     }
 
+    // Individual entity parsers
     private static Entity parseTurretEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         HashMap<String, Number> textures = JSONUtils.getFromComplexPath(json, "textures");
 
         return new TurretEntity(position, p, textures);
+    }
+
+    private static Entity parseAmmoPickupEntity(JSONObject json, Player p) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
+        int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();
+
+        return new AmmoPickupEntity(position, textureId, amount);
     }
 }

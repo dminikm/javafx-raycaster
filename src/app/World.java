@@ -45,6 +45,12 @@ class BlockRaycastResult extends RaycastResult {
 }
 
 class Sprite {
+    public Sprite(Vec2 pos, int textureId, boolean solid) {
+        this.pos = pos;
+        this.textureId = textureId;
+        this.solid = solid;
+    }
+
     public Vec2     pos;
     public int      textureId;
     public boolean  solid;
@@ -315,6 +321,10 @@ public class World {
         for (TileEntity tent : this.tileEntities) {
             tent.update(delta, this);
         }
+
+        this.entities = this.entities.stream().filter((final Entity ent) -> {
+            return !ent.markedDelete();
+        }).collect(Collectors.toList());
     }
 
     public Entity getPlayer() {
@@ -324,9 +334,9 @@ public class World {
     public List<Sprite> getAllSprites() {
         List<Sprite> sprites = new ArrayList<Sprite>(this.sprites);
         List<Sprite> entitySprites = this.entities.stream().filter((final Entity entity) -> {
-            return entity instanceof MonsterEntity;
+            return entity instanceof WorldEntity;
         }).map((final Entity entity) -> {
-            return ((MonsterEntity)entity).getSprite();
+            return ((WorldEntity)entity).getSprite();
         }).collect(Collectors.toList());
 
         sprites.addAll(entitySprites);

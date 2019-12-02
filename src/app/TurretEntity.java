@@ -67,12 +67,11 @@ public class TurretEntity extends MonsterEntity {
 
     @Override
     public Sprite getSprite() {
-        Sprite spr = new Sprite();
-        spr.pos = this.position.copy();
-        spr.solid = false;
-        spr.textureId = this.currentTextureId;
-
-        return spr;
+        return new Sprite(
+            this.position.copy(),
+            this.currentTextureId,
+            false
+        );
     }
 
     private int currentTextureId;

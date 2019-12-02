@@ -6,6 +6,8 @@ public abstract class Entity {
         this.direction = dir;
         this.velocity = vel;
         this.health = 100;
+
+        this.delete = false;
     }
 
     public Vec2 getPosition() {
@@ -49,8 +51,14 @@ public abstract class Entity {
     public void onInteract() {}
     public abstract void update(double delta, World world);
 
+    public final boolean markedDelete() {
+        return this.delete;
+    }
+
     protected Vec2 position;
     protected Vec2 direction;
     protected Vec2 velocity;
     protected double health;
+
+    protected boolean delete;
 }

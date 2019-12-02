@@ -1,0 +1,19 @@
+package app;
+
+public class AmmoPickupEntity extends PickupEntity {
+    public AmmoPickupEntity(Vec2 pos, int textureId, int amount) {
+        super(pos);
+        this.radius = 0.5;
+        this.amount = amount;
+
+        this.textureId = textureId;
+        this.solid = false;
+    }
+
+    @Override
+    protected void onPickup(Player p) {
+        this.delete = true;
+    }
+
+    private int amount;
+}
