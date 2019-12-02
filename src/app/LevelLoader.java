@@ -95,6 +95,10 @@ public class LevelLoader
                     ent = parseAmmoPickupEntity(entity, p);
                     break;
 
+                case "healthpickupentity":
+                    ent = parseHealthPickupEntity(entity, p);
+                    break;
+
                 default:
                     break;
             };
@@ -201,5 +205,13 @@ public class LevelLoader
         int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();
 
         return new AmmoPickupEntity(position, textureId, amount);
+    }
+
+    private static Entity parseHealthPickupEntity(JSONObject json, Player p) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
+        int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();
+
+        return new HealthPickupEntity(position, textureId, amount);
     }
 }

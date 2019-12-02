@@ -20,6 +20,7 @@
 		{"id": 14,  "name": "data/img/turret/turret_firing03.png"       },
         {"id": 15,  "name": "data/img/turret/turret_firing04.png"       },
         {"id": 20,  "name": "data/img/pickups/ammo.png"},
+        {"id": 21,  "name": "data/img/pickups/health.png"},
         {"id": 99,  "name": "data/img/glass_top_border01.png" }
     ],
 
@@ -90,9 +91,9 @@
             },
 
             {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 20, "amount": 5 },
-            {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 9.5 }, "textureId": 20, "amount": 5 },
+            {"template": "HealthPickupEntity", "position": { "x": 3.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
             {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 7.5 }, "textureId": 20, "amount": 5 },
-            {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 9.5 }, "textureId": 20, "amount": 5 }
+            {"template": "HealthPickupEntity", "position": { "x": 5.5, "y": 9.5 }, "textureId": 21, "amount": 25 }
         ]
     }
 }

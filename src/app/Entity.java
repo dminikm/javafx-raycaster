@@ -45,7 +45,7 @@ public abstract class Entity {
     }
 
     public void takeDamage(double damage) {
-        this.health = Math.max(0, this.health - damage);
+        this.health = Math.min(100, Math.max(0, this.health - damage));
     }
 
     public void onInteract() {}
