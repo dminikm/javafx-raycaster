@@ -346,9 +346,9 @@ public class World {
 
     public void resetTo(World w) {
         this.entities = w.entities;
+        this.tileEntities = w.tileEntities;
         this.player = w.player;
         this.sprites = w.sprites;
-        this.tileEntities = w.tileEntities;
         this.worldMap = w.worldMap;
     }
 

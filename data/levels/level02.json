@@ -1,0 +1,46 @@
+{
+    "meta": {
+        "title": "Test"
+    },
+
+    "player": {
+        "start": {"x": 4, "y": 4},
+        "dir": {"x": -1, "y": 0}
+    },
+
+    "textures": [
+        {"id": 0,   "name": "data/img/air.png"              },
+        {"id": 1,   "name": "data/img/red_brick_wall/top_border01.png" },
+        {"id": 2,   "name": "data/img/orange_brick_wall/top_border01.png"},
+        {"id": 9,   "name": "data/img/barrel.png"           },
+        {"id": 10,  "name": "data/img/pillar.png"           },
+        {"id": 11,  "name": "data/img/turret/turret_idle.png"       },
+		{"id": 12,  "name": "data/img/turret/turret_firing01.png"       },
+		{"id": 13,  "name": "data/img/turret/turret_firing02.png"       },
+		{"id": 14,  "name": "data/img/turret/turret_firing03.png"       },
+		{"id": 15,  "name": "data/img/turret/turret_firing04.png"       },
+        {"id": 99,  "name": "data/img/glass_top_border01.png" }
+    ],
+
+    "map": {
+        "level": [
+            [1, 2, 2, 2, 2, 2, 2, 2, 2],
+            [1, -1, 0, 0, 0, 0, 0, 0, 2],
+            [1, 0, 0, 0, 0, 0, 0, 0, 2],
+            [1, 0, 0, 0, 0, 0, 0, 0, 2],
+            [1, 0, 0, 0, 0, 0, 0, 0, 2],
+            [1, 0, 0, 0, 0, 0, 0, 0, 2],
+            [1, 1, 1, 1, 1, 1, 1, 1, 2]
+        ],
+
+        "sprites": [
+        ],
+
+        "tileEntities": [
+            {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 1}, "nextLevel": "data/levels/level01.json", "textureId": 99}
+        ],
+
+        "entities": [
+        ]
+    }
+}

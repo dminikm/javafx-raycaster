@@ -36,6 +36,11 @@ public class LevelChangeTileEntity extends TileEntity {
         return res;
     }
 
+    @Override
+    public boolean isSolid() {
+        return true;
+    }
+
     private int textureId;
     private String nextLevel;
     private boolean change;

@@ -29,5 +29,10 @@ public class GameEndTileEntity extends TileEntity {
         return res;
     }
 
+    @Override
+    public boolean isSolid() {
+        return true;
+    }
+
     private int textureId;
 }
