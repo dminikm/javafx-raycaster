@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LevelLoader
 {
@@ -127,6 +128,10 @@ public class LevelLoader
                     tent = parseLevelChangeTileEntity(tileEntity, p);
                     break;
 
+                case "secretdoortileentity":
+                    tent = parseSecretDoorTileEntity(tileEntity, p);
+                    break;
+
                 default:
                     break;
             };
@@ -163,6 +168,21 @@ public class LevelLoader
         String nextLevel = JSONUtils.getFromComplexPath(json, "nextLevel");
 
         return new LevelChangeTileEntity(position, nextLevel, textureId.intValue());
+    }
+
+    private static TileEntity parseSecretDoorTileEntity(JSONObject json, Player p) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
+
+        List<JSONObject> pathJSON = JSONUtils.getFromComplexPath(json, "path");
+        List<Vec2> path = pathJSON.stream().map((final JSONObject vec) -> {
+            return new Vec2(
+                ((Number)JSONUtils.getFromComplexPath(vec, "x")).doubleValue(),
+                ((Number)JSONUtils.getFromComplexPath(vec, "y")).doubleValue()
+            );
+        }).collect(Collectors.toList());
+
+        return new SecretDoorTileEntity(position, textureId.intValue(), path);
     }
 
     private static Entity parseTurretEntity(JSONObject json, Player p) {

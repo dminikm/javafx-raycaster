@@ -28,7 +28,7 @@
             [1, -1, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, -1, 1],
             [1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 1],
             [1, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 2, 0, 1],
-            [1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 2, 2, -1, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, -1, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -76,7 +76,8 @@
             {"template": "DoorTileEntity", "position": { "x": 5, "y": 9 }, "textureId": 99, "startOffset": {"x": 1.0, "y": 0.0}, "endOffset": {"x": 0.0, "y": 1.0}},
 
             {"template": "GameEndTileEntity", "position": {"x": 17, "y": 1}, "textureId": 99},
-            {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 1}, "nextLevel": "data/levels/level02.json", "textureId": 99}
+            {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 1}, "nextLevel": "data/levels/level02.json", "textureId": 99},
+            {"template": "SecretDoorTileEntity", "position": {"x": 4, "y": 4}, "path": [{"x": 4.5, "y": 4.5}, {"x": 4.5, "y": 3.5}, {"x": 5.5, "y": 3.5}], "textureId": 2}
         ],
 
         "entities": [

@@ -32,12 +32,19 @@ public class LevelChangeTileEntity extends TileEntity {
     public TileEntityRaycastResult castRay(Vec2 start, Vec2 dir) {
         TileEntityRaycastResult res = new TileEntityRaycastResult(new Rect((int)this.position.x, (int)this.position.y, 1, 1).castRay(start.add(dir.mul(-0.001)), dir));
         res.entity = this;
+        res.distance = 0;
+        res.precisePositition = start;
 
         return res;
     }
 
     @Override
     public boolean isSolid() {
+        return true;
+    }
+
+    @Override
+    public boolean canApplyShading() {
         return true;
     }
 

@@ -1,6 +1,7 @@
 package app;
 
 import javafx.animation.AnimationTimer;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
@@ -8,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 public class Gameloop extends AnimationTimer {
     public Gameloop(Canvas cv) {
@@ -76,8 +78,18 @@ public class Gameloop extends AnimationTimer {
         gc.setLineWidth(2);
         Font theFont = Font.font("Consolas", FontWeight.NORMAL, 12);
         gc.setFont( theFont );
-        gc.fillText("FPS: " + (1 / delta), 10, 10 );
-        gc.fillText("Health: " + this.world.getPlayer().health, 10, 50);
+        gc.fillText("FPS: " + (int)(1 / delta), 100, 10 );
+
+        gc.setFill(new Color(0.1, 0.1, 0.1, 0.3));
+        gc.fillRect(0, this.canvasHeight - 100, 250, 100);
+
+        gc.setFill( Color.WHITE );
+        Font healthFont = Font.font("Consolas", FontWeight.BOLD, 48);
+        gc.setFont(healthFont);
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.setTextBaseline(VPos.CENTER);
+        gc.fillText("+", 50, this.canvasHeight - 50);
+        gc.fillText("" + (int)this.world.getPlayer().health, 125, this.canvasHeight - 50);
     }
 
     private void udpate(double delta) {

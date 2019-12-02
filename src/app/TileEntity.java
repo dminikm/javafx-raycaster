@@ -9,6 +9,10 @@ public abstract class TileEntity extends Entity {
         return false;
     }
 
+    public boolean canApplyShading() {
+        return false;
+    }
+
     public abstract TileEntityRaycastResult castRay(Vec2 start, Vec2 dir);
     public abstract int getTextureId();
 }

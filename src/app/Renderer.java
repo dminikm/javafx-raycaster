@@ -72,7 +72,7 @@ public class Renderer {
                 boolean applyShading = true;
                 if (res instanceof TileEntityRaycastResult) {
                     t = this.textureRegistry.getTextureForId(((TileEntityRaycastResult)res).entity.getTextureId());
-                    applyShading = false;
+                    applyShading = ((TileEntityRaycastResult)res).entity.canApplyShading();
                 }
 
                 if (res instanceof BlockRaycastResult) {
