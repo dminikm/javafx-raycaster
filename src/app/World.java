@@ -344,6 +344,14 @@ public class World {
         return null;
     }
 
+    public void resetTo(World w) {
+        this.entities = w.entities;
+        this.player = w.player;
+        this.sprites = w.sprites;
+        this.tileEntities = w.tileEntities;
+        this.worldMap = w.worldMap;
+    }
+
     private int[][] worldMap;
 
     private Entity              player;

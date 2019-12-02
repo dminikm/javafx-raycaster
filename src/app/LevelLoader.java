@@ -24,8 +24,6 @@ public class LevelLoader
 
         textureregistry.loadTexturesFromJSON(json);
         
-        TileEntity[] tileEntities = {};
-        Entity[] entities = {};
         Player p = parsePlayer(json);
 
         var w = new World(
@@ -125,6 +123,10 @@ public class LevelLoader
                     tent = parseGameEndTileEntity(tileEntity, p);
                     break;
 
+                case "levelchangetileentity":
+                    tent = parseLevelChangeTileEntity(tileEntity, p);
+                    break;
+
                 default:
                     break;
             };
@@ -153,6 +155,14 @@ public class LevelLoader
         Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
 
         return new GameEndTileEntity(position, textureId.intValue());
+    }
+
+    private static TileEntity parseLevelChangeTileEntity(JSONObject json, Player p) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        Number textureId = JSONUtils.getFromComplexPath(json, "textureId");
+        String nextLevel = JSONUtils.getFromComplexPath(json, "nextLevel");
+
+        return new LevelChangeTileEntity(position, nextLevel, textureId.intValue());
     }
 
     private static Entity parseTurretEntity(JSONObject json, Player p) {

@@ -10,7 +10,17 @@ import java.util.List;
 
 
 public class TextureRegistry {
-    public TextureRegistry() {
+    private static TextureRegistry instance;
+
+    public static TextureRegistry getInstance() {
+        if (instance == null) {
+            instance = new TextureRegistry();
+        }
+
+        return instance;
+    }
+    
+    private TextureRegistry() {
         this.mapping = new HashMap<String, Integer>();
         this.textures = new ArrayList<Texture>();
     }
