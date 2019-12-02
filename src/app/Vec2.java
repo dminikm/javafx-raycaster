@@ -63,6 +63,10 @@ public class Vec2 {
         return new Vec2(this.x, this.y);
     }
 
+    public Vec2 floor() {
+        return new Vec2((int)this.x, (int)this.y);
+    }
+
     static Vec2 fromAngle(double angle) {
         double rad = Angle.toRad(angle);
         return new Vec2(Math.cos(rad), Math.sin(rad)).normalize();

@@ -1,7 +1,9 @@
 package app;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,6 +72,16 @@ public class World {
 
         this.player = p;
         this.entities.add(p);
+
+        this.toPlayerPaths = new Vec2[this.worldMap.length][this.worldMap[0].length];
+    }
+
+    public void resetTo(World w) {
+        this.entities = w.entities;
+        this.tileEntities = w.tileEntities;
+        this.player = w.player;
+        this.sprites = w.sprites;
+        this.worldMap = w.worldMap;
     }
 
     public RaycastResult castRay(Vec2 start, Vec2 dir) {
@@ -290,7 +302,31 @@ public class World {
         return true;
     }
 
+    public boolean isFree(Vec2 pos, boolean ignoreEntities) {        
+        if (this.worldMap[(int)pos.y][(int)pos.x] == -1) {
+            TileEntity tent = this.getTileEntityAt((int)pos.x, (int)pos.y);
+
+            if (tent != null && tent.isSolid()) {
+                return false;
+            }
+        } else if (this.worldMap[(int)pos.y][(int)pos.x] == 0) { // Check for entities and sprites
+            List<Sprite> sprites = (ignoreEntities) ? this.sprites : this.getAllSprites();
+            
+            for (Sprite sprite : sprites) {
+                if ((int)sprite.pos.x == (int)pos.x && (int)sprite.pos.y == (int)pos.y && sprite.solid) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return true;
+    }
+
     public void update(double delta) {
+        this.updatePlayerPaths();
+
         for (Entity ent : this.entities) {
             ent.update(delta, this);
 
@@ -354,12 +390,87 @@ public class World {
         return null;
     }
 
-    public void resetTo(World w) {
-        this.entities = w.entities;
-        this.tileEntities = w.tileEntities;
-        this.player = w.player;
-        this.sprites = w.sprites;
-        this.worldMap = w.worldMap;
+    private boolean isInBounds(Vec2 pos) {
+        return  pos.x >= 0 &&
+                pos.y >= 0 &&
+                pos.y < this.worldMap.length &&
+                pos.x < this.worldMap[(int)pos.y].length;
+    }
+
+    private List<Vec2> getNeighborsForBlock(Vec2 pos) {
+        List<Vec2> neighbors = new ArrayList<Vec2>(0);
+
+        neighbors.add(pos.add(new Vec2(-1, 0)).floor());
+        neighbors.add(pos.add(new Vec2(1, 0)).floor());
+        neighbors.add(pos.add(new Vec2(0, -1)).floor());
+        neighbors.add(pos.add(new Vec2(0, 1)).floor());
+
+        return neighbors.stream().filter((final Vec2 position) -> {
+            return this.isInBounds(position) && this.isFree(position, true);
+        }).collect(Collectors.toList());
+    }
+
+    private void updatePlayerPaths() {
+        // Clear paths
+        for (int y = 0; y < this.toPlayerPaths.length; y++) {
+            for (int x = 0; x < this.toPlayerPaths[y].length; x++) {
+                this.toPlayerPaths[y][x] = null;
+            }
+        }
+
+        Deque<Vec2> frontier = new ArrayDeque<Vec2>(); // New frontier
+        Vec2 playerPos = this.getPlayer().getPosition().floor();
+        frontier.push(playerPos); // Push player to frontier
+
+        while (!frontier.isEmpty()) {
+            Vec2 current = frontier.pop();
+            for (Vec2 neighbor : this.getNeighborsForBlock(current)) {
+                if (this.toPlayerPaths[(int)neighbor.y][(int)neighbor.x] == null) {     // Not updated yet
+                    frontier.add(neighbor);                                             // Add as a next check
+                    this.toPlayerPaths[(int)neighbor.y][(int)neighbor.x] = current;     // Set it's path to current
+                }
+            }
+        }
+
+        this.toPlayerPaths[(int)playerPos.y][(int)playerPos.x] = null;
+
+        System.out.println("Path to player");
+        for (int y = 0; y < this.toPlayerPaths.length; y++) {
+            for (int x = 0; x < this.toPlayerPaths[y].length; x++) {
+                Vec2 path = this.toPlayerPaths[y][x];
+                
+                if (path == null) {
+                    System.out.print("O");
+                } else if ((int)path.x > x) {
+                    System.out.print(">");
+                } else if ((int)path.x < x) {
+                    System.out.print("<");
+                } else if ((int)path.y > y) {
+                    System.out.print("v");
+                } else if ((int)path.y < y) {
+                    System.out.print("^");
+                } else {
+                    System.out.print("O");
+                }
+            }
+            System.out.println("");
+        }
+    }
+
+    public List<Vec2> getPathToPlayer(Vec2 pos) {
+        List<Vec2> path = new ArrayList<Vec2>(0);
+        if (this.toPlayerPaths[(int)pos.y][(int)pos.x] != null) {   // Can get to player
+            path.add(pos.floor());
+
+            Vec2 currentPos = pos.floor();
+            while (!currentPos.equals(this.getPlayer().getPosition().floor())) {    // We havent reached the player
+                Vec2 cameFrom = this.toPlayerPaths[(int)currentPos.y][(int)currentPos.x];   // Where this cell came from
+                path.add(cameFrom.floor());
+                currentPos = cameFrom.floor();
+            }
+        }
+
+        return path;
     }
 
     private int[][] worldMap;
@@ -368,4 +479,7 @@ public class World {
     private List<Entity>        entities;
     private List<TileEntity>    tileEntities;
     private List<Sprite>        sprites;
+
+    // Pathfinding stuff
+    private Vec2[][] toPlayerPaths;
 }
