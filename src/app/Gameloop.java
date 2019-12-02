@@ -82,6 +82,7 @@ public class Gameloop extends AnimationTimer {
 
         gc.setFill(new Color(0.1, 0.1, 0.1, 0.3));
         gc.fillRect(0, this.canvasHeight - 100, 250, 100);
+        gc.fillRect(this.canvasWidth - 250, this.canvasHeight - 100, 250, 100);
 
         gc.setFill( Color.WHITE );
         Font healthFont = Font.font("Consolas", FontWeight.BOLD, 48);
@@ -90,6 +91,8 @@ public class Gameloop extends AnimationTimer {
         gc.setTextBaseline(VPos.CENTER);
         gc.fillText("+", 50, this.canvasHeight - 50);
         gc.fillText("" + (int)this.world.getPlayer().health, 125, this.canvasHeight - 50);
+
+        gc.fillText("" + 0, this.canvasWidth - 125, this.canvasHeight - 50);
     }
 
     private void udpate(double delta) {
