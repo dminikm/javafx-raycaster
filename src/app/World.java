@@ -7,45 +7,6 @@ import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class RaycastResult {
-    public RaycastResult() {}
-
-    public RaycastResult(RaycastResult res) {
-        this.hit = res.hit;
-        this.distance = res.distance;
-        this.side = res.side;
-        this.startOffset = res.startOffset;
-        this.precisePositition = res.precisePositition;
-        this.worldPositition = res.worldPositition;
-    }
-
-    public boolean hit              = false;
-    public double distance          = Double.MAX_VALUE;
-    public int side                 = 0;
-
-    public double startOffset       = 0;
-    public Vec2 precisePositition   = new Vec2();
-    public Vec2 worldPositition     = new Vec2();
-}
-
-class TileEntityRaycastResult extends RaycastResult {
-    public TileEntityRaycastResult() {}
-    public TileEntityRaycastResult(RaycastResult res) { super(res); }
-
-    public TileEntity entity = null;
-}
-
-class EntityRaycastResult extends RaycastResult {
-    public EntityRaycastResult() {}
-    public EntityRaycastResult(RaycastResult res) { super(res); }
-
-    public Entity entity = null;
-}
-
-class BlockRaycastResult extends RaycastResult {
-    public int blockId = 0;
-}
-
 class Sprite {
     public Sprite(Vec2 pos, int textureId, boolean solid) {
         this.pos = pos;
@@ -58,7 +19,7 @@ class Sprite {
     public boolean  solid;
 }
 
-public class World {
+public class World implements RayCastable {
     public World(int[][] worldMap, Player p, TileEntity[] tileEntities, Entity[] entities, Sprite[] sprites) {
         this.worldMap = worldMap;
 
@@ -143,7 +104,7 @@ public class World {
 
                     Vec2 pos = start.add(dir.mul(dist));
 
-                    TileEntityRaycastResult res = tent.castRay(pos, dir);
+                    TileEntityRaycastResult res = (TileEntityRaycastResult)tent.castRay(pos, dir);
                     res.distance += dist;
                     res.worldPositition = new Vec2(mapX, mapY);
                     res.entity = tent;
@@ -365,8 +326,8 @@ public class World {
         }).collect(Collectors.toList());
     }
 
-    public Entity getPlayer() {
-        return this.player;
+    public Player getPlayer() {
+        return (Player)this.player;
     }
 
     public List<Sprite> getAllSprites() {

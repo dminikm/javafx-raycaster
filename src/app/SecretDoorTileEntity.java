@@ -41,7 +41,7 @@ public class SecretDoorTileEntity extends TileEntity {
     }
 
     @Override
-    public TileEntityRaycastResult castRay(Vec2 start, Vec2 dir) {
+    public RaycastResult castRay(Vec2 start, Vec2 dir) {
         if (this.opening && this.openingTime >= ((double)this.path.size() - 1) - 0.002) {
             return new TileEntityRaycastResult();
         }

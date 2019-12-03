@@ -1,6 +1,6 @@
 package app;
 
-public class Line {
+public class Line implements RayCastable {
     Line(Vec2 start, Vec2 end) {
         this.start = start;
         this.end = end;

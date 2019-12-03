@@ -1,6 +1,6 @@
 package app;
 
-public class Rect {
+public class Rect implements RayCastable {
     public Rect() {
         this.x = 0;
         this.y = 0;

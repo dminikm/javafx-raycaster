@@ -22,7 +22,7 @@ public class GameEndTileEntity extends TileEntity {
     }
 
     @Override
-    public TileEntityRaycastResult castRay(Vec2 start, Vec2 dir) {
+    public RaycastResult castRay(Vec2 start, Vec2 dir) {
         TileEntityRaycastResult res = new TileEntityRaycastResult(new Rect((int)this.position.x, (int)this.position.y, 1, 1).castRay(start.add(dir.mul(-0.001)), dir));
         res.entity = this;
         res.precisePositition = start;
