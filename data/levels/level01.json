@@ -90,6 +90,22 @@
                 }
             },
 
+            {
+                "template": "DogEntity",
+                "position": {"x": 16, "y": 15},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 1,
+                    "textureIds": [20]
+                }, {
+                    "cycleTime": 1,
+                    "textureIds": [21]
+                }, {
+                    "cycleTime": 1,
+                    "textureIds": [99]
+                }]
+            },
+
             {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 20, "amount": 5 },
             {"template": "HealthPickupEntity", "position": { "x": 3.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
             {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 7.5 }, "textureId": 20, "amount": 5 },

@@ -1,5 +1,8 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONObject;
 
 class JSONUtils {
@@ -19,5 +22,12 @@ class JSONUtils {
             ((Number)getFromComplexPath(json, path + ".x")).doubleValue(),
             ((Number)getFromComplexPath(json, path + ".y")).doubleValue()
         );
+    }
+
+    public static AnimatedSprite getAnimatedSpriteFromJson(JSONObject json, String path) {
+        double cycleTime = ((Number)getFromComplexPath(json, path + "cycleTime")).doubleValue();
+        List<Number> textureIds = getFromComplexPath(json, path + "textureIds");
+
+        return new AnimatedSprite(textureIds, cycleTime);
     }
 }

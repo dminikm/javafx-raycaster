@@ -91,6 +91,10 @@ public class LevelLoader
                     ent = parseTurretEntity(entity, p);
                     break;
 
+                case "dogentity":
+                    ent = parseDogEntity(entity, p);
+                    break;
+
                 case "ammopickupentity":
                     ent = parseAmmoPickupEntity(entity, p);
                     break;
@@ -197,6 +201,19 @@ public class LevelLoader
         HashMap<String, Number> textures = JSONUtils.getFromComplexPath(json, "textures");
 
         return new TurretEntity(position, p, textures);
+    }
+
+    private static Entity parseDogEntity(JSONObject json, Player p) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        Vec2 direction = JSONUtils.vecFromJson(json, "direction");
+        List<AnimatedSprite> sprites = new ArrayList<AnimatedSprite>(0);
+        List<JSONObject> jsonSprites = JSONUtils.getFromComplexPath(json, "sprites");
+
+        for (JSONObject spr : jsonSprites) {
+            sprites.add(JSONUtils.getAnimatedSpriteFromJson(spr, ""));
+        }
+
+        return new DogEntity(position, p, sprites);
     }
 
     private static Entity parseAmmoPickupEntity(JSONObject json, Player p) {
