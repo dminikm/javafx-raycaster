@@ -82,6 +82,8 @@ public class World {
         this.player = w.player;
         this.sprites = w.sprites;
         this.worldMap = w.worldMap;
+
+        this.toPlayerPaths = new Vec2[this.worldMap.length][this.worldMap[0].length];
     }
 
     public RaycastResult castRay(Vec2 start, Vec2 dir) {
