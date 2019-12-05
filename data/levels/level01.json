@@ -29,7 +29,7 @@
                 "ammo": 0,
                 "fireDelay": 0.8,
                 "numShots": 1,
-                "spread": 0.1,
+                "spread": 0.8,
                 "damage": 10,
                 "range": 16,
                 "sound": "data/assets/weapons/pistol/pistol.wav",
@@ -37,6 +37,21 @@
                     "cycleTime": 0.16,
                     "repeat": true,
                     "textureIds": [110, 111, 112, 113, 114]
+                }
+            }, {
+                "name": "Machinegun",
+                "available": false,
+                "ammo": 0,
+                "fireDelay": 0.2,
+                "numShots": 1,
+                "spread": 3,
+                "damage": 15,
+                "range": 25,
+                "sound": "data/assets/weapons/machinegun/machinegun.wav",
+                "animation": {
+                    "cycleTime": 0.04,
+                    "repeat": true,
+                    "textureIds": [120, 121, 122, 123, 124]
                 }
             }
         ]
@@ -96,7 +111,15 @@
         {"id": 113, "name": "data/assets/weapons/pistol/pistol04.png"},
         {"id": 114, "name": "data/assets/weapons/pistol/pistol05.png"},
         {"id": 115, "name": "data/assets/weapons/pistol/pistol_overworld.png"},
-        {"id": 116, "name": "data/assets/weapons/pistol/pistol_magazine.png"}
+        {"id": 116, "name": "data/assets/weapons/pistol/pistol_magazine.png"},
+
+        {"id": 120, "name": "data/assets/weapons/machinegun/machinegun01.png"},
+        {"id": 121, "name": "data/assets/weapons/machinegun/machinegun02.png"},
+        {"id": 122, "name": "data/assets/weapons/machinegun/machinegun03.png"},
+        {"id": 123, "name": "data/assets/weapons/machinegun/machinegun04.png"},
+        {"id": 124, "name": "data/assets/weapons/machinegun/machinegun05.png"},
+        {"id": 125, "name": "data/assets/weapons/machinegun/machinegun_overworld.png"},
+        {"id": 126, "name": "data/assets/weapons/machinegun/machinegun_magazine.png"}
     ],
 
     "map": {
@@ -241,7 +264,9 @@
             {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 116, "weaponName": "Pistol", "amount": 5, "makeAvailable": false },
             {"template": "HealthPickupEntity", "position": { "x": 3.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
             {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 7.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
-            {"template": "HealthPickupEntity", "position": { "x": 5.5, "y": 9.5 }, "textureId": 21, "amount": 25 }
+            {"template": "HealthPickupEntity", "position": { "x": 5.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
+
+            {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 3.5 }, "textureId": 125, "weaponName": "Machinegun", "amount": 25, "makeAvailable": true }
         ]
     }
 }
