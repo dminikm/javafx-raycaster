@@ -18,6 +18,7 @@ public class Player extends Entity {
         KeyRegistry r = KeyRegistry.getInstance();
 
         int speed = 4;
+        int turningSpeed = 80;
 
         if (r.isKeyDown(KeyCode.SHIFT)) {
             speed *= 1.8;
@@ -46,9 +47,9 @@ public class Player extends Entity {
         }
 
         if (r.isKeyDown(KeyCode.LEFT)) {
-            this.direction = Vec2.fromAngle(this.direction.toAngle() - 100 * delta);
+            this.direction = Vec2.fromAngle(this.direction.toAngle() - turningSpeed * delta);
         } else if (r.isKeyDown(KeyCode.RIGHT)) {
-            this.direction = Vec2.fromAngle(this.direction.toAngle() + 100 * delta);
+            this.direction = Vec2.fromAngle(this.direction.toAngle() + turningSpeed * delta);
         }
 
         this.velocity = fvel.add(svel);
