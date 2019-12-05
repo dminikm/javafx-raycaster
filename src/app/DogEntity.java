@@ -58,13 +58,16 @@ public class DogEntity extends MonsterEntity {
             }
 
             // Check if player in range and the dog can bite again
-            if (playerDir.len() < 1.4 && this.elapsedTime - this.attackDelay > this.lastBite) {
+            if (playerDir.len() < 2 && this.elapsedTime - this.attackDelay > this.lastBite) {
                 this.fire(world);
                 this.lastBite = this.elapsedTime;
             }
         }
 
-        System.out.println("Health: " + this.health);
+        if (this.isFiring()) {
+            this.currentSpriteIndex = this.sprites.size() - 2;
+            this.sprites.get(this.currentSpriteIndex).update(delta);
+        }
     }
 
     private void fire(World world) {
@@ -77,6 +80,10 @@ public class DogEntity extends MonsterEntity {
 
         // queue sound
         world.alertEntitiesInDistance(this.position, 10);
+    }
+
+    private boolean isFiring() {
+        return this.elapsedTime - this.attackDelay < this.lastBite;
     }
 
     @Override
