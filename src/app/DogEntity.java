@@ -13,6 +13,13 @@ public class DogEntity extends MonsterEntity {
     public void update(double delta, World world) {
         this.elapsedTime += delta;
 
+        if (this.health <= 0) {
+            this.currentSpriteIndex = this.sprites.size() - 1;
+            this.sprites.get(this.currentSpriteIndex).update(delta);
+            this.velocity = new Vec2();
+            return;
+        }
+
         Vec2 playerDir = world.getPlayer().getPosition().sub(this.position);
         double angle = Angle.normalizeDeg(playerDir.normalize().toAngle() - this.direction.toAngle());
 

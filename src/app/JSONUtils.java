@@ -27,7 +27,8 @@ class JSONUtils {
     public static AnimatedSprite getAnimatedSpriteFromJson(JSONObject json, String path) {
         double cycleTime = ((Number)getFromComplexPath(json, path + "cycleTime")).doubleValue();
         List<Number> textureIds = getFromComplexPath(json, path + "textureIds");
+        boolean repeat = getFromComplexPath(json, path + "repeat");
 
-        return new AnimatedSprite(textureIds, cycleTime);
+        return new AnimatedSprite(textureIds, cycleTime, repeat);
     }
 }

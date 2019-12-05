@@ -18,6 +18,7 @@
                 "range": 1.8,
                 "animation": {
                     "cycleTime": 0.14,
+                    "repeat": true,
                     "textureIds": [100, 101, 102, 103, 104]
                 }
             }
@@ -52,11 +53,14 @@
 		{"id": 59,  "name": "data/img/dog/dog_right_side02.png"       },
 		{"id": 60,  "name": "data/img/dog/dog_right_side03.png"       },
         {"id": 61,  "name": "data/img/dog/dog_right_side04.png"       },
-
         {"id": 62,  "name": "data/img/dog/dog_back01.png"       },
 		{"id": 63,  "name": "data/img/dog/dog_back02.png"       },
 		{"id": 64,  "name": "data/img/dog/dog_back03.png"       },
         {"id": 65,  "name": "data/img/dog/dog_back04.png"       },
+        {"id": 66,  "name": "data/img/dog/dog_dead01.png"       },
+        {"id": 67,  "name": "data/img/dog/dog_dead02.png"       },
+        {"id": 68,  "name": "data/img/dog/dog_dead03.png"       },
+        {"id": 69,  "name": "data/img/dog/dog_dead04.png"       },
 
         {"id": 100, "name": "data/img/weapons/knife/knife01.png" },
         {"id": 101, "name": "data/img/weapons/knife/knife02.png" }, 
@@ -137,17 +141,25 @@
                 "direction": {"x": 1, "y": 0},
                 "sprites": [{
                     "cycleTime": 0.1,
+                    "repeat": true,
                     "textureIds": [50, 51, 52, 53]
                 }, {
                     "cycleTime": 0.1,
+                    "repeat": true,
                     "textureIds": [54, 55, 56, 57]
                 },{
                     "cycleTime": 0.1,
+                    "repeat": true,
                     "textureIds": [58, 59, 60, 61]
                 }
                 , {
                     "cycleTime": 0.1,
+                    "repeat": true,
                     "textureIds": [62, 63, 64, 65]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [66, 67, 68, 69]
                 }]
             },
 

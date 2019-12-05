@@ -3,38 +3,39 @@ package app;
 import java.util.List;
 
 public class AnimatedSprite {
-    public AnimatedSprite(List<Number> sprites, double cycleTime) {
+    public AnimatedSprite(List<Number> sprites, double cycleTime, boolean repeat) {
         this.sprites = sprites;
-        this.currentIndex = 0;
         this.elapsedTime = 0;
         this.cycleTime = cycleTime;
+        this.repeat = repeat;
     }
 
     public void update(double delta) {
         this.elapsedTime += delta;
 
-        if (this.elapsedTime >= this.cycleTime * this.sprites.size()) {
+        if (this.elapsedTime >= this.cycleTime * this.sprites.size() && this.repeat) {
             this.elapsedTime -= this.cycleTime * this.sprites.size();
         }
-
-        this.currentIndex = (int)(this.elapsedTime / this.cycleTime);
     }
 
     public void setElapsedTime(double time) {
         this.elapsedTime = time;
-        this.currentIndex = (int)(this.elapsedTime / this.cycleTime);
     }
 
     public Sprite getSprite(Vec2 pos, boolean solid) {
-        return new Sprite(pos, this.sprites.get(this.currentIndex).intValue(), solid);
+        return new Sprite(pos, this.sprites.get(this.getCurrentIndex()).intValue(), solid);
     }
 
     public int getTextureId() {
-        return this.sprites.get(this.currentIndex).intValue();
+        return this.sprites.get(this.getCurrentIndex()).intValue();
+    }
+
+    private int getCurrentIndex() {
+        return Math.min((int)(this.elapsedTime / this.cycleTime), this.sprites.size() - 1);
     }
 
     private List<Number> sprites;
-    private int currentIndex;
     private double cycleTime;
     private double elapsedTime;
+    private boolean repeat;
 }
