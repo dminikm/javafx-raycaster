@@ -157,7 +157,7 @@ public class World implements RayCastable {
     }
 
     public EntityRaycastResult castRayEntity(Vec2 start, Vec2 dir, Entity ignore) {
-        double closestDistance = 99999;
+        double closestDistance = Double.POSITIVE_INFINITY;
         EntityRaycastResult result = new EntityRaycastResult();
 
         for (Entity ent : this.entities) {

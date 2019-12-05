@@ -61,6 +61,21 @@ public class Gameloop extends AnimationTimer {
 
         int ammo = this.world.getPlayer().getCurrentWeapon().getAmmo();
         gc.fillText("" + ((ammo < 0) ? "Inf" : ammo), this.canvasWidth - 125, this.canvasHeight - 50);
+
+        int centerX = this.canvasWidth / 2;
+        int centerY = this.canvasHeight / 2;
+
+        gc.setFill(Color.BLACK);
+        gc.fillRect(centerX - 15, centerY - 2, 12, 4);
+        gc.fillRect(centerX + 3, centerY - 2, 12, 4);
+        gc.fillRect(centerX - 2, centerY - 15, 4, 12);
+        gc.fillRect(centerX - 2, centerY + 3, 4, 12);
+
+        gc.setFill(Color.WHITE);
+        gc.fillRect(centerX - 14, centerY - 1, 10, 2);
+        gc.fillRect(centerX + 4, centerY - 1, 10, 2);
+        gc.fillRect(centerX - 1, centerY - 14, 2, 10);
+        gc.fillRect(centerX - 1, centerY + 4, 2, 10);
     }
 
     private void udpate(double delta) {
