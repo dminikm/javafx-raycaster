@@ -213,7 +213,7 @@ public class LevelLoader
             sprites.add(JSONUtils.getAnimatedSpriteFromJson(spr, ""));
         }
 
-        return new DogEntity(position, p, sprites);
+        return new DogEntity(position, direction, p, sprites);
     }
 
     private static Entity parseAmmoPickupEntity(JSONObject json, Player p) {

@@ -2,8 +2,8 @@ package app;
 import java.util.List;
 
 public class DogEntity extends MonsterEntity {
-    DogEntity(Vec2 pos, Player player, List<AnimatedSprite> sprites) {
-        super(pos, new Vec2(), new Vec2(), player);
+    DogEntity(Vec2 pos, Vec2 dir, Player player, List<AnimatedSprite> sprites) {
+        super(pos, dir, new Vec2(), player);
 
         // Testing with only one now
         this.sprites = sprites;
@@ -11,31 +11,61 @@ public class DogEntity extends MonsterEntity {
 
     @Override
     public void update(double delta, World world) {
-        Vec2 pDir = this.position.sub(world.getPlayer().getPosition());
-        Vec2 testDir = this.position.add(this.direction).sub(world.getPlayer().getPosition());
-        Vec2 fDir = testDir.add(pDir).normalize().mul(-1);
+        Vec2 playerDir = world.getPlayer().getPosition().sub(this.position);
+        double angle = Angle.normalizeDeg(playerDir.normalize().toAngle() - this.direction.toAngle());
 
-        if ((fDir.x > 0 || fDir.x < 0) && Math.abs(fDir.x) > Math.abs(fDir.y)) {
-            this.currentSpriteIndex = 1;
-        } else if (fDir.y > 0) {
-            this.currentSpriteIndex = 0;
-        } else if (fDir.y < 0) {
-            this.currentSpriteIndex = 2;
-        }
+        if (angle > 180 - 45 && angle < 180 + 45) {
+            this.currentSpriteIndex = 3;    // Back
+        } else if (angle > 360 - 45 || angle < 0 + 45) {
+            this.currentSpriteIndex = 0;    // Front
 
-        
-        List<Vec2> path = world.getPathToPlayer(this.position);
-        
-        if (path.size() >= 2) {
-            Vec2 dir = path.get(1).add(new Vec2(0.5, 0.5)).sub(this.position).normalize();
-            //this.velocity = dir.mul(1);
+            // IF player is in front of the dog, check if he is visible
+            EntityRaycastResult res = world.castRayEntity(this.position, playerDir.normalize(), this);
+            if (res.hit && res.entity instanceof Player) {
+                // If so, alert this dog
+                this.alerted = true;
+            }
+
+        } else if (angle > 90 - 45 && angle < 90 + 45) {
+            this.currentSpriteIndex = 2;    // Right
         } else {
-            //this.velocity = new Vec2();
+            this.currentSpriteIndex = 1;    // Left
         }
 
-        if (this.velocity.len() > 0) {
-            this.sprites.get(this.currentSpriteIndex).update(delta);
+        if (this.alerted) {
+            List<Vec2> path = world.getPathToPlayer(this.position);
+
+            if (path.size() >= 2) {
+                Vec2 dir = path.get(1).add(new Vec2(0.5, 0.5)).sub(this.position).normalize();
+                this.direction = playerDir.normalize();
+                this.velocity = dir.mul(1);
+            } else {
+                this.velocity = new Vec2();
+            }
+
+            // Update animation
+            if (this.velocity.len() > 0) {
+                this.sprites.get(this.currentSpriteIndex).update(delta);
+            }
+
+            // Check if player in range and the dog can bite again
+            if (playerDir.len() < 0.8 && this.elapsedTime - this.attackDelay < this.lastBite) {
+                this.fire(world);
+                this.lastBite = this.elapsedTime;
+            }
         }
+    }
+
+    private void fire(World world) {
+        Vec2 dir = world.getPlayer().getPosition().sub(this.position).normalize();
+        EntityRaycastResult res = world.castRayEntity(this.position, dir, this);
+
+        if (res.hit) {
+            res.entity.takeDamage(this.damage);
+        }
+
+        // queue sound
+        world.alertEntitiesInDistance(this.position, 10);
     }
 
     @Override
@@ -45,4 +75,10 @@ public class DogEntity extends MonsterEntity {
 
     private List<AnimatedSprite> sprites;
     private int currentSpriteIndex;
+
+    private double elapsedTime = 0;
+    private double lastBite = -10;
+
+    private final double attackDelay = 2.2;
+    private final int damage = 10;
 }

@@ -396,28 +396,6 @@ public class World implements RayCastable {
         }
 
         this.toPlayerPaths[(int)playerPos.y][(int)playerPos.x] = null;
-
-        /*System.out.println("Path to player");
-        for (int y = 0; y < this.toPlayerPaths.length; y++) {
-            for (int x = 0; x < this.toPlayerPaths[y].length; x++) {
-                Vec2 path = this.toPlayerPaths[y][x];
-                
-                if (path == null) {
-                    System.out.print("O");
-                } else if ((int)path.x > x) {
-                    System.out.print(">");
-                } else if ((int)path.x < x) {
-                    System.out.print("<");
-                } else if ((int)path.y > y) {
-                    System.out.print("v");
-                } else if ((int)path.y < y) {
-                    System.out.print("^");
-                } else {
-                    System.out.print("O");
-                }
-            }
-            System.out.println("");
-        }*/
     }
 
     public List<Vec2> getPathToPlayer(Vec2 pos) {
@@ -432,6 +410,16 @@ public class World implements RayCastable {
         }
 
         return path;
+    }
+
+    public void alertEntitiesInDistance(Vec2 pos, double distance) {
+        for (Entity ent : this.entities) {
+            if (ent instanceof MonsterEntity) {
+                if (ent.getPosition().sub(pos).len() < distance) {
+                    ((MonsterEntity)ent).onAlert();
+                }
+            }
+        }
     }
 
     private int[][] worldMap;

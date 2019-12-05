@@ -21,7 +21,26 @@
         {"id": 15,  "name": "data/img/turret/turret_firing04.png"       },
         {"id": 20,  "name": "data/img/pickups/ammo.png"},
         {"id": 21,  "name": "data/img/pickups/health.png"},
-        {"id": 99,  "name": "data/img/glass_top_border01.png" }
+        {"id": 99,  "name": "data/img/glass_top_border01.png" },
+
+        {"id": 50,  "name": "data/img/dog/dog_front01.png"       },
+		{"id": 51,  "name": "data/img/dog/dog_front02.png"       },
+		{"id": 52,  "name": "data/img/dog/dog_front03.png"       },
+        {"id": 53,  "name": "data/img/dog/dog_front04.png"       },
+
+        {"id": 54,  "name": "data/img/dog/dog_left_side01.png"       },
+		{"id": 55,  "name": "data/img/dog/dog_left_side02.png"       },
+		{"id": 56,  "name": "data/img/dog/dog_left_side03.png"       },
+        {"id": 57,  "name": "data/img/dog/dog_left_side04.png"       },
+        {"id": 58,  "name": "data/img/dog/dog_right_side01.png"       },
+		{"id": 59,  "name": "data/img/dog/dog_right_side02.png"       },
+		{"id": 60,  "name": "data/img/dog/dog_right_side03.png"       },
+        {"id": 61,  "name": "data/img/dog/dog_right_side04.png"       },
+
+        {"id": 62,  "name": "data/img/dog/dog_back01.png"       },
+		{"id": 63,  "name": "data/img/dog/dog_back02.png"       },
+		{"id": 64,  "name": "data/img/dog/dog_back03.png"       },
+        {"id": 65,  "name": "data/img/dog/dog_back04.png"       }
     ],
 
     "map": {
@@ -95,14 +114,18 @@
                 "position": {"x": 16, "y": 15},
                 "direction": {"x": 1, "y": 0},
                 "sprites": [{
-                    "cycleTime": 1,
-                    "textureIds": [20]
+                    "cycleTime": 0.1,
+                    "textureIds": [50, 51, 52, 53]
                 }, {
-                    "cycleTime": 1,
-                    "textureIds": [21]
-                }, {
-                    "cycleTime": 1,
-                    "textureIds": [99]
+                    "cycleTime": 0.1,
+                    "textureIds": [54, 55, 56, 57]
+                },{
+                    "cycleTime": 0.1,
+                    "textureIds": [58, 59, 60, 61]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "textureIds": [62, 63, 64, 65]
                 }]
             },
 

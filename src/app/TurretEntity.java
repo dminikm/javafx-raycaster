@@ -53,16 +53,6 @@ public class TurretEntity extends MonsterEntity {
             this.shotsFired++;
             this.fire(world);
         }
-
-        // Pathfinding test
-        List<Vec2> path = world.getPathToPlayer(this.position);
-
-        if (path.size() >= 2) {
-            Vec2 dir = path.get(1).add(new Vec2(0.5, 0.5)).sub(this.position).normalize();
-            this.velocity = dir.mul(1);
-        } else {
-            this.velocity = new Vec2();
-        }
     }
 
     private void fire(World world) {
@@ -70,10 +60,13 @@ public class TurretEntity extends MonsterEntity {
         EntityRaycastResult res = world.castRayEntity(this.position, dir, this);
 
         if (res.hit) {
-            res.entity.takeDamage(5);
+            res.entity.takeDamage(this.damage);
         }
 
         // queue sound
+
+        // Alert other entities
+        world.alertEntitiesInDistance(this.position, 4);
     }
 
     @Override
@@ -100,4 +93,6 @@ public class TurretEntity extends MonsterEntity {
     private boolean firing = false;
     private Vec2 target = new Vec2();
     private int shotsFired = 0;
+
+    private final int damage = 5;
 }
