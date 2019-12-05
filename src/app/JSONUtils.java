@@ -3,7 +3,9 @@ package app;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javafx.scene.media.AudioClip;
@@ -33,6 +35,14 @@ class JSONUtils {
         boolean repeat = getFromComplexPath(json, path + "repeat");
 
         return new AnimatedSprite(textureIds, cycleTime, repeat);
+    }
+
+    public static List<AnimatedSprite> getAnimatedSpritesFromJson(JSONObject json, String path) {
+        List<JSONObject> sprites = getFromComplexPath(json, path);
+
+        return sprites.stream().map((final JSONObject spr) -> {
+            return getAnimatedSpriteFromJson(spr, "");
+        }).collect(Collectors.toList());
     }
 
     public static AudioClip getAudioClipFromJson(JSONObject json, String path) {

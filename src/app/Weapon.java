@@ -64,6 +64,8 @@ class Weapon {
         }
 
         this.sound.play();
+
+        world.alertEntitiesInDistance(pos, this.range);
     }
 
     public void update(double delta)

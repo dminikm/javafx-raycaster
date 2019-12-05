@@ -6,18 +6,27 @@ import java.util.List;
 import javafx.scene.media.AudioClip;
 
 public class TurretEntity extends MonsterEntity {
-    TurretEntity(Vec2 pos, Player player, AnimatedSprite animation, AudioClip sound) {
+    TurretEntity(Vec2 pos, Player player, AnimatedSprite animation, AnimatedSprite deadSprite, AudioClip hurtSound, AudioClip firingSound) {
         super(pos, new Vec2(), new Vec2(), player);
 
         this.animation = animation;
+        this.deadSprite = deadSprite;
         this.elapsedTime = 0;
 
-        this.sound = sound;
+        this.hurtSound = hurtSound;
+        this.firingSound = firingSound;
+
+        this.health = 45;
     }
 
     @Override
     public void update(double delta, World world) {
         this.elapsedTime += delta;
+
+        if (this.health <= 0) {
+            this.animation.setElapsedTime(0);
+            return;
+        }
 
         if (!firing) {
             Vec2 dir = world.getPlayer().getPosition().sub(this.position).normalize();
@@ -58,7 +67,7 @@ public class TurretEntity extends MonsterEntity {
         }
 
         // queue sound
-        this.sound.play();
+        this.firingSound.play();
 
         // Alert other entities
         world.alertEntitiesInDistance(this.position, 4);
@@ -66,10 +75,21 @@ public class TurretEntity extends MonsterEntity {
 
     @Override
     public Sprite getSprite() {
-        return this.animation.getSprite(this.position.copy(), false);
+        return (this.health > 0) ? this.animation.getSprite(this.position.copy(), false)
+                                 : this.deadSprite.getSprite(this.position.copy(), false);
+    }
+
+    @Override
+    public void takeDamage(double damage) {
+        super.takeDamage(damage);
+
+        if (!this.hurtSound.isPlaying()) {
+            this.hurtSound.play();
+        }
     }
 
     private AnimatedSprite animation;
+    private AnimatedSprite deadSprite;
     private double elapsedTime;
 
     private double firingTime = 0;
@@ -79,5 +99,6 @@ public class TurretEntity extends MonsterEntity {
 
     private final int damage = 5;
 
-    AudioClip sound;
+    AudioClip hurtSound;
+    AudioClip firingSound;
 }

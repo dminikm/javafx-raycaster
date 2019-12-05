@@ -234,20 +234,17 @@ public class LevelLoader
     private static Entity parseTurretEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         AnimatedSprite animation = JSONUtils.getAnimatedSpriteFromJson(json, "sprite.");
-        AudioClip sound = JSONUtils.getAudioClipFromJson(json, "sound");
+        AnimatedSprite deadSprite = JSONUtils.getAnimatedSpriteFromJson(json, "deadSprite.");
+        AudioClip firingSound = JSONUtils.getAudioClipFromJson(json, "firingSound");
+        AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "hurtSound");
 
-        return new TurretEntity(position, p, animation, sound);
+        return new TurretEntity(position, p, animation, deadSprite, hurtSound, firingSound);
     }
 
     private static Entity parseDogEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         Vec2 direction = JSONUtils.vecFromJson(json, "direction");
-        List<AnimatedSprite> sprites = new ArrayList<AnimatedSprite>(0);
-        List<JSONObject> jsonSprites = JSONUtils.getFromComplexPath(json, "sprites");
-
-        for (JSONObject spr : jsonSprites) {
-            sprites.add(JSONUtils.getAnimatedSpriteFromJson(spr, ""));
-        }
+        List<AnimatedSprite> sprites = JSONUtils.getAnimatedSpritesFromJson(json, "sprites");
 
         AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "hurtSound");
         AudioClip attackSound = JSONUtils.getAudioClipFromJson(json, "attackSound");

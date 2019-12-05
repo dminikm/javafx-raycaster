@@ -107,6 +107,8 @@ public class DogEntity extends MonsterEntity {
         if (!this.hurtSound.isPlaying()) {
             this.hurtSound.play();
         }
+
+        this.alerted = true;
     }
 
     private List<AnimatedSprite> sprites;

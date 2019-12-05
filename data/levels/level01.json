@@ -39,7 +39,7 @@
                     "textureIds": [110, 111, 112, 113, 114]
                 }
             }
-        ],
+        ]
     },
 
     "textures": [
@@ -54,6 +54,7 @@
 		{"id": 13,  "name": "data/assets/turret/turret_firing02.png"       },
 		{"id": 14,  "name": "data/assets/turret/turret_firing03.png"       },
         {"id": 15,  "name": "data/assets/turret/turret_firing04.png"       },
+        {"id": 16,  "name": "data/assets/turret/turret_dead.png" },
         {"id": 20,  "name": "data/assets/pickups/ammo.png"},
         {"id": 21,  "name": "data/assets/pickups/health.png"},
         {"id": 99,  "name": "data/assets/glass_top_border01.png" },
@@ -156,12 +157,53 @@
                     "repeat": true,
                     "textureIds": [11, 12, 13, 14, 15]
                 },
-                "sound": "data/assets/turret/turret_firing.wav"
+                "deadSprite": {
+                    "cycleTime": 1,
+                    "repeat": false,
+                    "textureIds": [16]
+                },
+                "firingSound": "data/assets/turret/turret_firing.wav",
+                "hurtSound": "data/assets/turret/turret_hurt.wav"
             },
 
             {
                 "template": "DogEntity",
                 "position": {"x": 16, "y": 15},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [50, 51, 52, 53]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [54, 55, 56, 57]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [58, 59, 60, 61]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [62, 63, 64, 65]
+                }, {
+                    "cycleTime": 0.33,
+                    "repeat": true,
+                    "textureIds": [66, 67, 68]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [69, 70, 71, 72]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
+            },
+
+            {
+                "template": "DogEntity",
+                "position": {"x": 1.5, "y": 2.5},
                 "direction": {"x": 1, "y": 0},
                 "sprites": [{
                     "cycleTime": 0.1,
