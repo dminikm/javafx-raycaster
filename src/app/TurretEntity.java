@@ -3,8 +3,10 @@ package app;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.scene.media.AudioClip;
+
 public class TurretEntity extends MonsterEntity {
-    TurretEntity(Vec2 pos, Player player, HashMap<String, Number> textures) {
+    TurretEntity(Vec2 pos, Player player, HashMap<String, Number> textures, AudioClip sound) {
         super(pos, new Vec2(), new Vec2(), player);
 
         this.idleTextureId = textures.get("idleTexture").intValue();
@@ -16,6 +18,8 @@ public class TurretEntity extends MonsterEntity {
 
         this.currentTextureId = this.idleTextureId;
         this.elapsedTime = 0;
+
+        this.sound = sound;
     }
 
     @Override
@@ -64,6 +68,7 @@ public class TurretEntity extends MonsterEntity {
         }
 
         // queue sound
+        this.sound.play();
 
         // Alert other entities
         world.alertEntitiesInDistance(this.position, 4);
@@ -95,4 +100,6 @@ public class TurretEntity extends MonsterEntity {
     private int shotsFired = 0;
 
     private final int damage = 5;
+
+    AudioClip sound;
 }

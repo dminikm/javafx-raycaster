@@ -156,7 +156,8 @@
                     "firingTexture2": 13,
                     "firingTexture3": 14,
                     "firingTexture4": 15
-                }
+                },
+                "sound": "data/assets/turret/turret_firing.wav"
             },
 
             {

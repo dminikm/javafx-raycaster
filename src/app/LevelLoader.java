@@ -233,8 +233,9 @@ public class LevelLoader
     private static Entity parseTurretEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         HashMap<String, Number> textures = JSONUtils.getFromComplexPath(json, "textures");
+        AudioClip sound = JSONUtils.getAudioClipFromJson(json, "sound");
 
-        return new TurretEntity(position, p, textures);
+        return new TurretEntity(position, p, textures, sound);
     }
 
     private static Entity parseDogEntity(JSONObject json, Player p) {
