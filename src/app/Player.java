@@ -2,12 +2,15 @@ package app;
 
 import java.util.List;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.AudioClip;
 
 public class Player extends Entity {
-    public Player(Vec2 pos, Vec2 dir, Vec2 vel, List<Weapon> weapons) {
+    public Player(Vec2 pos, Vec2 dir, Vec2 vel, List<Weapon> weapons, AudioClip hurtSound) {
         super(pos, dir, vel);
         this.weapons = weapons;
         this.currentWeapon = 0;
+
+        this.hurtSound = hurtSound;
     }
 
     @Override
@@ -87,10 +90,20 @@ public class Player extends Entity {
         );
     }
 
+    @Override
+    public void takeDamage(double damage) {
+        super.takeDamage(damage);
+
+        if(!this.hurtSound.isPlaying()) {
+            this.hurtSound.play();
+        }
+    }
+
     public Weapon getCurrentWeapon() {
         return this.weapons.get(this.currentWeapon);
     }
 
     private List<Weapon> weapons;
     private int currentWeapon;
+    AudioClip hurtSound;
 }

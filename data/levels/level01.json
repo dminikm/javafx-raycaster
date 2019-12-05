@@ -6,6 +6,7 @@
     "player": {
         "start": {"x": 2, "y": 16},
         "dir": {"x": 0, "y": -1},
+        "hurtSound": "data/assets/player_hurt.wav",
         "weapons": [
             {
                 "name": "Knife",
@@ -38,7 +39,7 @@
                     "textureIds": [110, 111, 112, 113, 114]
                 }
             }
-        ]
+        ],
     },
 
     "textures": [

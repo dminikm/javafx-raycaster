@@ -106,8 +106,9 @@ public class LevelLoader
         var position = JSONUtils.vecFromJson(json, "player.start");
         var direction = JSONUtils.vecFromJson(json, "player.dir");
         List<Weapon> weapons = parseWeapons(JSONUtils.getFromComplexPath(json, "player"));
+        AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "player.hurtSound");
 
-        return new Player(position, direction, new Vec2(), weapons);
+        return new Player(position, direction, new Vec2(), weapons, hurtSound);
     }
 
     private static Entity[] parseEntities(JSONObject json, Player p) {
