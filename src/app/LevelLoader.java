@@ -248,7 +248,10 @@ public class LevelLoader
             sprites.add(JSONUtils.getAnimatedSpriteFromJson(spr, ""));
         }
 
-        return new DogEntity(position, direction, p, sprites);
+        AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "hurtSound");
+        AudioClip attackSound = JSONUtils.getAudioClipFromJson(json, "attackSound");
+
+        return new DogEntity(position, direction, p, sprites, hurtSound, attackSound);
     }
 
     private static Entity parseAmmoPickupEntity(JSONObject json, Player p) {

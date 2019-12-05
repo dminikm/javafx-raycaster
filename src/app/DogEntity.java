@@ -1,12 +1,19 @@
 package app;
 import java.util.List;
 
+import javafx.scene.media.AudioClip;
+
 public class DogEntity extends MonsterEntity {
-    DogEntity(Vec2 pos, Vec2 dir, Player player, List<AnimatedSprite> sprites) {
+    DogEntity(Vec2 pos, Vec2 dir, Player player, List<AnimatedSprite> sprites, AudioClip hurtSound, AudioClip attackSound) {
         super(pos, dir, new Vec2(), player);
 
         // Testing with only one now
         this.sprites = sprites;
+
+        this.hurtSound = hurtSound;
+        this.attackSound = attackSound;
+
+        this.health = 40;
     }
 
     @Override
@@ -79,6 +86,8 @@ public class DogEntity extends MonsterEntity {
         }
 
         // queue sound
+        this.attackSound.play();
+
         world.alertEntitiesInDistance(this.position, 10);
     }
 
@@ -91,6 +100,15 @@ public class DogEntity extends MonsterEntity {
         return this.sprites.get(currentSpriteIndex).getSprite(this.position.copy(), this.health > 0);
     }
 
+    @Override
+    public void takeDamage(double damage) {
+        super.takeDamage(damage);
+
+        if (!this.hurtSound.isPlaying()) {
+            this.hurtSound.play();
+        }
+    }
+
     private List<AnimatedSprite> sprites;
     private int currentSpriteIndex;
 
@@ -99,4 +117,7 @@ public class DogEntity extends MonsterEntity {
 
     private final double attackDelay = 1;
     private final int damage = 10;
+
+    private AudioClip hurtSound;
+    private AudioClip attackSound;
 }

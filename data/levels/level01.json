@@ -26,14 +26,14 @@
                 "name": "Pistol",
                 "available": true,
                 "ammo": 100,
-                "fireDelay": 0.3,
+                "fireDelay": 0.8,
                 "numShots": 1,
                 "spread": 0.1,
                 "damage": 10,
                 "range": 16,
                 "sound": "data/assets/weapons/pistol/pistol.wav",
                 "animation": {
-                    "cycleTime": 0.06,
+                    "cycleTime": 0.16,
                     "repeat": true,
                     "textureIds": [110, 111, 112, 113, 114]
                 }
@@ -190,7 +190,9 @@
                     "cycleTime": 0.1,
                     "repeat": false,
                     "textureIds": [69, 70, 71, 72]
-                }]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
             },
 
             {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 20, "amount": 5 },
