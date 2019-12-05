@@ -101,6 +101,16 @@ public class Player extends Entity {
         return this.weapons.get(this.currentWeapon);
     }
 
+    public Weapon getWeaponByName(String name) {
+        for (Weapon w : this.weapons) {
+            if (w.getName().equals(name)) {
+                return w;
+            }
+        }
+
+        return null;
+    }
+
     private List<Weapon> weapons;
     private int currentWeapon;
     AudioClip hurtSound;

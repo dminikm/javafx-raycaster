@@ -25,8 +25,8 @@
                 }
             }, {
                 "name": "Pistol",
-                "available": true,
-                "ammo": 100,
+                "available": false,
+                "ammo": 0,
                 "fireDelay": 0.8,
                 "numShots": 1,
                 "spread": 0.1,
@@ -94,7 +94,8 @@
         {"id": 111, "name": "data/assets/weapons/pistol/pistol02.png"},
         {"id": 112, "name": "data/assets/weapons/pistol/pistol03.png"},
         {"id": 113, "name": "data/assets/weapons/pistol/pistol04.png"},
-        {"id": 114, "name": "data/assets/weapons/pistol/pistol05.png"}
+        {"id": 114, "name": "data/assets/weapons/pistol/pistol05.png"},
+        {"id": 115, "name": "data/assets/weapons/pistol/pistol_overworld.png"}
     ],
 
     "map": {
@@ -236,9 +237,9 @@
                 "attackSound": "data/assets/dog/dog_attack.wav"
             },
 
-            {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 20, "amount": 5 },
+            {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 20, "weaponName": "Pistol", "amount": 5, "makeAvailable": false },
             {"template": "HealthPickupEntity", "position": { "x": 3.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
-            {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 7.5 }, "textureId": 20, "amount": 5 },
+            {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 7.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
             {"template": "HealthPickupEntity", "position": { "x": 5.5, "y": 9.5 }, "textureId": 21, "amount": 25 }
         ]
     }

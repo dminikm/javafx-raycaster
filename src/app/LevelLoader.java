@@ -256,8 +256,10 @@ public class LevelLoader
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
         int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();
+        String weaponName = JSONUtils.getFromComplexPath(json, "weaponName");
+        boolean makeAvailable = JSONUtils.getFromComplexPath(json, "makeAvailable");
 
-        return new AmmoPickupEntity(position, textureId, amount);
+        return new AmmoPickupEntity(position, textureId, weaponName, amount, makeAvailable);
     }
 
     private static Entity parseHealthPickupEntity(JSONObject json, Player p) {

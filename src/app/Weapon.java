@@ -13,6 +13,7 @@ class Weapon {
         int damage, double range,
         boolean available
         ) {
+        this.name = name;
         this.sound = sound;
         this.available = available;
         this.ammo = ammo;
