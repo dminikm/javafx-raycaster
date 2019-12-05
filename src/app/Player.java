@@ -53,6 +53,21 @@ public class Player extends Entity {
 
         this.velocity = fvel.add(svel);
 
+        KeyCode[] weaponKeys = new KeyCode[] {
+            KeyCode.DIGIT1, KeyCode.DIGIT2,
+            KeyCode.DIGIT3, KeyCode.DIGIT4,
+            KeyCode.DIGIT5, KeyCode.DIGIT6,
+            KeyCode.DIGIT7, KeyCode.DIGIT8,
+            KeyCode.DIGIT9
+        };
+        
+        for (int i = 0; i < Math.min(weaponKeys.length, this.weapons.size()); i++) {
+            Weapon w = this.weapons.get(i);
+            if (r.isKeyDown(weaponKeys[i]) && w != null && w.isAvailable()) {
+                this.currentWeapon = i;
+            }
+        }
+
         for (Weapon w : this.weapons) {
             w.update(delta);
         }

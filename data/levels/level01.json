@@ -14,12 +14,26 @@
                 "fireDelay": 0.7,
                 "numShots": 1,
                 "spread": 0,
-                "damage": 15,
+                "damage": 35,
                 "range": 1.8,
                 "animation": {
                     "cycleTime": 0.14,
                     "repeat": true,
                     "textureIds": [100, 101, 102, 103, 104]
+                }
+            }, {
+                "name": "Pistol",
+                "available": true,
+                "ammo": 100,
+                "fireDelay": 0.3,
+                "numShots": 1,
+                "spread": 0.1,
+                "damage": 10,
+                "range": 16,
+                "animation": {
+                    "cycleTime": 0.06,
+                    "repeat": true,
+                    "textureIds": [110, 111, 112, 113, 114]
                 }
             }
         ]
@@ -69,7 +83,13 @@
         {"id": 101, "name": "data/img/weapons/knife/knife02.png" }, 
         {"id": 102, "name": "data/img/weapons/knife/knife03.png" }, 
         {"id": 103, "name": "data/img/weapons/knife/knife04.png" }, 
-        {"id": 104, "name": "data/img/weapons/knife/knife05.png" }
+        {"id": 104, "name": "data/img/weapons/knife/knife05.png" },
+
+        {"id": 110, "name": "data/img/weapons/pistol/pistol01.png"},
+        {"id": 111, "name": "data/img/weapons/pistol/pistol02.png"},
+        {"id": 112, "name": "data/img/weapons/pistol/pistol03.png"},
+        {"id": 113, "name": "data/img/weapons/pistol/pistol04.png"},
+        {"id": 114, "name": "data/img/weapons/pistol/pistol05.png"}
     ],
 
     "map": {

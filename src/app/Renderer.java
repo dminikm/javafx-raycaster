@@ -163,10 +163,10 @@ public class Renderer {
         Weapon w = p.getCurrentWeapon();
         Texture t = this.textureRegistry.getTextureForId(w.getTexture());
 
-        int centerX = (this.buffer.width / 2) - (t.width / 2);
-        int centerY = (this.buffer.height) - (t.height);
+        int screenX = (this.buffer.width / 2) - (t.width / 2);
+        int screenY = (this.buffer.height) - (t.height);
 
-        this.buffer.copyFromBuffer(t, centerX, centerY);
+        this.buffer.copyFromBuffer(t, screenX, screenY);
     }
 
     private Vec2 getPlane() {
