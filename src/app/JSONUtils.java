@@ -1,9 +1,12 @@
 package app;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
+
+import javafx.scene.media.AudioClip;
 
 class JSONUtils {
     public static <T> T getFromComplexPath(JSONObject json, String path) {
@@ -30,5 +33,10 @@ class JSONUtils {
         boolean repeat = getFromComplexPath(json, path + "repeat");
 
         return new AnimatedSprite(textureIds, cycleTime, repeat);
+    }
+
+    public static AudioClip getAudioClipFromJson(JSONObject json, String path) {
+        File soundPath = new File((String)JSONUtils.getFromComplexPath(json, path));
+        return new AudioClip(soundPath.toURI().toString());
     }
 }

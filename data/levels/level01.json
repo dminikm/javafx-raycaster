@@ -137,9 +137,9 @@
         ],
 
         "tileEntities": [
-            {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}},
-            {"template": "DoorTileEntity", "position": { "x": 10, "y": 11 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}},
-            {"template": "DoorTileEntity", "position": { "x": 4, "y": 16 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}},
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 11 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 4, "y": 16 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}, "sound": "data/assets/door.wav"},
 
             {"template": "GameEndTileEntity", "position": {"x": 17, "y": 1}, "textureId": 99},
             {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 1}, "nextLevel": "data/levels/level02.json", "textureId": 99},

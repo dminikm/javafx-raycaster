@@ -86,9 +86,7 @@ public class LevelLoader
         int damage = ((Number)JSONUtils.getFromComplexPath(json, "damage")).intValue();
         double range = ((Number)JSONUtils.getFromComplexPath(json, "range")).doubleValue();
         AnimatedSprite animation = JSONUtils.getAnimatedSpriteFromJson(json, "animation.");
-       
-        File soundPath = new File((String)JSONUtils.getFromComplexPath(json, "sound"));
-        AudioClip sound = new AudioClip(soundPath.toURI().toString());
+        AudioClip sound = JSONUtils.getAudioClipFromJson(json, "sound");
 
         return new Weapon(name, sound, animation, ammo, fireDelay, numShots, spread, damage, range, available);
     }
@@ -196,8 +194,9 @@ public class LevelLoader
         Vec2 startOffset = JSONUtils.vecFromJson(json, "startOffset");
         Vec2 endOffset = JSONUtils.vecFromJson(json, "endOffset");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
+        AudioClip sound = JSONUtils.getAudioClipFromJson(json, "sound");
 
-        return new DoorTileEntity(position, startOffset, endOffset, textureId);
+        return new DoorTileEntity(position, startOffset, endOffset, textureId, sound);
     }
 
     private static TileEntity parseGameEndTileEntity(JSONObject json, Player p) {

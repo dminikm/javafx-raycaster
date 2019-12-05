@@ -1,7 +1,9 @@
 package app;
 
+import javafx.scene.media.AudioClip;
+
 public class DoorTileEntity extends TileEntity {
-    public DoorTileEntity(Vec2 pos, Vec2 startOffset, Vec2 endOffset, int textureId) {
+    public DoorTileEntity(Vec2 pos, Vec2 startOffset, Vec2 endOffset, int textureId, AudioClip sound) {
         super(pos);
 
         this.startOffset = startOffset;
@@ -12,6 +14,8 @@ public class DoorTileEntity extends TileEntity {
 
         this.opening = false;
         this.openedState = 0.0;
+
+        this.sound = sound;
     }
 
     public void update(double delta, World world) {
@@ -45,6 +49,10 @@ public class DoorTileEntity extends TileEntity {
     @Override
     public void onInteract() {
         this.opening = !this.opening;
+
+        if (!this.sound.isPlaying()) {
+            this.sound.play();
+        }
     }
 
     private int textureId;
@@ -54,4 +62,6 @@ public class DoorTileEntity extends TileEntity {
     
     private boolean opening;
     private double openedState;
+
+    private AudioClip sound;
 }
