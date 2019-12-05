@@ -20,7 +20,7 @@ public class DoorTileEntity extends TileEntity {
 
     public void update(double delta, World world) {
         if (this.opening) {
-            this.openedState = Math.min(1.0, this.openedState + delta);
+            this.openedState = Math.min(0.9, this.openedState + delta);
         } else {
             this.openedState = Math.max(0.0, this.openedState - delta);
         }

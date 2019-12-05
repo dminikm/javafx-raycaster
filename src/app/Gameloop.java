@@ -24,30 +24,6 @@ public class Gameloop extends AnimationTimer {
         this.textureRegistry = TextureRegistry.getInstance();
         this.world = LevelLoader.loadLevel("data/levels/level01.json", textureRegistry);
         this.renderer = new Renderer(canvasWidth, canvasHeight, this.world, textureRegistry);
-
-        this.mouseLocked = false;
-    }
-
-    private Vec2 getScreenCenter() {
-        var bounds = this.sc.localToScreen(this.sc.getBoundsInLocal());
-        return new Vec2(bounds.getMinX() + this.canvasWidth / 2, bounds.getMinY() + this.canvasHeight / 2);
-    }
-
-    private Vec2 getMousePosition() {
-        var position = new Robot().getMousePosition();
-        return new Vec2(Math.floor(position.getX()), Math.floor(position.getY()));
-    }
-
-    private Vec2 getMouseDelta() {
-        var position = this.getMousePosition();
-        var center = this.getScreenCenter();
-
-        return position.sub(center);
-    }
-
-    private void lockMouse() {
-        var pos = this.getScreenCenter();
-        new Robot().mouseMove(pos.x, pos.y);
     }
 
     @Override
@@ -55,17 +31,8 @@ public class Gameloop extends AnimationTimer {
         double delta = (currentNanoTime - lastNanoTime) / 1000000000.0;
         this.lastNanoTime = currentNanoTime;
 
-        var mouseDelta = this.getMouseDelta();
-        var mousePos = this.getMousePosition();
-
-        KeyRegistry.getInstance().handleMouse(mouseDelta, mousePos);
-
         this.udpate(delta);
         this.render(delta);
-
-        if (this.mouseLocked) {
-            this.lockMouse();
-        }
 
         KeyRegistry.getInstance().update(delta);
     }
@@ -109,8 +76,6 @@ public class Gameloop extends AnimationTimer {
     
     private int canvasWidth;
     private int canvasHeight;
-    
-    private boolean mouseLocked;
     
     private TextureRegistry textureRegistry;
     private Renderer renderer;

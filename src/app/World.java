@@ -162,6 +162,7 @@ public class World implements RayCastable {
 
         for (Entity ent : this.entities) {
             if (ent == ignore) { continue; }
+            if (ent.health <= 0) { continue; }
 
             Rect bb = ent.getBoundingBox();
             RaycastResult res = bb.castRay(start, dir);

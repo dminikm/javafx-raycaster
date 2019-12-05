@@ -51,9 +51,6 @@ public class Player extends Entity {
             this.direction = Vec2.fromAngle(this.direction.toAngle() + 100 * delta);
         }
 
-        var mouseDelta = r.getMouseDeltaSmooth();
-        //this.direction = Vec2.fromAngle(this.direction.toAngle() + mouseDelta.x * 7 * delta);
-
         this.velocity = fvel.add(svel);
 
         KeyCode[] weaponKeys = new KeyCode[] {
