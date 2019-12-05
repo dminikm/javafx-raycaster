@@ -12,52 +12,25 @@ public class Renderer {
 
         this.world = world;
         this.textureRegistry = registry;
-
-        this.multicoreRendering = false;
     }
 
     public ColorBuffer render(double delta) {
-        if (!this.multicoreRendering) {
-            this.renderPart(delta, 0, internalWidth);
-        } else {
-            Thread[] threads = this.getThreads();
-
-            int step = this.internalWidth / (threads.length + 1);
-            for (int i = 0; i < threads.length; i++) {
-                int start = step * i;
-                int end = step * (i + 1);
-                threads[i] = new Thread(
-                    new ThreadRenderer(this, delta, start, end)
-                );
-
-                System.out.printf("[Rendering] thread: %d, start: %d ,end: %d\n", i, start, end);
-                threads[i].start();
-            }
-
-            this.renderPart(delta, step * threads.length, this.internalWidth);
-
-            for (int i = 0; i < threads.length; i++) {
-                try { threads[i].join(); } catch(Exception e) {
-                    System.out.printf("[Rendering] thread %d could not be joined!\n", i);
-                }
-            }
-        }
-
+        this.renderWorld(delta);
         this.renderSprites(delta);
         this.renderWeapon();
 
         return this.buffer;
     }
 
-    public void renderPart(double delta, int start, int end) {
-        buffer.clearRect(start, 0, end - start, buffer.getHeight());
+    public void renderWorld(double delta) {
+        buffer.clearRect(0, 0, buffer.getWidth(), buffer.getHeight());
 
         Vec2 dir = this.world.getPlayer().getDirection();
         Vec2 pos = this.world.getPlayer().getPosition();
         Vec2 plane = this.getPlane();
         
 
-        for (int x = start; x < end; x++) {
+        for (int x = 0; x < buffer.getWidth(); x++) {
             double cameraX = 2 * x / (double)this.internalWidth - 1;
             Vec2 rayDir = dir.add(plane.mul(cameraX));
 
@@ -86,9 +59,9 @@ public class Renderer {
                 //    texX = t.width - texX - 1;
                 //}
 
-                if (texX > 0) {
-                    texX -= 1;
-                }
+                //if (texX > 0) {
+                //    texX -= 1;
+                //}
 
                 for (int y = drawStart; y < drawEnd; y++) {
                     int d = (int)(y * 256 - this.internalHeight * 128 + lineHeigth * 128);
@@ -174,37 +147,6 @@ public class Renderer {
         return Vec2.fromAngle(dir.toAngle() + 90).mul(0.66);
     }
 
-    private Thread[] getThreads() {
-        int numThreads = Runtime.getRuntime().availableProcessors() - 2;
-
-        Thread[] threads = new Thread[numThreads];
-
-        for (int i = 0; i < threads.length; i++) {
-            threads[i] = new Thread();
-        }
-
-        return threads;
-    }
-    
-    private class ThreadRenderer implements Runnable {
-        public ThreadRenderer(Renderer r, double delta, int start, int end) {
-            this.r = r;
-            this.start = start;
-            this.end = end;
-            this.delta = delta;
-        }
-
-        @Override
-        public void run() {
-            r.renderPart(this.delta, this.start, this.end);
-        }
-
-        private Renderer r;
-        private int start;
-        private int end;
-        private double delta;
-    }
-
     private int internalWidth;
     private int internalHeight;
     
@@ -213,7 +155,4 @@ public class Renderer {
 
     private World world;
     private TextureRegistry textureRegistry;
-
-    private boolean multicoreRendering;
-
 }
