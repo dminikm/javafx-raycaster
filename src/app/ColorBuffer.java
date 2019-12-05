@@ -62,6 +62,17 @@ public class ColorBuffer {
         return PixelFormat.getIntArgbPreInstance();
     }
 
+    public void copyFromBuffer(ColorBuffer other, int x, int y) {
+        for (int sy = 0; sy < other.height; sy++) {
+            for (int sx = 0; sx < other.width; sx++) {
+                int dx = x + sx;
+                int dy = y + sy;
+
+                this.setPixelTransparent(dx, dy, other.getPixel(sx, sy));
+            }
+        }
+    }
+
     protected int[] data;
     protected int width;
     protected int height;

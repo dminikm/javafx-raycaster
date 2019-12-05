@@ -44,6 +44,7 @@ public class Renderer {
         }
 
         this.renderSprites(delta);
+        this.renderWeapon();
 
         return this.buffer;
     }
@@ -155,6 +156,17 @@ public class Renderer {
                 }
             }
         }
+    }
+
+    private void renderWeapon() {
+        Player p = world.getPlayer();
+        Weapon w = p.getCurrentWeapon();
+        Texture t = this.textureRegistry.getTextureForId(w.getTexture());
+
+        int centerX = (this.buffer.width / 2) - (t.width / 2);
+        int centerY = (this.buffer.height) - (t.height);
+
+        this.buffer.copyFromBuffer(t, centerX, centerY);
     }
 
     private Vec2 getPlane() {

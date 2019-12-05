@@ -1,16 +1,13 @@
 package app;
 
-import org.json.simple.JSONObject;
-
+import java.util.List;
 import javafx.scene.input.KeyCode;
 
 public class Player extends Entity {
-    public Player(Vec2 pos, Vec2 dir) {
-        super(pos, dir, new Vec2(0, 0));
-    }
-
-    public Player(Vec2 pos, Vec2 dir, Vec2 vel) {
+    public Player(Vec2 pos, Vec2 dir, Vec2 vel, List<Weapon> weapons) {
         super(pos, dir, vel);
+        this.weapons = weapons;
+        this.currentWeapon = 0;
     }
 
     @Override
@@ -55,6 +52,14 @@ public class Player extends Entity {
         //this.direction = Vec2.fromAngle(this.direction.toAngle() + mouseDelta.x * 7 * delta);
 
         this.velocity = fvel.add(svel);
+
+        for (Weapon w : this.weapons) {
+            w.update(delta);
+        }
+
+        if (r.isKeyDown(KeyCode.SPACE)) {
+            this.getCurrentWeapon().fire(this.position, this.direction, world);
+        }
     }
 
     @Override
@@ -66,4 +71,11 @@ public class Player extends Entity {
             0.2
         );
     }
+
+    public Weapon getCurrentWeapon() {
+        return this.weapons.get(this.currentWeapon);
+    }
+
+    private List<Weapon> weapons;
+    private int currentWeapon;
 }

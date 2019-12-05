@@ -70,11 +70,37 @@ public class LevelLoader
         return arr;
     }
 
+    private static Weapon parseWeapon(JSONObject json) {
+        String name = JSONUtils.getFromComplexPath(json, "name");
+        boolean available = JSONUtils.getFromComplexPath(json, "available");
+        int ammo = ((Number)JSONUtils.getFromComplexPath(json, "ammo")).intValue();
+        double fireDelay = ((Number)JSONUtils.getFromComplexPath(json, "fireDelay")).doubleValue();
+        int numShots = ((Number)JSONUtils.getFromComplexPath(json, "numShots")).intValue();
+        double spread = ((Number)JSONUtils.getFromComplexPath(json, "spread")).doubleValue();
+        int damage = ((Number)JSONUtils.getFromComplexPath(json, "damage")).intValue();
+        double range = ((Number)JSONUtils.getFromComplexPath(json, "range")).doubleValue();
+        AnimatedSprite animation = JSONUtils.getAnimatedSpriteFromJson(json, "animation.");
+
+        return new Weapon(name, animation, ammo, fireDelay, numShots, spread, damage, range, available);
+    }
+
+    private static List<Weapon> parseWeapons(JSONObject json) {
+        List<Weapon> weapons = new ArrayList<Weapon>(0);
+        List<JSONObject> jsonWeapons = JSONUtils.getFromComplexPath(json, "weapons");
+
+        weapons = jsonWeapons.stream().map((JSONObject weapon) -> {
+            return parseWeapon(weapon);
+        }).collect(Collectors.toList());
+
+        return weapons;
+    }
+
     private static Player parsePlayer(JSONObject json) {
         var position = JSONUtils.vecFromJson(json, "player.start");
         var direction = JSONUtils.vecFromJson(json, "player.dir");
+        List<Weapon> weapons = parseWeapons(JSONUtils.getFromComplexPath(json, "player"));
 
-        return new Player(position, direction);
+        return new Player(position, direction, new Vec2(), weapons);
     }
 
     private static Entity[] parseEntities(JSONObject json, Player p) {

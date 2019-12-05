@@ -5,7 +5,23 @@
 
     "player": {
         "start": {"x": 11, "y": 15},
-        "dir": {"x": -1, "y": 0}
+        "dir": {"x": -1, "y": 0},
+        "weapons": [
+            {
+                "name": "Knife",
+                "available": true,
+                "ammo": -1,
+                "fireDelay": 0.7,
+                "numShots": 1,
+                "spread": 0,
+                "damage": 15,
+                "range": 1.8,
+                "animation": {
+                    "cycleTime": 0.14,
+                    "textureIds": [100, 101, 102, 103, 104]
+                }
+            }
+        ]
     },
 
     "textures": [
@@ -40,7 +56,13 @@
         {"id": 62,  "name": "data/img/dog/dog_back01.png"       },
 		{"id": 63,  "name": "data/img/dog/dog_back02.png"       },
 		{"id": 64,  "name": "data/img/dog/dog_back03.png"       },
-        {"id": 65,  "name": "data/img/dog/dog_back04.png"       }
+        {"id": 65,  "name": "data/img/dog/dog_back04.png"       },
+
+        {"id": 100, "name": "data/img/weapons/knife/knife01.png" },
+        {"id": 101, "name": "data/img/weapons/knife/knife02.png" }, 
+        {"id": 102, "name": "data/img/weapons/knife/knife03.png" }, 
+        {"id": 103, "name": "data/img/weapons/knife/knife04.png" }, 
+        {"id": 104, "name": "data/img/weapons/knife/knife05.png" }
     ],
 
     "map": {

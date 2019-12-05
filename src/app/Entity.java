@@ -36,10 +36,10 @@ public abstract class Entity {
 
     public Rect getBoundingBox() {
         Rect r = new Rect();
-        r.w = 0.1;
-        r.h = 0.1;
-        r.x = this.position.x - 0.5;
-        r.y = this.position.y - 0.5;
+        r.w = 0.4;
+        r.h = 0.4;
+        r.x = this.position.x - 0.2;
+        r.y = this.position.y - 0.2;
 
         return r;
     }

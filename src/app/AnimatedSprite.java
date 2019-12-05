@@ -20,10 +20,18 @@ public class AnimatedSprite {
         this.currentIndex = (int)(this.elapsedTime / this.cycleTime);
     }
 
+    public void setElapsedTime(double time) {
+        this.elapsedTime = time;
+        this.currentIndex = (int)(this.elapsedTime / this.cycleTime);
+    }
+
     public Sprite getSprite(Vec2 pos, boolean solid) {
         return new Sprite(pos, this.sprites.get(this.currentIndex).intValue(), solid);
     }
 
+    public int getTextureId() {
+        return this.sprites.get(this.currentIndex).intValue();
+    }
 
     private List<Number> sprites;
     private int currentIndex;

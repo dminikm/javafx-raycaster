@@ -56,6 +56,8 @@ public class DogEntity extends MonsterEntity {
                 this.lastBite = this.elapsedTime;
             }
         }
+
+        System.out.println("Health: " + this.health);
     }
 
     private void fire(World world) {
