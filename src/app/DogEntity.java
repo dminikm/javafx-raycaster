@@ -11,6 +11,8 @@ public class DogEntity extends MonsterEntity {
 
     @Override
     public void update(double delta, World world) {
+        this.elapsedTime += delta;
+
         Vec2 playerDir = world.getPlayer().getPosition().sub(this.position);
         double angle = Angle.normalizeDeg(playerDir.normalize().toAngle() - this.direction.toAngle());
 
@@ -49,7 +51,7 @@ public class DogEntity extends MonsterEntity {
             }
 
             // Check if player in range and the dog can bite again
-            if (playerDir.len() < 0.8 && this.elapsedTime - this.attackDelay < this.lastBite) {
+            if (playerDir.len() < 1.4 && this.elapsedTime - this.attackDelay > this.lastBite) {
                 this.fire(world);
                 this.lastBite = this.elapsedTime;
             }
@@ -79,6 +81,6 @@ public class DogEntity extends MonsterEntity {
     private double elapsedTime = 0;
     private double lastBite = -10;
 
-    private final double attackDelay = 2.2;
+    private final double attackDelay = 1;
     private final int damage = 10;
 }
