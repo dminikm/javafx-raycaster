@@ -4,8 +4,8 @@
     },
 
     "player": {
-        "start": {"x": 11, "y": 15},
-        "dir": {"x": -1, "y": 0},
+        "start": {"x": 2, "y": 16},
+        "dir": {"x": 0, "y": -1},
         "weapons": [
             {
                 "name": "Knife",
@@ -43,6 +43,7 @@
         {"id": 0,   "name": "data/img/air.png"              },
         {"id": 1,   "name": "data/img/red_brick_wall/top_border01.png" },
         {"id": 2,   "name": "data/img/orange_brick_wall/top_border01.png"},
+        {"id": 3,   "name": "data/img/tutorial.png"},
         {"id": 9,   "name": "data/img/barrel.png"           },
         {"id": 10,  "name": "data/img/pillar.png"           },
         {"id": 11,  "name": "data/img/turret/turret_idle.png"       },
@@ -106,11 +107,11 @@
             [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 3, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ],
 
@@ -127,9 +128,6 @@
             {"position": { "x": 11.5 , "y": 18.5 },    "textureId": 10,     "solid": true},
             {"position": { "x": 12.5 , "y": 18.5 },    "textureId": 10,     "solid": true},
             {"position": { "x": 1.5 , "y": 21.5 },     "textureId":  9,    "solid": true},
-            {"position": { "x": 1.5 , "y": 15.5 },     "textureId":  9,    "solid": true},
-            {"position": { "x": 1.8 , "y": 16.0 },     "textureId":  9,    "solid": true},
-            {"position": { "x": 1.2 , "y": 16.2 },     "textureId":  9,    "solid": true},
             {"position": { "x": 2.5 , "y":  3.5 },     "textureId":  9,    "solid": true},
             {"position": { "x": 15.5 , "y": 9.5 },     "textureId":  9,    "solid": true},
             {"position": { "x": 15.1 , "y": 10.0 },    "textureId":  9,     "solid": true},
@@ -139,6 +137,7 @@
         "tileEntities": [
             {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}},
             {"template": "DoorTileEntity", "position": { "x": 10, "y": 11 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}},
+            {"template": "DoorTileEntity", "position": { "x": 4, "y": 16 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}},
 
             {"template": "GameEndTileEntity", "position": {"x": 17, "y": 1}, "textureId": 99},
             {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 1}, "nextLevel": "data/levels/level02.json", "textureId": 99},
