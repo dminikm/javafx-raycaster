@@ -1,5 +1,7 @@
 package app;
 
+import java.util.Random;
+
 class Weapon {
     public Weapon(
         String name,
@@ -38,12 +40,24 @@ class Weapon {
         if (this.ammo == 0 || this.isFiring())
             return;
 
+        Random r = new Random();
+        r.nextDouble();
+
         this.ammo--;
         this.lastFired = this.elapsedTime;
 
-        EntityRaycastResult res = world.castRayEntity(pos, dir, world.getPlayer());
-        if (res.hit && res.distance <= this.range) {
-            res.entity.takeDamage(this.damage);
+        double startAngle = dir.toAngle() - ((this.numShots / 2) * this.spread);
+
+        for (int i = 0; i < this.numShots; i++) {
+            double angle = 
+                startAngle +                                                        // Angle \|/ (the first one)
+                (i * this.spread) +                                                 // Angle \|/ (the i-th one)
+                ((r.nextInt(50) > 24) ? 1 : -1) * (r.nextDouble() * this.spread);   // Random \/ spread to the side
+
+            EntityRaycastResult res = world.castRayEntity(pos, Vec2.fromAngle(angle), world.getPlayer());
+            if (res.hit && res.distance <= this.range) {
+                res.entity.takeDamage(this.damage);
+            }
         }
     }
 
@@ -64,6 +78,14 @@ class Weapon {
 
     public String getName() {
         return this.name;
+    }
+
+    public int getAmmo() {
+        return this.ammo;
+    }
+
+    public void addAmmo(int ammo) {
+        this.ammo += ammo;
     }
 
     private boolean available;

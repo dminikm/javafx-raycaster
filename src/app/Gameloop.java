@@ -92,7 +92,8 @@ public class Gameloop extends AnimationTimer {
         gc.fillText("+", 50, this.canvasHeight - 50);
         gc.fillText("" + (int)this.world.getPlayer().health, 125, this.canvasHeight - 50);
 
-        gc.fillText("" + 0, this.canvasWidth - 125, this.canvasHeight - 50);
+        int ammo = this.world.getPlayer().getCurrentWeapon().getAmmo();
+        gc.fillText("" + ((ammo < 0) ? "Inf" : ammo), this.canvasWidth - 125, this.canvasHeight - 50);
     }
 
     private void udpate(double delta) {
