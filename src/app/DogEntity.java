@@ -88,7 +88,7 @@ public class DogEntity extends MonsterEntity {
 
     @Override
     public Sprite getSprite() {
-        return this.sprites.get(currentSpriteIndex).getSprite(this.position.copy(), true);
+        return this.sprites.get(currentSpriteIndex).getSprite(this.position.copy(), this.health > 0);
     }
 
     private List<AnimatedSprite> sprites;
