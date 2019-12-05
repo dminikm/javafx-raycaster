@@ -6,17 +6,10 @@ import java.util.List;
 import javafx.scene.media.AudioClip;
 
 public class TurretEntity extends MonsterEntity {
-    TurretEntity(Vec2 pos, Player player, HashMap<String, Number> textures, AudioClip sound) {
+    TurretEntity(Vec2 pos, Player player, AnimatedSprite animation, AudioClip sound) {
         super(pos, new Vec2(), new Vec2(), player);
 
-        this.idleTextureId = textures.get("idleTexture").intValue();
-        this.firingTextureId1 = textures.get("firingTexture1").intValue();
-        this.firingTextureId2 = textures.get("firingTexture2").intValue();
-        this.firingTextureId3 = textures.get("firingTexture3").intValue();
-        this.firingTextureId4 = textures.get("firingTexture4").intValue();
-
-
-        this.currentTextureId = this.idleTextureId;
+        this.animation = animation;
         this.elapsedTime = 0;
 
         this.sound = sound;
@@ -38,16 +31,7 @@ public class TurretEntity extends MonsterEntity {
         }
 
         double timeDiff = this.elapsedTime - this.firingTime;
-        if (this.firing && timeDiff < 0.2) {
-            this.currentTextureId = this.firingTextureId1;
-        } else if (this.firing && timeDiff < 0.4) {
-            this.currentTextureId = this.firingTextureId2;
-        } else if (this.firing && timeDiff < 0.6) {
-            this.currentTextureId = this.firingTextureId3;
-        } else if (this.firing && timeDiff < 1) {
-            this.currentTextureId = this.firingTextureId4;
-        } else if (this.firing && timeDiff > 1) {
-            this.currentTextureId = this.idleTextureId;
+        if (this.firing && timeDiff > 1) {
             this.firing = false;
             this.firingTime = 0;
             this.shotsFired = 0;
@@ -56,6 +40,12 @@ public class TurretEntity extends MonsterEntity {
         if (timeDiff > 0.2 * (this.shotsFired + 1) && timeDiff < 0.7) {
             this.shotsFired++;
             this.fire(world);
+        }
+
+        if (this.firing) {
+            this.animation.update(delta);
+        } else {
+            this.animation.setElapsedTime(0);
         }
     }
 
@@ -76,22 +66,10 @@ public class TurretEntity extends MonsterEntity {
 
     @Override
     public Sprite getSprite() {
-        return new Sprite(
-            this.position.copy(),
-            this.currentTextureId,
-            false
-        );
+        return this.animation.getSprite(this.position.copy(), false);
     }
 
-    private int currentTextureId;
-
-    // textures
-    private int idleTextureId;
-    private int firingTextureId1;
-    private int firingTextureId2;
-    private int firingTextureId3;
-    private int firingTextureId4;
-
+    private AnimatedSprite animation;
     private double elapsedTime;
 
     private double firingTime = 0;

@@ -233,10 +233,10 @@ public class LevelLoader
     // Individual entity parsers
     private static Entity parseTurretEntity(JSONObject json, Player p) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
-        HashMap<String, Number> textures = JSONUtils.getFromComplexPath(json, "textures");
+        AnimatedSprite animation = JSONUtils.getAnimatedSpriteFromJson(json, "sprite.");
         AudioClip sound = JSONUtils.getAudioClipFromJson(json, "sound");
 
-        return new TurretEntity(position, p, textures, sound);
+        return new TurretEntity(position, p, animation, sound);
     }
 
     private static Entity parseDogEntity(JSONObject json, Player p) {

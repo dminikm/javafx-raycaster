@@ -151,12 +151,10 @@
             {
                 "template": "TurretEntity",
                 "position": {"x": 15, "y": 15},
-                "textures": {
-                    "idleTexture": 11,
-                    "firingTexture1": 12,
-                    "firingTexture2": 13,
-                    "firingTexture3": 14,
-                    "firingTexture4": 15
+                "sprite": {
+                    "cycleTime": 0.2,
+                    "repeat": true,
+                    "textureIds": [11, 12, 13, 14, 15]
                 },
                 "sound": "data/assets/turret/turret_firing.wav"
             },
