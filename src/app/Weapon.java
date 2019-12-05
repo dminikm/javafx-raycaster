@@ -1,16 +1,19 @@
 package app;
 
 import java.util.Random;
+import javafx.scene.media.AudioClip;
 
 class Weapon {
     public Weapon(
         String name,
+        AudioClip sound,
         AnimatedSprite animation,
         int ammo, double delay,
         int numShots, double spread,
         int damage, double range,
         boolean available
         ) {
+        this.sound = sound;
         this.available = available;
         this.ammo = ammo;
         this.animation = animation;
@@ -59,6 +62,8 @@ class Weapon {
                 res.entity.takeDamage(this.damage);
             }
         }
+
+        this.sound.play();
     }
 
     public void update(double delta)
@@ -102,4 +107,6 @@ class Weapon {
     private double range;
 
     private String name;
+
+    private AudioClip sound;
 }

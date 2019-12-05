@@ -16,6 +16,7 @@
                 "spread": 0,
                 "damage": 35,
                 "range": 1.8,
+                "sound": "data/img/weapons/knife/knife.wav",
                 "animation": {
                     "cycleTime": 0.14,
                     "repeat": true,
@@ -30,6 +31,7 @@
                 "spread": 0.1,
                 "damage": 10,
                 "range": 16,
+                "sound": "data/img/weapons/pistol/pistol.wav",
                 "animation": {
                     "cycleTime": 0.06,
                     "repeat": true,

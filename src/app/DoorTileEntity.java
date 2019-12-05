@@ -9,6 +9,9 @@ public class DoorTileEntity extends TileEntity {
         this.textureId = textureId;
 
         this.doorDirection = startOffset.sub(endOffset).normalize();
+
+        this.opening = false;
+        this.openedState = 0.0;
     }
 
     public void update(double delta, World world) {
@@ -49,6 +52,6 @@ public class DoorTileEntity extends TileEntity {
     private Vec2 startOffset;
     private Vec2 doorDirection;
     
-    private boolean opening = true;
-    private double openedState = 0.0;
+    private boolean opening;
+    private double openedState;
 }
