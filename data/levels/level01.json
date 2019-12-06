@@ -153,6 +153,35 @@
         {"id": 121,  "name": "data/assets/dog/dog_dead03.png"       },
         {"id": 122,  "name": "data/assets/dog/dog_dead04.png"       },
 
+        {"id": 130,  "name": "data/assets/soldier/soldier_front01.png"       },
+		{"id": 131,  "name": "data/assets/soldier/soldier_front02.png"       },
+		{"id": 132,  "name": "data/assets/soldier/soldier_front03.png"       },
+        {"id": 133,  "name": "data/assets/soldier/soldier_front04.png"       },
+        {"id": 134,  "name": "data/assets/soldier/soldier_front05.png"       },
+        {"id": 135,  "name": "data/assets/soldier/soldier_left_side01.png"       },
+		{"id": 136,  "name": "data/assets/soldier/soldier_left_side02.png"       },
+		{"id": 137,  "name": "data/assets/soldier/soldier_left_side03.png"       },
+        {"id": 138,  "name": "data/assets/soldier/soldier_left_side04.png"       },
+        {"id": 139,  "name": "data/assets/soldier/soldier_left_side05.png"       },
+        {"id": 140,  "name": "data/assets/soldier/soldier_right_side01.png"       },
+		{"id": 141,  "name": "data/assets/soldier/soldier_right_side02.png"       },
+		{"id": 142,  "name": "data/assets/soldier/soldier_right_side03.png"       },
+        {"id": 143,  "name": "data/assets/soldier/soldier_right_side04.png"       },
+        {"id": 144,  "name": "data/assets/soldier/soldier_right_side05.png"       },
+        {"id": 145,  "name": "data/assets/soldier/soldier_back01.png"       },
+		{"id": 146,  "name": "data/assets/soldier/soldier_back02.png"       },
+		{"id": 147,  "name": "data/assets/soldier/soldier_back03.png"       },
+        {"id": 148,  "name": "data/assets/soldier/soldier_back04.png"       },
+        {"id": 149,  "name": "data/assets/soldier/soldier_back05.png"       },
+        {"id": 150,  "name": "data/assets/soldier/soldier_attack01.png"       },
+		{"id": 151,  "name": "data/assets/soldier/soldier_attack02.png"       },
+        {"id": 152,  "name": "data/assets/soldier/soldier_attack03.png"       },
+        {"id": 153,  "name": "data/assets/soldier/soldier_dead01.png"       },
+        {"id": 154,  "name": "data/assets/soldier/soldier_dead02.png"       },
+        {"id": 155,  "name": "data/assets/soldier/soldier_dead03.png"       },
+        {"id": 156,  "name": "data/assets/soldier/soldier_dead04.png"       },
+        {"id": 157,  "name": "data/assets/soldier/soldier_dead05.png"       },
+
         {"id": 200, "name": "data/assets/weapons/knife/knife01.png" },
         {"id": 201, "name": "data/assets/weapons/knife/knife02.png" }, 
         {"id": 202, "name": "data/assets/weapons/knife/knife03.png" }, 
@@ -392,6 +421,40 @@
                 }],
                 "hurtSound": "data/assets/dog/dog_hurt.wav",
                 "attackSound": "data/assets/dog/dog_attack.wav"
+            },
+
+            {
+                "template": "DogEntity",
+                "position": {"x": 20.5, "y": 27.5},
+                "direction": {"x": -1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": true,
+                    "textureIds": [150, 151, 152]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
             },
 
             {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 26.5 }, "textureId": 215, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
