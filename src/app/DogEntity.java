@@ -28,24 +28,15 @@ public class DogEntity extends MonsterEntity {
         }
 
         Vec2 playerDir = world.getPlayer().getPosition().sub(this.position);
-        double angle = Angle.normalizeDeg(playerDir.normalize().toAngle() - this.direction.toAngle());
 
-        if (angle > 180 - 45 && angle < 180 + 45) {
-            this.currentSpriteIndex = 3;    // Back
-        } else if (angle > 360 - 45 || angle < 0 + 45) {
-            this.currentSpriteIndex = 0;    // Front
-
-            // IF player is in front of the dog, check if he is visible
+        this.currentSpriteIndex = this.getAngleToPlayer(world);
+        if (this.currentSpriteIndex == 0) {
+            // IF player is in front of the soldier, check if he is visible
             EntityRaycastResult res = world.castRayEntity(this.position, playerDir.normalize(), this);
             if (res.hit && res.entity instanceof Player) {
-                // If so, alert this dog
+                // If so, alert this soldier
                 this.alerted = true;
             }
-
-        } else if (angle > 90 - 45 && angle < 90 + 45) {
-            this.currentSpriteIndex = 2;    // Right
-        } else {
-            this.currentSpriteIndex = 1;    // Left
         }
 
         if (this.alerted) {
