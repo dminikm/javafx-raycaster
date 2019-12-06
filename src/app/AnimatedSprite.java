@@ -30,7 +30,7 @@ public class AnimatedSprite {
         return this.sprites.get(this.getCurrentIndex()).intValue();
     }
 
-    private int getCurrentIndex() {
+    public int getCurrentIndex() {
         return Math.min((int)(this.elapsedTime / this.cycleTime), this.sprites.size() - 1);
     }
 

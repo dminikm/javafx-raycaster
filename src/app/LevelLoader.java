@@ -112,6 +112,9 @@ public class LevelLoader
                 case "dogentity":
                     return parseDogEntity(entity);
 
+                case "soldierentity":
+                    return parseSoldierEntity(entity);
+
                 case "ammopickupentity":
                     return parseAmmoPickupEntity(entity);
 
@@ -214,6 +217,17 @@ public class LevelLoader
         AudioClip attackSound = JSONUtils.getAudioClipFromJson(json, "attackSound");
 
         return new DogEntity(position, direction, sprites, hurtSound, attackSound);
+    }
+
+    private static Entity parseSoldierEntity(JSONObject json) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        Vec2 direction = JSONUtils.vecFromJson(json, "direction");
+        List<AnimatedSprite> sprites = JSONUtils.getAnimatedSpritesFromJson(json, "sprites");
+
+        AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "hurtSound");
+        AudioClip attackSound = JSONUtils.getAudioClipFromJson(json, "attackSound");
+
+        return new SoldierEntity(position, direction, sprites, hurtSound, attackSound);
     }
 
     private static Entity parseAmmoPickupEntity(JSONObject json) {

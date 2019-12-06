@@ -355,7 +355,7 @@ public class World implements RayCastable {
                 pos.x < this.worldMap[(int)pos.y].length;
     }
 
-    private List<Vec2> getNeighborsForBlock(Vec2 pos) {
+    public List<Vec2> getFreeNeighborsForBlock(Vec2 pos) {
         List<Vec2> neighbors = new ArrayList<Vec2>(0);
 
         neighbors.add(pos.add(new Vec2(-1, 0)).floor());
@@ -382,7 +382,7 @@ public class World implements RayCastable {
 
         while (!frontier.isEmpty()) {
             Vec2 current = frontier.pop();
-            for (Vec2 neighbor : this.getNeighborsForBlock(current)) {
+            for (Vec2 neighbor : this.getFreeNeighborsForBlock(current)) {
                 if (this.toPlayerPaths[(int)neighbor.y][(int)neighbor.x] == null) {     // Not updated yet
                     frontier.add(neighbor);                                             // Add as a next check
                     this.toPlayerPaths[(int)neighbor.y][(int)neighbor.x] = current;     // Set it's path to current

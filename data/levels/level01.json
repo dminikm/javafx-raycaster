@@ -424,7 +424,7 @@
             },
 
             {
-                "template": "DogEntity",
+                "template": "SoldierEntity",
                 "position": {"x": 20.5, "y": 27.5},
                 "direction": {"x": -1, "y": 0},
                 "sprites": [{
@@ -445,8 +445,8 @@
                     "textureIds": [145, 146, 147, 148, 149]
                 }, {
                     "cycleTime": 0.12,
-                    "repeat": true,
-                    "textureIds": [150, 151, 152]
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
                 },
                 {
                     "cycleTime": 0.1,
