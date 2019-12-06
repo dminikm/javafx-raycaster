@@ -4,14 +4,14 @@
     },
 
     "player": {
-        "start": {"x": 2, "y": 16},
-        "dir": {"x": 0, "y": -1},
+        "start": {"x": 1.5, "y": 29.5},
+        "dir": {"x": 1, "y": 0},
         "hurtSound": "data/assets/player_hurt.wav",
         "weapons": [
             {
                 "name": "Knife",
                 "available": true,
-                "ammo": -1,
+                "ammo":-1,
                 "fireDelay": 0.7,
                 "numShots": 1,
                 "spread": 0,
@@ -58,21 +58,39 @@
     },
 
     "textures": [
-        {"id": 0,   "name": "data/assets/air.png"              },
-        {"id": 1,   "name": "data/assets/red_brick_wall/top_border01.png" },
-        {"id": 2,   "name": "data/assets/orange_brick_wall/top_border01.png"},
-        {"id": 3,   "name": "data/assets/tutorial.png"},
-        {"id": 9,   "name": "data/assets/barrel.png"           },
-        {"id": 10,  "name": "data/assets/pillar.png"           },
-        {"id": 11,  "name": "data/assets/turret/turret_idle.png"       },
-		{"id": 12,  "name": "data/assets/turret/turret_firing01.png"       },
-		{"id": 13,  "name": "data/assets/turret/turret_firing02.png"       },
-		{"id": 14,  "name": "data/assets/turret/turret_firing03.png"       },
-        {"id": 15,  "name": "data/assets/turret/turret_firing04.png"       },
-        {"id": 16,  "name": "data/assets/turret/turret_dead.png" },
-        {"id": 20,  "name": "data/assets/pickups/ammo.png"},
-        {"id": 21,  "name": "data/assets/pickups/health.png"},
-        {"id": 99,  "name": "data/assets/door.png" },
+        {"id": 0,   "name": "data/assets/air.png"                       },
+        {"id": 1,   "name": "data/assets/bluestone01.png"                       },
+        {"id": 2,   "name": "data/assets/bluestone02.png"                       },
+        {"id": 3,   "name": "data/assets/bluestone03.png"                      },
+        {"id": 4,   "name": "data/assets/bluestone04.png"                      },
+        {"id": 5,   "name": "data/assets/bluestone04.png"                       },
+        {"id": 6,   "name": "data/assets/stone01.png"                      },
+        {"id": 7,   "name": "data/assets/stone02.png"                       },
+        {"id": 8,   "name": "data/assets/stone03.png"                       },
+        {"id": 9,   "name": "data/assets/stone04.png"                       },
+        {"id": 10,  "name": "data/assets/stone04.png"                       },
+        {"id": 11,  "name": "data/assets/wood01.png"                       },
+        {"id": 12,  "name": "data/assets/wood02.png"                       },
+        {"id": 13,  "name": "data/assets/wood03.png"                       },
+        {"id": 14,  "name": "data/assets/wood04.png"                       },
+        {"id": 15,  "name": "data/assets/wood05.png"                       },
+        {"id": 16,  "name": "data/assets/brick01.png"                       },
+        {"id": 17,  "name": "data/assets/brick02.png"                       },
+        {"id": 18,  "name": "data/assets/brick03.png"                       },
+        {"id": 19,  "name": "data/assets/brick04.png"                       },
+        {"id": 20,  "name": "data/assets/brick05.png"                       },
+        {"id": 21,  "name": "data/assets/redbrick01.png"                       },
+        {"id": 22,  "name": "data/assets/redbrick02.png"                       },
+        {"id": 23,  "name": "data/assets/sandstone01.png"                       },
+        {"id": 24,  "name": "data/assets/sandstone02.png"                       },
+        {"id": 25,  "name": "data/assets/elevator01.png"                       },
+        {"id": 26,  "name": "data/assets/elevator02.png"                       },
+        {"id": 27,  "name": "data/assets/elevator03.png"                       },
+        {"id": 28,  "name": "data/assets/door01.png"                    },
+        {"id": 29,  "name": "data/assets/door02.png"                },
+        {"id": 30,  "name": "data/assets/tutorial.png"              },
+
+        {"id": 40, "name": "data/assets/pickups/health.png"         },
 
         {"id": 50,  "name": "data/assets/dog/dog_front01.png"       },
 		{"id": 51,  "name": "data/assets/dog/dog_front02.png"       },
@@ -124,24 +142,38 @@
 
     "map": {
         "level": [
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, -1, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, -1, 1],
-            [1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 1],
-            [1, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 2, 0, 1],
-            [1, 0, 2, 2, -1, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 3, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 2,-1, 1, 2, 2, 2, 2, 1, 2, 1, 1, 2, 2, 2, 2, 1, 1, 3, 2, 2, 2, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0],
+            [2, 0, 0, 2, 1, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+            [2, 0, 0, 2, 2, 0, 0, 1, 2, 0, 0, 2, 2, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [2, 1,-1, 2, 1, 2,-1, 1, 2, 2,-1, 2, 1, 2,-1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [1, 2,-1, 1, 2, 2,-1, 2, 1, 1,-1, 1, 2, 1,-1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0, 2, 2, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0,30, 2, 0, 0, 2, 1, 0, 0, 2, 2, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 5, 2, 3, 2, 4, 2, 2, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ],
 
         "sprites": [
@@ -164,36 +196,61 @@
         ],
 
         "tileEntities": [
-            {"template": "DoorTileEntity", "position": { "x": 10, "y": 12 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}, "sound": "data/assets/door.wav"},
-            {"template": "DoorTileEntity", "position": { "x": 10, "y": 11 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}, "sound": "data/assets/door.wav"},
-            {"template": "DoorTileEntity", "position": { "x": 4, "y": 16 }, "textureId": 99, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}, "sound": "data/assets/door.wav"},
+            {"template": "SecretDoorTileEntity", "position": {"x": 2, "y": 21}, "path": [{"x": 2.5, "y": 21.5}, {"x": 2.5, "y": 20.5}, {"x": 3.5, "y": 20.5}], "textureId": 2},
 
-            {"template": "GameEndTileEntity", "position": {"x": 17, "y": 1}, "textureId": 99},
-            {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 1}, "nextLevel": "data/levels/level02.json", "textureId": 99},
-            {"template": "SecretDoorTileEntity", "position": {"x": 4, "y": 4}, "path": [{"x": 4.5, "y": 4.5}, {"x": 4.5, "y": 3.5}, {"x": 5.5, "y": 3.5}], "textureId": 2}
+            {"template": "DoorTileEntity", "position": { "x": 2, "y": 27 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 6, "y": 27 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 27 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 14, "y": 27 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+
+            {"template": "DoorTileEntity", "position": { "x": 2, "y": 24 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 6, "y": 24 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 24 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 14, "y": 24 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+
+            {"template": "DoorTileEntity", "position": { "x": 16, "y": 26 }, "textureId": 28, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 16, "y": 25 }, "textureId": 28, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}, "sound": "data/assets/door.wav"},
         ],
 
         "entities": [
             {
-                "template": "TurretEntity",
-                "position": {"x": 15, "y": 15},
-                "sprite": {
-                    "cycleTime": 0.2,
+                "template": "DogEntity",
+                "position": {"x": 19.5, "y": 23.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [11, 12, 13, 14, 15]
+                    "textureIds": [50, 51, 52, 53]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [54, 55, 56, 57]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [58, 59, 60, 61]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [62, 63, 64, 65]
+                }, {
+                    "cycleTime": 0.33,
+                    "repeat": true,
+                    "textureIds": [66, 67, 68]
                 },
-                "deadSprite": {
-                    "cycleTime": 1,
+                {
+                    "cycleTime": 0.1,
                     "repeat": false,
-                    "textureIds": [16]
-                },
-                "firingSound": "data/assets/turret/turret_firing.wav",
-                "hurtSound": "data/assets/turret/turret_hurt.wav"
+                    "textureIds": [69, 70, 71, 72]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
             },
 
             {
                 "template": "DogEntity",
-                "position": {"x": 16, "y": 15},
+                "position": {"x": 21.5, "y": 28.5},
                 "direction": {"x": 1, "y": 0},
                 "sprites": [{
                     "cycleTime": 0.1,
@@ -228,8 +285,8 @@
 
             {
                 "template": "DogEntity",
-                "position": {"x": 1.5, "y": 2.5},
-                "direction": {"x": 1, "y": 0},
+                "position": {"x": 20.5, "y": 28.5},
+                "direction": {"x": -1, "y": 0},
                 "sprites": [{
                     "cycleTime": 0.1,
                     "repeat": true,
@@ -261,12 +318,11 @@
                 "attackSound": "data/assets/dog/dog_attack.wav"
             },
 
-            {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 7.5 }, "textureId": 116, "weaponName": "Pistol", "amount": 5, "makeAvailable": false },
-            {"template": "HealthPickupEntity", "position": { "x": 3.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
-            {"template": "AmmoPickupEntity", "position": { "x": 5.5, "y": 7.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
-            {"template": "HealthPickupEntity", "position": { "x": 5.5, "y": 9.5 }, "textureId": 21, "amount": 25 },
-
-            {"template": "AmmoPickupEntity", "position": { "x": 3.5, "y": 3.5 }, "textureId": 125, "weaponName": "Machinegun", "amount": 25, "makeAvailable": true }
+            {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 26.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
+            {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 25.5 }, "textureId": 116, "weaponName": "Pistol", "amount": 25, "makeAvailable": false },
+            {"template": "HealthPickupEntity", "position": { "x": 10.5, "y": 29.5 }, "textureId": 40, "amount": 25 },
+            {"template": "AmmoPickupEntity", "position": { "x": 1.5, "y": 19.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
+            {"template": "HealthPickupEntity", "position": { "x": 17.5, "y": 29.5 }, "textureId": 40, "amount": 25 }
         ]
     }
 }
