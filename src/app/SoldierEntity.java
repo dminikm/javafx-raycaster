@@ -90,7 +90,7 @@ public class SoldierEntity extends MonsterEntity {
         Vec2 dir = world.getPlayer().getPosition().sub(this.position).normalize();
         EntityRaycastResult res = world.castRayEntity(this.position, dir, this);
 
-        if (res.hit && res.entity != null) {
+        if (res.hit) {
             res.entity.takeDamage(this.damage);
         }
 
