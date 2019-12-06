@@ -3,7 +3,6 @@ package app;
 public class AmmoPickupEntity extends PickupEntity {
     public AmmoPickupEntity(Vec2 pos, int textureId, String weaponName, int amount, boolean makeAvailable) {
         super(pos);
-        this.radius = 0.5;
         this.amount = amount;
         this.makeAvailable = makeAvailable;
         this.weaponName = weaponName;

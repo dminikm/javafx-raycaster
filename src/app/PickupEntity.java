@@ -3,7 +3,7 @@ package app;
 public abstract class PickupEntity extends WorldEntity {
     public PickupEntity(Vec2 pos) {
         super(pos, new Vec2(), new Vec2());
-        this.radius = 0;
+        this.radius = 0.5;
     }
 
     @Override

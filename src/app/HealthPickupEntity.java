@@ -3,7 +3,6 @@ package app;
 public class HealthPickupEntity extends PickupEntity {
     public HealthPickupEntity(Vec2 pos, int textureId, int amount) {
         super(pos);
-        this.radius = 0.5;
         this.amount = amount;
 
         this.textureId = textureId;

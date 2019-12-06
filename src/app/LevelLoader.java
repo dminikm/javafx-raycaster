@@ -118,6 +118,9 @@ public class LevelLoader
                 case "healthpickupentity":
                     return parseHealthPickupEntity(entity);
 
+                case "treasurepickupentity":
+                    return parseTreasurePickupEntity(entity);
+
                 default:
                     return null;
             }
@@ -229,5 +232,12 @@ public class LevelLoader
         int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();
 
         return new HealthPickupEntity(position, textureId, amount);
+    }
+
+    private static Entity parseTreasurePickupEntity(JSONObject json) {
+        Vec2 position = JSONUtils.vecFromJson(json, "position");
+        int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
+
+        return new TreasurePickupEntity(position, textureId);
     }
 }

@@ -216,6 +216,15 @@
             {"position": {"x": 23.5, "y": 28.5}, "textureId": 58, "solid": true},
             {"position": {"x": 23.5, "y": 23.5}, "textureId": 58, "solid": true},
 
+            {"position": {"x": 25.5, "y": 11.5}, "textureId": 58, "solid": true},
+            {"position": {"x": 29.5, "y": 9.5}, "textureId": 58, "solid": true},
+            {"position": {"x": 25.5, "y": 13.5}, "textureId": 58, "solid": true},
+            {"position": {"x": 29.5, "y": 13.5}, "textureId": 58, "solid": true},
+
+            {"position": {"x": 23.5, "y": 11.5}, "textureId": 45, "solid": false},
+            {"position": {"x": 27.5, "y": 8.5}, "textureId": 45, "solid": false},
+            {"position": {"x": 30.5, "y": 11.5}, "textureId": 47, "solid": false},
+
             {"position": {"x": 3.5, "y": 25.5}, "textureId": 43, "solid": false},
             {"position": {"x": 7.5, "y": 25.5}, "textureId": 42, "solid": false},
             {"position": {"x": 11.5, "y": 25.5}, "textureId": 43, "solid": false},
@@ -243,7 +252,6 @@
             {"position": {"x": 12.5, "y": 10.5}, "textureId": 44, "solid": true},
             {"position": {"x": 8.5, "y": 17.5}, "textureId": 44, "solid": true},
             {"position": {"x": 12.5, "y": 17.5}, "textureId": 44, "solid": true},
-
 
             {"position": {"x": 2.5, "y": 2.5}, "textureId": 32, "solid": true},
             {"position": {"x": 2.5, "y": 3.5}, "textureId": 32, "solid": true},
@@ -390,7 +398,16 @@
             {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 25.5 }, "textureId": 216, "weaponName": "Pistol", "amount": 25, "makeAvailable": false },
             {"template": "HealthPickupEntity", "position": { "x": 10.5, "y": 29.5 }, "textureId": 70, "amount": 25 },
             {"template": "AmmoPickupEntity", "position": { "x": 1.5, "y": 19.5 }, "textureId": 215, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
-            {"template": "HealthPickupEntity", "position": { "x": 17.5, "y": 29.5 }, "textureId": 70, "amount": 25 }
+            {"template": "HealthPickupEntity", "position": { "x": 17.5, "y": 29.5 }, "textureId": 70, "amount": 25 },
+
+            {"template": "AmmoPickupEntity", "position": { "x": 28.5, "y": 29.5 }, "textureId": 216, "weaponName": "Pistol", "amount": 25, "makeAvailable": false },
+            {"template": "AmmoPickupEntity", "position": { "x": 29.5, "y": 29.5 }, "textureId": 216, "weaponName": "Pistol", "amount": 25, "makeAvailable": false },
+
+            {"template": "TreasurePickupEntity", "position": { "x": 27.5, "y": 24.5 }, "textureId": 59},
+            {"template": "TreasurePickupEntity", "position": { "x": 27.5, "y": 25.5 }, "textureId": 59},
+            {"template": "TreasurePickupEntity", "position": { "x": 27.5, "y": 26.5 }, "textureId": 59},
+            {"template": "TreasurePickupEntity", "position": { "x": 30.5, "y": 25.5 }, "textureId": 60},
+            {"template": "TreasurePickupEntity", "position": { "x": 30.5, "y": 28.5 }, "textureId": 60}
         ]
     }
 }
