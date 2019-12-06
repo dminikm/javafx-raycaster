@@ -27,8 +27,8 @@ public class LevelLoader
         var w = new World(
             parseLevel(json),
             p,
-            parseTileEntities(json, p),
-            parseEntities(json, p),
+            parseTileEntities(json),
+            parseEntities(json),
             parseSprites(json)
         );
 
@@ -102,7 +102,7 @@ public class LevelLoader
         return new Player(position, direction, new Vec2(), weapons, hurtSound);
     }
 
-    private static Entity[] parseEntities(JSONObject json, Player p) {
+    private static Entity[] parseEntities(JSONObject json) {
         List<JSONObject> entities = JSONUtils.getFromComplexPath(json, "map.entities");
         var parsedEntities = new ArrayList<Entity>();
 
@@ -113,19 +113,19 @@ public class LevelLoader
             switch (template.toLowerCase())
             {
                 case "turretentity":
-                    ent = parseTurretEntity(entity, p);
+                    ent = parseTurretEntity(entity);
                     break;
 
                 case "dogentity":
-                    ent = parseDogEntity(entity, p);
+                    ent = parseDogEntity(entity);
                     break;
 
                 case "ammopickupentity":
-                    ent = parseAmmoPickupEntity(entity, p);
+                    ent = parseAmmoPickupEntity(entity);
                     break;
 
                 case "healthpickupentity":
-                    ent = parseHealthPickupEntity(entity, p);
+                    ent = parseHealthPickupEntity(entity);
                     break;
 
                 default:
@@ -141,7 +141,7 @@ public class LevelLoader
         return res;
     }
 
-    private static TileEntity[] parseTileEntities(JSONObject json, Player p) {
+    private static TileEntity[] parseTileEntities(JSONObject json) {
         List<JSONObject> tileEntities = JSONUtils.getFromComplexPath(json, "map.tileEntities");
         var parsedTileEntities = new ArrayList<TileEntity>();
 
@@ -152,19 +152,19 @@ public class LevelLoader
             switch (template.toLowerCase())
             {
                 case "doortileentity":
-                    tent = parseDoorTileEntity(tileEntity, p);
+                    tent = parseDoorTileEntity(tileEntity);
                     break;
 
                 case "gameendtileentity":
-                    tent = parseGameEndTileEntity(tileEntity, p);
+                    tent = parseGameEndTileEntity(tileEntity);
                     break;
 
                 case "levelchangetileentity":
-                    tent = parseLevelChangeTileEntity(tileEntity, p);
+                    tent = parseLevelChangeTileEntity(tileEntity);
                     break;
 
                 case "secretdoortileentity":
-                    tent = parseSecretDoorTileEntity(tileEntity, p);
+                    tent = parseSecretDoorTileEntity(tileEntity);
                     break;
 
                 default:
@@ -181,7 +181,7 @@ public class LevelLoader
     }
 
     // Individual tile entity parsers
-    private static TileEntity parseDoorTileEntity(JSONObject json, Player p) {
+    private static TileEntity parseDoorTileEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         Vec2 startOffset = JSONUtils.vecFromJson(json, "startOffset");
         Vec2 endOffset = JSONUtils.vecFromJson(json, "endOffset");
@@ -191,14 +191,14 @@ public class LevelLoader
         return new DoorTileEntity(position, startOffset, endOffset, textureId, sound);
     }
 
-    private static TileEntity parseGameEndTileEntity(JSONObject json, Player p) {
+    private static TileEntity parseGameEndTileEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
 
         return new GameEndTileEntity(position, textureId);
     }
 
-    private static TileEntity parseLevelChangeTileEntity(JSONObject json, Player p) {
+    private static TileEntity parseLevelChangeTileEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
         String nextLevel = JSONUtils.getFromComplexPath(json, "nextLevel");
@@ -206,7 +206,7 @@ public class LevelLoader
         return new LevelChangeTileEntity(position, nextLevel, textureId);
     }
 
-    private static TileEntity parseSecretDoorTileEntity(JSONObject json, Player p) {
+    private static TileEntity parseSecretDoorTileEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
 
@@ -222,17 +222,17 @@ public class LevelLoader
     }
 
     // Individual entity parsers
-    private static Entity parseTurretEntity(JSONObject json, Player p) {
+    private static Entity parseTurretEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         AnimatedSprite animation = JSONUtils.getAnimatedSpriteFromJson(json, "sprite.");
         AnimatedSprite deadSprite = JSONUtils.getAnimatedSpriteFromJson(json, "deadSprite.");
         AudioClip firingSound = JSONUtils.getAudioClipFromJson(json, "firingSound");
         AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "hurtSound");
 
-        return new TurretEntity(position, p, animation, deadSprite, hurtSound, firingSound);
+        return new TurretEntity(position, animation, deadSprite, hurtSound, firingSound);
     }
 
-    private static Entity parseDogEntity(JSONObject json, Player p) {
+    private static Entity parseDogEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         Vec2 direction = JSONUtils.vecFromJson(json, "direction");
         List<AnimatedSprite> sprites = JSONUtils.getAnimatedSpritesFromJson(json, "sprites");
@@ -240,10 +240,10 @@ public class LevelLoader
         AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "hurtSound");
         AudioClip attackSound = JSONUtils.getAudioClipFromJson(json, "attackSound");
 
-        return new DogEntity(position, direction, p, sprites, hurtSound, attackSound);
+        return new DogEntity(position, direction, sprites, hurtSound, attackSound);
     }
 
-    private static Entity parseAmmoPickupEntity(JSONObject json, Player p) {
+    private static Entity parseAmmoPickupEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
         int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();
@@ -253,7 +253,7 @@ public class LevelLoader
         return new AmmoPickupEntity(position, textureId, weaponName, amount, makeAvailable);
     }
 
-    private static Entity parseHealthPickupEntity(JSONObject json, Player p) {
+    private static Entity parseHealthPickupEntity(JSONObject json) {
         Vec2 position = JSONUtils.vecFromJson(json, "position");
         int textureId = ((Number)JSONUtils.getFromComplexPath(json, "textureId")).intValue();
         int amount = ((Number)JSONUtils.getFromComplexPath(json, "amount")).intValue();

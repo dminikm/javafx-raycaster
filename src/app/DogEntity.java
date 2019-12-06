@@ -4,8 +4,8 @@ import java.util.List;
 import javafx.scene.media.AudioClip;
 
 public class DogEntity extends MonsterEntity {
-    DogEntity(Vec2 pos, Vec2 dir, Player player, List<AnimatedSprite> sprites, AudioClip hurtSound, AudioClip attackSound) {
-        super(pos, dir, new Vec2(), player);
+    DogEntity(Vec2 pos, Vec2 dir, List<AnimatedSprite> sprites, AudioClip hurtSound, AudioClip attackSound) {
+        super(pos, dir, new Vec2());
 
         // Testing with only one now
         this.sprites = sprites;

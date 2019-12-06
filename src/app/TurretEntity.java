@@ -3,8 +3,8 @@ package app;
 import javafx.scene.media.AudioClip;
 
 public class TurretEntity extends MonsterEntity {
-    TurretEntity(Vec2 pos, Player player, AnimatedSprite animation, AnimatedSprite deadSprite, AudioClip hurtSound, AudioClip firingSound) {
-        super(pos, new Vec2(), new Vec2(), player);
+    TurretEntity(Vec2 pos, AnimatedSprite animation, AnimatedSprite deadSprite, AudioClip hurtSound, AudioClip firingSound) {
+        super(pos, new Vec2(), new Vec2());
 
         this.animation = animation;
         this.deadSprite = deadSprite;
