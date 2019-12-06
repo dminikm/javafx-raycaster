@@ -32,8 +32,6 @@ public class SecretDoorTileEntity extends TileEntity {
 
     @Override
     public void onInteract() {
-        // TODO: Implement end screen?
-        //System.exit(0);
         if (!this.opening) {
             this.openingTime = 0;
             this.opening = true;

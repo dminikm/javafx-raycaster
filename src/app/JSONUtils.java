@@ -1,11 +1,8 @@
 package app;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javafx.scene.media.AudioClip;

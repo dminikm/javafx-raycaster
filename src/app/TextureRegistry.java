@@ -40,6 +40,8 @@ public class TextureRegistry {
     // TODO:
     // This is intentionally bad
     // It should be improved and the level format re-thought
+    // NOTE:
+    // Too late for that
     public void loadTexturesFromJSON(JSONObject json) {
         this.dropTexures();
 

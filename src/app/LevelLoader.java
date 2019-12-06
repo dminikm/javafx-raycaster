@@ -2,19 +2,10 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 import java.io.FileReader;
-import java.nio.file.Path;
-
 import org.json.simple.parser.JSONParser;
-
 import javafx.scene.media.AudioClip;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LevelLoader

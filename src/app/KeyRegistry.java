@@ -1,10 +1,7 @@
 package app;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
-
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -35,9 +32,6 @@ public class KeyRegistry {
     private KeyRegistry(Scene scene) {
         this.keys = new HashMap<KeyCode, KeyState>();
         var self = this;
-
-        this.mouseDeltas = new ArrayDeque<Vec2>();
-        this.mousePosition = new Vec2();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -101,6 +95,4 @@ public class KeyRegistry {
     }
 
     private Map<KeyCode, KeyState> keys;
-    private Vec2 mousePosition;
-    private Deque<Vec2> mouseDeltas;
 }

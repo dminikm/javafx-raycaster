@@ -6,16 +6,15 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
-import javafx.scene.robot.Robot;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 public class Gameloop extends AnimationTimer {
     public Gameloop(Canvas cv) {
-        this.sc = cv;
+        this.cv = cv;
         this.lastNanoTime = System.nanoTime();
-        this.gc = cv.getGraphicsContext2D();
+        this.gc = this.cv.getGraphicsContext2D();
         this.pw = this.gc.getPixelWriter();
 
         this.canvasWidth = (int)cv.getWidth();
@@ -84,7 +83,7 @@ public class Gameloop extends AnimationTimer {
 
     private long lastNanoTime;
     
-    private Canvas sc;
+    private Canvas cv;
     private GraphicsContext gc;
     private PixelWriter pw;
     

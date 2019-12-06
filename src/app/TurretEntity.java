@@ -1,8 +1,5 @@
 package app;
 
-import java.util.HashMap;
-import java.util.List;
-
 import javafx.scene.media.AudioClip;
 
 public class TurretEntity extends MonsterEntity {

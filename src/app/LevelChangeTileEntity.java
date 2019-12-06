@@ -23,8 +23,6 @@ public class LevelChangeTileEntity extends TileEntity {
 
     @Override
     public void onInteract() {
-        // TODO: Implement end screen?
-        //System.exit(0);
         this.change = true;
     }
 
