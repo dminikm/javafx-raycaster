@@ -15,7 +15,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) 
     {
-        stage.setTitle( "Canvas Example" );
+        stage.setTitle("Raycaster - Dominik Meca (MEC0037)");
         
         Group root = new Group();
         Scene scene = new Scene( root );

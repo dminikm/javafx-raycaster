@@ -33,23 +33,32 @@ public class Gameloop extends AnimationTimer {
         this.udpate(delta);
         this.render(delta);
 
+        if (this.world.getPlayer().health <= 0) {
+            this.world.resetTo(LevelLoader.loadLevel(this.world.getName(), this.textureRegistry));
+        }
+
         KeyRegistry.getInstance().update(delta);
     }
 
     private void render(double delta) {
         ColorBuffer buffer = this.renderer.render(delta);
 
+        // Copy the final bufffer back to the canvas
         pw.setPixels(0, 0, this.canvasWidth, this.canvasHeight, buffer.getPixelFormat(), buffer.getData(), 0, buffer.getWidth());
+
+        // Draw fps
         gc.setFill( Color.WHITE );
         gc.setLineWidth(2);
         Font theFont = Font.font("Consolas", FontWeight.NORMAL, 12);
         gc.setFont( theFont );
         gc.fillText("FPS: " + (int)(1 / delta), 100, 10 );
 
+        // Draw health/ammo box
         gc.setFill(new Color(0.1, 0.1, 0.1, 0.3));
         gc.fillRect(0, this.canvasHeight - 100, 250, 100);
         gc.fillRect(this.canvasWidth - 250, this.canvasHeight - 100, 250, 100);
 
+        // Draw health + ammo
         gc.setFill( Color.WHITE );
         Font healthFont = Font.font("Consolas", FontWeight.BOLD, 48);
         gc.setFont(healthFont);
@@ -61,6 +70,7 @@ public class Gameloop extends AnimationTimer {
         int ammo = this.world.getPlayer().getCurrentWeapon().getAmmo();
         gc.fillText("" + ((ammo < 0) ? "Inf" : ammo), this.canvasWidth - 125, this.canvasHeight - 50);
 
+        // Draw crosshair
         int centerX = this.canvasWidth / 2;
         int centerY = this.canvasHeight / 2;
 

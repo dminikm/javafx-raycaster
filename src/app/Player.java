@@ -20,48 +20,17 @@ public class Player extends Entity {
         int speed = 4;
         int turningSpeed = 80;
 
+        // Run button
         if (r.isKeyDown(KeyCode.SHIFT)) {
             speed *= 1.8;
         }
 
+        // Interact button
         if (r.hasKeyBeenReleased(KeyCode.E)) {
             world.interactRay(this.position, this.direction);
         }
 
-        Vec2 fvel;
-        if (r.isKeyDown(KeyCode.W)) {
-            fvel = Vec2.fromAngle(this.direction.toAngle()).mul(speed);
-        } else if (r.isKeyDown(KeyCode.S)) {
-            fvel = Vec2.fromAngle(this.direction.toAngle()).mul(-speed);
-        } else {
-            fvel = new Vec2();
-        }
-
-        Vec2 svel;
-        if (r.isKeyDown(KeyCode.A)) {
-            svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(-speed);
-        } else if (r.isKeyDown(KeyCode.D)) {
-            svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(speed);
-        } else {
-            svel = new Vec2();
-        }
-
-        if (r.isKeyDown(KeyCode.LEFT)) {
-            this.direction = Vec2.fromAngle(this.direction.toAngle() - turningSpeed * delta);
-        } else if (r.isKeyDown(KeyCode.RIGHT)) {
-            this.direction = Vec2.fromAngle(this.direction.toAngle() + turningSpeed * delta);
-        }
-
-        this.velocity = fvel.add(svel);
-
-        KeyCode[] weaponKeys = new KeyCode[] {
-            KeyCode.DIGIT1, KeyCode.DIGIT2,
-            KeyCode.DIGIT3, KeyCode.DIGIT4,
-            KeyCode.DIGIT5, KeyCode.DIGIT6,
-            KeyCode.DIGIT7, KeyCode.DIGIT8,
-            KeyCode.DIGIT9
-        };
-        
+        // Weapon switching
         for (int i = 0; i < Math.min(weaponKeys.length, this.weapons.size()); i++) {
             Weapon w = this.weapons.get(i);
             if (r.isKeyDown(weaponKeys[i]) && w != null && w.isAvailable()) {
@@ -69,13 +38,40 @@ public class Player extends Entity {
             }
         }
 
+        // Update all weapons
         for (Weapon w : this.weapons) {
             w.update(delta);
         }
 
+        // Fire
         if (r.isKeyDown(KeyCode.SPACE)) {
             this.getCurrentWeapon().fire(this.position, this.direction, world);
         }
+
+        // Forward movement
+        Vec2 fvel = new Vec2();
+        if (r.isKeyDown(KeyCode.W)) {
+            fvel = Vec2.fromAngle(this.direction.toAngle()).mul(speed);
+        } else if (r.isKeyDown(KeyCode.S)) {
+            fvel = Vec2.fromAngle(this.direction.toAngle()).mul(-speed);
+        }
+
+        // Side movement
+        Vec2 svel = new Vec2();
+        if (r.isKeyDown(KeyCode.A)) {
+            svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(-speed);
+        } else if (r.isKeyDown(KeyCode.D)) {
+            svel = Vec2.fromAngle(this.direction.toAngle() + 90).mul(speed);
+        }
+
+        // Looking around
+        if (r.isKeyDown(KeyCode.LEFT)) {
+            this.direction = Vec2.fromAngle(this.direction.toAngle() - turningSpeed * delta);
+        } else if (r.isKeyDown(KeyCode.RIGHT)) {
+            this.direction = Vec2.fromAngle(this.direction.toAngle() + turningSpeed * delta);
+        }
+
+        this.velocity = fvel.add(svel);
     }
 
     @Override
@@ -92,7 +88,7 @@ public class Player extends Entity {
     public void takeDamage(double damage) {
         super.takeDamage(damage);
 
-        if(!this.hurtSound.isPlaying()) {
+        if(!this.hurtSound.isPlaying() && damage > 0) {
             this.hurtSound.play();
         }
     }
@@ -114,4 +110,13 @@ public class Player extends Entity {
     private List<Weapon> weapons;
     private int currentWeapon;
     AudioClip hurtSound;
+
+
+    final KeyCode[] weaponKeys = new KeyCode[] {
+        KeyCode.DIGIT1, KeyCode.DIGIT2,
+        KeyCode.DIGIT3, KeyCode.DIGIT4,
+        KeyCode.DIGIT5, KeyCode.DIGIT6,
+        KeyCode.DIGIT7, KeyCode.DIGIT8,
+        KeyCode.DIGIT9
+    };
 }

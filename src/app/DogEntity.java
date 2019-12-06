@@ -49,11 +49,13 @@ public class DogEntity extends MonsterEntity {
         }
 
         if (this.alerted) {
+            // Get path to player
             List<Vec2> path = world.getPathToPlayer(this.position);
 
             if (path.size() >= 2) {
+                // Move along the path
                 Vec2 dir = path.get(1).add(new Vec2(0.5, 0.5)).sub(this.position).normalize();
-                this.direction = playerDir.normalize();
+                this.direction = dir.normalize();
                 this.velocity = dir.mul(1);
             } else {
                 this.velocity = new Vec2();

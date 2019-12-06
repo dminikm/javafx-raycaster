@@ -27,9 +27,9 @@ public class Line implements RayCastable {
             RaycastResult res = new RaycastResult();
             res.hit = true;
             res.distance = t1;
-            res.precisePositition = start.add(dir.mul(t1));
+            res.precisePosition = start.add(dir.mul(t1));
             res.worldPositition = this.start.copy();
-            res.startOffset = res.precisePositition.sub(this.start).len() / this.start.sub(this.end).len();
+            res.startOffset = res.precisePosition.distance(this.start) / this.start.distance(this.end);//res.precisePositition.sub(this.start).len() / this.start.sub(this.end).len();
 
             return res;
         }

@@ -14,20 +14,20 @@ public abstract class Entity {
         return this.position.copy();
     }
 
-    public Vec2 getDirection() {
-        return this.direction.copy();
-    }
-
-    public Vec2 getVelocity() {
-        return this.velocity.copy();
-    }
-
     public void setPosition(Vec2 pos) {
         this.position = pos.copy();
     }
 
+    public Vec2 getDirection() {
+        return this.direction.copy();
+    }
+    
     public void setDirection(Vec2 dir) {
         this.direction = dir.copy();
+    }
+
+    public Vec2 getVelocity() {
+        return this.velocity.copy();
     }
 
     public void setVelocity(Vec2 vel) {

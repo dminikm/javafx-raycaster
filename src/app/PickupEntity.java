@@ -9,7 +9,7 @@ public abstract class PickupEntity extends WorldEntity {
     @Override
     public void update(double delta, World world) {
         Entity p = world.getPlayer();
-        double distance = p.getPosition().sub(this.position).len();
+        double distance = p.getPosition().distance(this.position);
 
         if (distance < this.radius) {
             this.onPickup((Player)world.getPlayer());

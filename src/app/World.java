@@ -2,34 +2,22 @@ package app;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Sprite {
-    public Sprite(Vec2 pos, int textureId, boolean solid) {
-        this.pos = pos;
-        this.textureId = textureId;
-        this.solid = solid;
-    }
-
-    public Vec2     pos;
-    public int      textureId;
-    public boolean  solid;
-}
-
 public class World implements RayCastable {
-    public World(int[][] worldMap, Player p, TileEntity[] tileEntities, Entity[] entities, Sprite[] sprites) {
+    public World(String name, int[][] worldMap, Player p, List<TileEntity> tileEntities, List<Entity> entities, List<Sprite> sprites) {
+        this.name = name;
         this.worldMap = worldMap;
 
         this.entities = new ArrayList<Entity>();
         this.tileEntities = new ArrayList<>();
         this.sprites = new ArrayList<Sprite>();
 
-        Collections.addAll(this.entities, entities);
-        Collections.addAll(this.tileEntities, tileEntities);
-        Collections.addAll(this.sprites, sprites);
+        this.entities = entities;
+        this.tileEntities = tileEntities;
+        this.sprites = sprites;
 
         this.player = p;
         this.entities.add(p);
@@ -38,6 +26,7 @@ public class World implements RayCastable {
     }
 
     public void resetTo(World w) {
+        this.name = w.name;
         this.entities = w.entities;
         this.tileEntities = w.tileEntities;
         this.player = w.player;
@@ -132,14 +121,14 @@ public class World implements RayCastable {
             r.hit = true;
             r.distance = perpWallDist;
             r.side = side;
-            r.precisePositition = new Vec2(start.x + perpWallDist * dir.x, start.y + perpWallDist * dir.y);
+            r.precisePosition = new Vec2(start.x + perpWallDist * dir.x, start.y + perpWallDist * dir.y);
             r.worldPositition = new Vec2(mapX, mapY);
             r.blockId = this.worldMap[mapY][mapX];
             
             if (r.side == 0) {
-                r.startOffset = r.precisePositition.y - Math.floor(r.precisePositition.y);
+                r.startOffset = r.precisePosition.y - Math.floor(r.precisePosition.y);
             } else {
-                r.startOffset = r.precisePositition.x - Math.floor(r.precisePositition.x);
+                r.startOffset = r.precisePosition.x - Math.floor(r.precisePosition.x);
             }
     
             results.add(r);
@@ -416,13 +405,18 @@ public class World implements RayCastable {
     public void alertEntitiesInDistance(Vec2 pos, double distance) {
         for (Entity ent : this.entities) {
             if (ent instanceof MonsterEntity) {
-                if (ent.getPosition().sub(pos).len() < distance) {
+                if (ent.getPosition().distance(pos) < distance) {
                     ((MonsterEntity)ent).onAlert();
                 }
             }
         }
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    private String name;
     private int[][] worldMap;
 
     private Entity              player;

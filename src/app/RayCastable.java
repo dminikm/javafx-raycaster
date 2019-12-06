@@ -8,7 +8,7 @@ class RaycastResult {
         this.distance = res.distance;
         this.side = res.side;
         this.startOffset = res.startOffset;
-        this.precisePositition = res.precisePositition;
+        this.precisePosition = res.precisePosition;
         this.worldPositition = res.worldPositition;
     }
 
@@ -17,7 +17,7 @@ class RaycastResult {
     public int side                 = 0;
 
     public double startOffset       = 0;
-    public Vec2 precisePositition   = new Vec2();
+    public Vec2 precisePosition   = new Vec2();
     public Vec2 worldPositition     = new Vec2();
 }
 

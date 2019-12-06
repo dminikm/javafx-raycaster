@@ -23,16 +23,8 @@ public class Vec2 {
         return new Vec2(this.x * scalar, this.y * scalar);
     }
 
-    public Vec2 mulVec(Vec2 other) {
-        return new Vec2(this.x * other.x, this.y * other.y);
-    }
-
     public Vec2 div(double scalar) {
         return new Vec2(this.x / scalar, this.y / scalar);
-    }
-
-    public Vec2 divVec(Vec2 other) {
-        return new Vec2(this.x / other.x, this.y * other.y);
     }
 
     public double len() {

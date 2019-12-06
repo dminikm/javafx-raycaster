@@ -25,6 +25,7 @@ public class LevelLoader
         Player p = parsePlayer(json);
 
         var w = new World(
+            fileName,
             parseLevel(json),
             p,
             parseTileEntities(json),
@@ -50,21 +51,16 @@ public class LevelLoader
         return levelData;
     }
 
-    private static Sprite[] parseSprites(JSONObject json) {
+    private static List<Sprite> parseSprites(JSONObject json) {
         List<JSONObject> sprites = JSONUtils.getFromComplexPath(json, "map.sprites");
 
-        var parsedSprites = new ArrayList<Sprite>();
-        for (JSONObject sprite : sprites) {
-            parsedSprites.add(new Sprite(
+        return sprites.stream().map((final JSONObject sprite) -> {
+            return new Sprite(
                 JSONUtils.vecFromJson(sprite, "position"),
                 ((Number)sprite.get("textureId")).intValue(),
                 (boolean)sprite.get("solid")
-            ));
-        }
-
-        Sprite[] arr = new Sprite[parsedSprites.size()];
-        parsedSprites.toArray(arr);
-        return arr;
+            );
+        }).collect(Collectors.toList());
     }
 
     private static Weapon parseWeapon(JSONObject json) {
@@ -102,82 +98,56 @@ public class LevelLoader
         return new Player(position, direction, new Vec2(), weapons, hurtSound);
     }
 
-    private static Entity[] parseEntities(JSONObject json) {
+    private static List<Entity> parseEntities(JSONObject json) {
         List<JSONObject> entities = JSONUtils.getFromComplexPath(json, "map.entities");
-        var parsedEntities = new ArrayList<Entity>();
 
-        for (JSONObject entity : entities) {
+        return entities.stream().map((final JSONObject entity) -> {
             String template = JSONUtils.getFromComplexPath(entity, "template");
-            Entity ent = null;
 
             switch (template.toLowerCase())
             {
                 case "turretentity":
-                    ent = parseTurretEntity(entity);
-                    break;
+                    return parseTurretEntity(entity);
 
                 case "dogentity":
-                    ent = parseDogEntity(entity);
-                    break;
+                    return parseDogEntity(entity);
 
                 case "ammopickupentity":
-                    ent = parseAmmoPickupEntity(entity);
-                    break;
+                    return parseAmmoPickupEntity(entity);
 
                 case "healthpickupentity":
-                    ent = parseHealthPickupEntity(entity);
-                    break;
+                    return parseHealthPickupEntity(entity);
 
                 default:
-                    break;
-            };
-
-            parsedEntities.add(ent);
-        }
-
-        Entity[] res = new Entity[parsedEntities.size()];
-        parsedEntities.toArray(res);
-
-        return res;
+                    return null;
+            }
+        }).collect(Collectors.toList());
     }
 
-    private static TileEntity[] parseTileEntities(JSONObject json) {
+    private static List<TileEntity> parseTileEntities(JSONObject json) {
         List<JSONObject> tileEntities = JSONUtils.getFromComplexPath(json, "map.tileEntities");
-        var parsedTileEntities = new ArrayList<TileEntity>();
 
-        for (JSONObject tileEntity : tileEntities) {
+        return tileEntities.stream().map((final JSONObject tileEntity) -> {
             String template = JSONUtils.getFromComplexPath(tileEntity, "template");
-            TileEntity tent = null;
 
             switch (template.toLowerCase())
             {
                 case "doortileentity":
-                    tent = parseDoorTileEntity(tileEntity);
-                    break;
+                    return parseDoorTileEntity(tileEntity);
 
                 case "gameendtileentity":
-                    tent = parseGameEndTileEntity(tileEntity);
-                    break;
+                    return parseGameEndTileEntity(tileEntity);
 
                 case "levelchangetileentity":
-                    tent = parseLevelChangeTileEntity(tileEntity);
-                    break;
+                    return parseLevelChangeTileEntity(tileEntity);
 
                 case "secretdoortileentity":
-                    tent = parseSecretDoorTileEntity(tileEntity);
-                    break;
+                    return parseSecretDoorTileEntity(tileEntity);
 
                 default:
-                    break;
-            };
-
-            parsedTileEntities.add(tent);
-        }
-
-        TileEntity[] res = new TileEntity[parsedTileEntities.size()];
-        parsedTileEntities.toArray(res);
-
-        return res;
+                    return null;
+            }
+        }).collect(Collectors.toList());
     }
 
     // Individual tile entity parsers
