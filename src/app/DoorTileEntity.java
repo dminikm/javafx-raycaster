@@ -43,7 +43,7 @@ public class DoorTileEntity extends TileEntity {
 
     @Override
     public boolean isSolid() {
-        return this.openedState < 0.2;
+        return this.openedState <= 0.8;
     }
 
     @Override

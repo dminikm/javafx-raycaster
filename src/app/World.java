@@ -23,6 +23,11 @@ public class World implements RayCastable {
         this.entities.add(p);
 
         this.toPlayerPaths = new Vec2[this.worldMap.length][this.worldMap[0].length];
+
+        // For every tile entity, ensure the worldmap has that tile as -1
+        for (TileEntity tent : this.tileEntities) {
+            this.worldMap[(int)tent.position.y][(int)tent.position.x] = -1;
+        }
     }
 
     public void resetTo(World w) {
