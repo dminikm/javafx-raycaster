@@ -21,7 +21,7 @@
                 "animation": {
                     "cycleTime": 0.14,
                     "repeat": true,
-                    "textureIds": [100, 101, 102, 103, 104]
+                    "textureIds": [200, 201, 202, 203, 204]
                 }
             }, {
                 "name": "Pistol",
@@ -36,7 +36,7 @@
                 "animation": {
                     "cycleTime": 0.16,
                     "repeat": true,
-                    "textureIds": [110, 111, 112, 113, 114]
+                    "textureIds": [210, 211, 212, 213, 214]
                 }
             }, {
                 "name": "Machinegun",
@@ -51,93 +51,129 @@
                 "animation": {
                     "cycleTime": 0.04,
                     "repeat": true,
-                    "textureIds": [120, 121, 122, 123, 124]
+                    "textureIds": [220, 221, 222, 223, 224]
                 }
             }
         ]
     },
 
     "textures": [
-        {"id": 0,   "name": "data/assets/air.png"                       },
-        {"id": 1,   "name": "data/assets/bluestone01.png"                       },
-        {"id": 2,   "name": "data/assets/bluestone02.png"                       },
-        {"id": 3,   "name": "data/assets/bluestone03.png"                      },
-        {"id": 4,   "name": "data/assets/bluestone04.png"                      },
-        {"id": 5,   "name": "data/assets/bluestone04.png"                       },
-        {"id": 6,   "name": "data/assets/stone01.png"                      },
-        {"id": 7,   "name": "data/assets/stone02.png"                       },
-        {"id": 8,   "name": "data/assets/stone03.png"                       },
-        {"id": 9,   "name": "data/assets/stone04.png"                       },
-        {"id": 10,  "name": "data/assets/stone04.png"                       },
-        {"id": 11,  "name": "data/assets/wood01.png"                       },
-        {"id": 12,  "name": "data/assets/wood02.png"                       },
-        {"id": 13,  "name": "data/assets/wood03.png"                       },
-        {"id": 14,  "name": "data/assets/wood04.png"                       },
-        {"id": 15,  "name": "data/assets/wood05.png"                       },
-        {"id": 16,  "name": "data/assets/brick01.png"                       },
-        {"id": 17,  "name": "data/assets/brick02.png"                       },
-        {"id": 18,  "name": "data/assets/brick03.png"                       },
-        {"id": 19,  "name": "data/assets/brick04.png"                       },
-        {"id": 20,  "name": "data/assets/brick05.png"                       },
-        {"id": 21,  "name": "data/assets/redbrick01.png"                       },
-        {"id": 22,  "name": "data/assets/redbrick02.png"                       },
-        {"id": 23,  "name": "data/assets/sandstone01.png"                       },
-        {"id": 24,  "name": "data/assets/sandstone02.png"                       },
-        {"id": 25,  "name": "data/assets/elevator01.png"                       },
-        {"id": 26,  "name": "data/assets/elevator02.png"                       },
-        {"id": 27,  "name": "data/assets/elevator03.png"                       },
-        {"id": 28,  "name": "data/assets/door01.png"                    },
-        {"id": 29,  "name": "data/assets/door02.png"                },
-        {"id": 30,  "name": "data/assets/tutorial.png"              },
+        {"id": 0,   "name": "data/assets/textures/air.png"                       },
+        {"id": 1,   "name": "data/assets/textures/bluestone01.png"                       },
+        {"id": 2,   "name": "data/assets/textures/bluestone02.png"                       },
+        {"id": 3,   "name": "data/assets/textures/bluestone03.png"                      },
+        {"id": 4,   "name": "data/assets/textures/bluestone04.png"                      },
+        {"id": 5,   "name": "data/assets/textures/bluestone04.png"                       },
+        {"id": 6,   "name": "data/assets/textures/stone01.png"                      },
+        {"id": 7,   "name": "data/assets/textures/stone02.png"                       },
+        {"id": 8,   "name": "data/assets/textures/stone03.png"                       },
+        {"id": 9,   "name": "data/assets/textures/stone04.png"                       },
+        {"id": 10,  "name": "data/assets/textures/stone04.png"                       },
+        {"id": 11,  "name": "data/assets/textures/wood01.png"                       },
+        {"id": 12,  "name": "data/assets/textures/wood02.png"                       },
+        {"id": 13,  "name": "data/assets/textures/wood03.png"                       },
+        {"id": 14,  "name": "data/assets/textures/wood04.png"                       },
+        {"id": 15,  "name": "data/assets/textures/wood05.png"                       },
+        {"id": 16,  "name": "data/assets/textures/brick01.png"                       },
+        {"id": 17,  "name": "data/assets/textures/brick02.png"                       },
+        {"id": 18,  "name": "data/assets/textures/brick03.png"                       },
+        {"id": 19,  "name": "data/assets/textures/brick04.png"                       },
+        {"id": 20,  "name": "data/assets/textures/brick05.png"                       },
+        {"id": 21,  "name": "data/assets/textures/redbrick01.png"                       },
+        {"id": 22,  "name": "data/assets/textures/redbrick02.png"                       },
+        {"id": 23,  "name": "data/assets/textures/sandstone01.png"                       },
+        {"id": 24,  "name": "data/assets/textures/sandstone02.png"                       },
+        {"id": 25,  "name": "data/assets/textures/elevator01.png"                       },
+        {"id": 26,  "name": "data/assets/textures/elevator02.png"                       },
+        {"id": 27,  "name": "data/assets/textures/elevator03.png"                       },
+        {"id": 28,  "name": "data/assets/textures/door01.png"                    },
+        {"id": 29,  "name": "data/assets/textures/door02.png"                },
+        {"id": 30,  "name": "data/assets/textures/tutorial.png"              },
 
-        {"id": 40, "name": "data/assets/pickups/health.png"         },
+        {"id": 31,  "name": "data/assets/sprites/armor01.png" },
+        {"id": 32,  "name": "data/assets/sprites/barrel01.png" },
+        {"id": 33,  "name": "data/assets/sprites/barrel02.png" },
+        {"id": 34,  "name": "data/assets/sprites/flag.png" },
+        {"id": 35,  "name": "data/assets/sprites/key01.png" },
+        {"id": 36,  "name": "data/assets/sprites/key02.png" },
+        {"id": 37,  "name": "data/assets/sprites/kitchen01.png" },
+        {"id": 38,  "name": "data/assets/sprites/kitchen02.png" },
+        {"id": 39,  "name": "data/assets/sprites/kitchen03.png" },
+        {"id": 40,  "name": "data/assets/sprites/lamp01.png" },
+        {"id": 41,  "name": "data/assets/sprites/lamp02.png" },
+        {"id": 42,  "name": "data/assets/sprites/lamp03.png" },
+        {"id": 43,  "name": "data/assets/sprites/lamp04.png" },
+        {"id": 44,  "name": "data/assets/sprites/pillar01.png" },
+        {"id": 45,  "name": "data/assets/sprites/plant01.png" },
+        {"id": 46,  "name": "data/assets/sprites/plant02.png" },
+        {"id": 47,  "name": "data/assets/sprites/plant03.png" },
+        {"id": 48,  "name": "data/assets/sprites/sink01.png" },
+        {"id": 49,  "name": "data/assets/sprites/skeleton01.png" },
+        {"id": 50,  "name": "data/assets/sprites/skeleton02.png" },
+        {"id": 51,  "name": "data/assets/sprites/skeleton03.png" },
+        {"id": 52,  "name": "data/assets/sprites/skeleton04.png" },
+        {"id": 53,  "name": "data/assets/sprites/skeleton06.png" },
+        {"id": 54,  "name": "data/assets/sprites/skeleton07.png" },
+        {"id": 55,  "name": "data/assets/sprites/skeleton08.png" },
+        {"id": 56,  "name": "data/assets/sprites/skeleton5.png" },
+        {"id": 57,  "name": "data/assets/sprites/spears01.png" },
+        {"id": 58,  "name": "data/assets/sprites/table01.png" },
+        {"id": 59,  "name": "data/assets/sprites/treasure01.png" },
+        {"id": 60,  "name": "data/assets/sprites/treasure02.png" },
+        {"id": 61,  "name": "data/assets/sprites/treasure03.png" },
+        {"id": 62,  "name": "data/assets/sprites/water01.png" },
+        {"id": 63,  "name": "data/assets/sprites/well01.png" },
 
-        {"id": 50,  "name": "data/assets/dog/dog_front01.png"       },
-		{"id": 51,  "name": "data/assets/dog/dog_front02.png"       },
-		{"id": 52,  "name": "data/assets/dog/dog_front03.png"       },
-        {"id": 53,  "name": "data/assets/dog/dog_front04.png"       },
+        {"id": 70, "name": "data/assets/pickups/food01.png"         },
+        {"id": 71, "name": "data/assets/pickups/food02.png"         },
+        {"id": 72, "name": "data/assets/pickups/medkit01.png"         },
+        {"id": 73, "name": "data/assets/pickups/medkit02.png"         },
 
-        {"id": 54,  "name": "data/assets/dog/dog_left_side01.png"       },
-		{"id": 55,  "name": "data/assets/dog/dog_left_side02.png"       },
-		{"id": 56,  "name": "data/assets/dog/dog_left_side03.png"       },
-        {"id": 57,  "name": "data/assets/dog/dog_left_side04.png"       },
-        {"id": 58,  "name": "data/assets/dog/dog_right_side01.png"       },
-		{"id": 59,  "name": "data/assets/dog/dog_right_side02.png"       },
-		{"id": 60,  "name": "data/assets/dog/dog_right_side03.png"       },
-        {"id": 61,  "name": "data/assets/dog/dog_right_side04.png"       },
-        {"id": 62,  "name": "data/assets/dog/dog_back01.png"       },
-		{"id": 63,  "name": "data/assets/dog/dog_back02.png"       },
-		{"id": 64,  "name": "data/assets/dog/dog_back03.png"       },
-        {"id": 65,  "name": "data/assets/dog/dog_back04.png"       },
-        {"id": 66,  "name": "data/assets/dog/dog_attack01.png"       },
-		{"id": 67,  "name": "data/assets/dog/dog_attack02.png"       },
-        {"id": 68,  "name": "data/assets/dog/dog_attack03.png"       },
-        {"id": 69,  "name": "data/assets/dog/dog_dead01.png"       },
-        {"id": 70,  "name": "data/assets/dog/dog_dead02.png"       },
-        {"id": 71,  "name": "data/assets/dog/dog_dead03.png"       },
-        {"id": 72,  "name": "data/assets/dog/dog_dead04.png"       },
+        {"id": 100,  "name": "data/assets/dog/dog_front01.png"       },
+		{"id": 101,  "name": "data/assets/dog/dog_front02.png"       },
+		{"id": 102,  "name": "data/assets/dog/dog_front03.png"       },
+        {"id": 103,  "name": "data/assets/dog/dog_front04.png"       },
+        {"id": 104,  "name": "data/assets/dog/dog_left_side01.png"       },
+		{"id": 105,  "name": "data/assets/dog/dog_left_side02.png"       },
+		{"id": 106,  "name": "data/assets/dog/dog_left_side03.png"       },
+        {"id": 107,  "name": "data/assets/dog/dog_left_side04.png"       },
+        {"id": 108,  "name": "data/assets/dog/dog_right_side01.png"       },
+		{"id": 109,  "name": "data/assets/dog/dog_right_side02.png"       },
+		{"id": 110,  "name": "data/assets/dog/dog_right_side03.png"       },
+        {"id": 111,  "name": "data/assets/dog/dog_right_side04.png"       },
+        {"id": 112,  "name": "data/assets/dog/dog_back01.png"       },
+		{"id": 113,  "name": "data/assets/dog/dog_back02.png"       },
+		{"id": 114,  "name": "data/assets/dog/dog_back03.png"       },
+        {"id": 115,  "name": "data/assets/dog/dog_back04.png"       },
+        {"id": 116,  "name": "data/assets/dog/dog_attack01.png"       },
+		{"id": 117,  "name": "data/assets/dog/dog_attack02.png"       },
+        {"id": 118,  "name": "data/assets/dog/dog_attack03.png"       },
+        {"id": 119,  "name": "data/assets/dog/dog_dead01.png"       },
+        {"id": 120,  "name": "data/assets/dog/dog_dead02.png"       },
+        {"id": 121,  "name": "data/assets/dog/dog_dead03.png"       },
+        {"id": 122,  "name": "data/assets/dog/dog_dead04.png"       },
 
-        {"id": 100, "name": "data/assets/weapons/knife/knife01.png" },
-        {"id": 101, "name": "data/assets/weapons/knife/knife02.png" }, 
-        {"id": 102, "name": "data/assets/weapons/knife/knife03.png" }, 
-        {"id": 103, "name": "data/assets/weapons/knife/knife04.png" }, 
-        {"id": 104, "name": "data/assets/weapons/knife/knife05.png" },
+        {"id": 200, "name": "data/assets/weapons/knife/knife01.png" },
+        {"id": 201, "name": "data/assets/weapons/knife/knife02.png" }, 
+        {"id": 202, "name": "data/assets/weapons/knife/knife03.png" }, 
+        {"id": 203, "name": "data/assets/weapons/knife/knife04.png" }, 
+        {"id": 204, "name": "data/assets/weapons/knife/knife05.png" },
 
-        {"id": 110, "name": "data/assets/weapons/pistol/pistol01.png"},
-        {"id": 111, "name": "data/assets/weapons/pistol/pistol02.png"},
-        {"id": 112, "name": "data/assets/weapons/pistol/pistol03.png"},
-        {"id": 113, "name": "data/assets/weapons/pistol/pistol04.png"},
-        {"id": 114, "name": "data/assets/weapons/pistol/pistol05.png"},
-        {"id": 115, "name": "data/assets/weapons/pistol/pistol_overworld.png"},
-        {"id": 116, "name": "data/assets/weapons/pistol/pistol_magazine.png"},
+        {"id": 210, "name": "data/assets/weapons/pistol/pistol01.png"},
+        {"id": 211, "name": "data/assets/weapons/pistol/pistol02.png"},
+        {"id": 212, "name": "data/assets/weapons/pistol/pistol03.png"},
+        {"id": 213, "name": "data/assets/weapons/pistol/pistol04.png"},
+        {"id": 214, "name": "data/assets/weapons/pistol/pistol05.png"},
+        {"id": 215, "name": "data/assets/weapons/pistol/pistol_overworld.png"},
+        {"id": 216, "name": "data/assets/weapons/pistol/pistol_magazine.png"},
 
-        {"id": 120, "name": "data/assets/weapons/machinegun/machinegun01.png"},
-        {"id": 121, "name": "data/assets/weapons/machinegun/machinegun02.png"},
-        {"id": 122, "name": "data/assets/weapons/machinegun/machinegun03.png"},
-        {"id": 123, "name": "data/assets/weapons/machinegun/machinegun04.png"},
-        {"id": 124, "name": "data/assets/weapons/machinegun/machinegun05.png"},
-        {"id": 125, "name": "data/assets/weapons/machinegun/machinegun_overworld.png"},
-        {"id": 126, "name": "data/assets/weapons/machinegun/machinegun_magazine.png"}
+        {"id": 220, "name": "data/assets/weapons/machinegun/machinegun01.png"},
+        {"id": 221, "name": "data/assets/weapons/machinegun/machinegun02.png"},
+        {"id": 222, "name": "data/assets/weapons/machinegun/machinegun03.png"},
+        {"id": 223, "name": "data/assets/weapons/machinegun/machinegun04.png"},
+        {"id": 224, "name": "data/assets/weapons/machinegun/machinegun05.png"},
+        {"id": 225, "name": "data/assets/weapons/machinegun/machinegun_overworld.png"},
+        {"id": 226, "name": "data/assets/weapons/machinegun/machinegun_magazine.png"}
     ],
 
     "map": {
@@ -177,6 +213,45 @@
         ],
 
         "sprites": [
+            {"position": {"x": 23.5, "y": 28.5}, "textureId": 58, "solid": true},
+            {"position": {"x": 23.5, "y": 23.5}, "textureId": 58, "solid": true},
+
+            {"position": {"x": 3.5, "y": 25.5}, "textureId": 43, "solid": false},
+            {"position": {"x": 7.5, "y": 25.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 11.5, "y": 25.5}, "textureId": 43, "solid": false},
+
+            {"position": {"x": 18.5, "y": 28.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 18.5, "y": 23.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 22.5, "y": 28.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 22.5, "y": 23.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 11.5, "y": 3.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 20.5, "y": 3.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 25.5, "y": 11.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 29.5, "y": 11.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 17.5, "y": 10.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 18.5, "y": 16.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 29.5, "y": 26.5}, "textureId": 42, "solid": false},
+
+            {"position": {"x": 1.5, "y": 28.5}, "textureId": 50, "solid": false},
+            {"position": {"x": 1.5, "y": 22.5}, "textureId": 49, "solid": false},
+            {"position": {"x": 10.5, "y": 23.5}, "textureId": 51, "solid": false},
+            {"position": {"x": 13.5, "y": 28.5}, "textureId": 53, "solid": false},
+
+            {"position": {"x": 10.5, "y": 14.5}, "textureId": 41, "solid": false},
+
+            {"position": {"x": 8.5, "y": 10.5}, "textureId": 44, "solid": true},
+            {"position": {"x": 12.5, "y": 10.5}, "textureId": 44, "solid": true},
+            {"position": {"x": 8.5, "y": 17.5}, "textureId": 44, "solid": true},
+            {"position": {"x": 12.5, "y": 17.5}, "textureId": 44, "solid": true},
+
+
+            {"position": {"x": 2.5, "y": 2.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 2.5, "y": 3.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 3.5, "y": 2.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 27.5, "y": 4.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 26.5, "y": 4.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 27.5, "y": 3.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 26.5, "y": 3.5}, "textureId": 32, "solid": true}
         ],
 
         "tileEntities": [
@@ -213,29 +288,29 @@
                 "sprites": [{
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [50, 51, 52, 53]
+                    "textureIds": [100, 101, 102, 103]
                 }, {
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [54, 55, 56, 57]
+                    "textureIds": [104, 105, 106, 107]
                 },{
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [58, 59, 60, 61]
+                    "textureIds": [108, 109, 110, 111]
                 }
                 , {
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [62, 63, 64, 65]
+                    "textureIds": [112, 113, 114, 115]
                 }, {
                     "cycleTime": 0.33,
                     "repeat": true,
-                    "textureIds": [66, 67, 68]
+                    "textureIds": [116, 117, 118]
                 },
                 {
                     "cycleTime": 0.1,
                     "repeat": false,
-                    "textureIds": [69, 70, 71, 72]
+                    "textureIds": [119, 120, 121, 122]
                 }],
                 "hurtSound": "data/assets/dog/dog_hurt.wav",
                 "attackSound": "data/assets/dog/dog_attack.wav"
@@ -248,29 +323,29 @@
                 "sprites": [{
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [50, 51, 52, 53]
+                    "textureIds": [100, 101, 102, 103]
                 }, {
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [54, 55, 56, 57]
+                    "textureIds": [104, 105, 106, 107]
                 },{
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [58, 59, 60, 61]
+                    "textureIds": [108, 109, 110, 111]
                 }
                 , {
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [62, 63, 64, 65]
+                    "textureIds": [112, 113, 114, 115]
                 }, {
                     "cycleTime": 0.33,
                     "repeat": true,
-                    "textureIds": [66, 67, 68]
+                    "textureIds": [116, 117, 118]
                 },
                 {
                     "cycleTime": 0.1,
                     "repeat": false,
-                    "textureIds": [69, 70, 71, 72]
+                    "textureIds": [119, 120, 121, 122]
                 }],
                 "hurtSound": "data/assets/dog/dog_hurt.wav",
                 "attackSound": "data/assets/dog/dog_attack.wav"
@@ -283,39 +358,39 @@
                 "sprites": [{
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [50, 51, 52, 53]
+                    "textureIds": [100, 101, 102, 103]
                 }, {
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [54, 55, 56, 57]
+                    "textureIds": [104, 105, 106, 107]
                 },{
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [58, 59, 60, 61]
+                    "textureIds": [108, 109, 110, 111]
                 }
                 , {
                     "cycleTime": 0.1,
                     "repeat": true,
-                    "textureIds": [62, 63, 64, 65]
+                    "textureIds": [112, 113, 114, 115]
                 }, {
                     "cycleTime": 0.33,
                     "repeat": true,
-                    "textureIds": [66, 67, 68]
+                    "textureIds": [116, 117, 118]
                 },
                 {
                     "cycleTime": 0.1,
                     "repeat": false,
-                    "textureIds": [69, 70, 71, 72]
+                    "textureIds": [119, 120, 121, 122]
                 }],
                 "hurtSound": "data/assets/dog/dog_hurt.wav",
                 "attackSound": "data/assets/dog/dog_attack.wav"
             },
 
-            {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 26.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
-            {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 25.5 }, "textureId": 116, "weaponName": "Pistol", "amount": 25, "makeAvailable": false },
-            {"template": "HealthPickupEntity", "position": { "x": 10.5, "y": 29.5 }, "textureId": 40, "amount": 25 },
-            {"template": "AmmoPickupEntity", "position": { "x": 1.5, "y": 19.5 }, "textureId": 115, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
-            {"template": "HealthPickupEntity", "position": { "x": 17.5, "y": 29.5 }, "textureId": 40, "amount": 25 }
+            {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 26.5 }, "textureId": 215, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
+            {"template": "AmmoPickupEntity", "position": { "x": 23.5, "y": 25.5 }, "textureId": 216, "weaponName": "Pistol", "amount": 25, "makeAvailable": false },
+            {"template": "HealthPickupEntity", "position": { "x": 10.5, "y": 29.5 }, "textureId": 70, "amount": 25 },
+            {"template": "AmmoPickupEntity", "position": { "x": 1.5, "y": 19.5 }, "textureId": 215, "weaponName": "Pistol", "amount": 10, "makeAvailable": true },
+            {"template": "HealthPickupEntity", "position": { "x": 17.5, "y": 29.5 }, "textureId": 70, "amount": 25 }
         ]
     }
 }
