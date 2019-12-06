@@ -9,5 +9,6 @@ public class TreasurePickupEntity extends PickupEntity {
     @Override
     protected void onPickup(Player p) {
         // Do nothing, treasure is useless
+        this.delete = true;
     }
 }

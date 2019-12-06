@@ -6,13 +6,9 @@ import javafx.scene.media.AudioClip;
 public class SoldierEntity extends MonsterEntity {
     SoldierEntity(Vec2 pos, Vec2 dir, List<AnimatedSprite> sprites, AudioClip hurtSound, AudioClip attackSound) {
         super(pos, dir, new Vec2());
-
-        // Testing with only one now
         this.sprites = sprites;
-
         this.hurtSound = hurtSound;
         this.attackSound = attackSound;
-
         this.health = 15;
     }
 
@@ -36,10 +32,10 @@ public class SoldierEntity extends MonsterEntity {
         } else if (angle > 360 - 45 || angle < 0 + 45) {
             this.currentSpriteIndex = 0;    // Front
 
-            // IF player is in front of the dog, check if he is visible
+            // IF player is in front of the soldier, check if he is visible
             EntityRaycastResult res = world.castRayEntity(this.position, playerDir.normalize(), this);
             if (res.hit && res.entity instanceof Player) {
-                // If so, alert this dog
+                // If so, alert this soldier
                 this.alerted = true;
             }
 
@@ -67,8 +63,9 @@ public class SoldierEntity extends MonsterEntity {
                 this.sprites.get(this.currentSpriteIndex).update(delta);
             }
 
-            // Check if player in range and the dog can bite again
-            if (playerDir.len() < 8 && this.elapsedTime - this.attackDelay > this.lastAttack) {
+            // Check if player in range and the soldier can bite again
+            EntityRaycastResult res = world.castRayEntity(this.position, playerDir.normalize(), this);
+            if (playerDir.len() < 8 && this.elapsedTime - this.attackDelay > this.lastAttack && res.hit && res.entity instanceof Player) {
                 this.fire(world);
                 this.lastAttack = this.elapsedTime;
             }

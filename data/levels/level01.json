@@ -424,9 +424,316 @@
             },
 
             {
-                "template": "SoldierEntity",
-                "position": {"x": 20.5, "y": 27.5},
+                "template": "DogEntity",
+                "position": {"x": 5.5, "y": 3.5},
                 "direction": {"x": -1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [100, 101, 102, 103]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [104, 105, 106, 107]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [108, 109, 110, 111]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [112, 113, 114, 115]
+                }, {
+                    "cycleTime": 0.33,
+                    "repeat": true,
+                    "textureIds": [116, 117, 118]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [119, 120, 121, 122]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 23.5, "y": 24.5},
+                "direction": {"x": -1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 29.5, "y": 8.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 29.5, "y": 10.5},
+                "direction": {"x": 0, "y": -1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 30.5, "y": 13.5},
+                "direction": {"x": -1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 25.5, "y": 12.5},
+                "direction": {"x": 0, "y": -1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 9.5, "y": 9.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 11.5, "y": 9.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 7.5, "y": 13.5},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 7.5, "y": 15.5},
+                "direction": {"x": 1, "y": 0},
                 "sprites": [{
                     "cycleTime": 0.1,
                     "repeat": true,
