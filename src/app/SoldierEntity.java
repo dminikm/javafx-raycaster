@@ -1,5 +1,6 @@
 package app;
 import java.util.List;
+import java.util.Random;
 
 import javafx.scene.media.AudioClip;
 
@@ -28,7 +29,7 @@ public class SoldierEntity extends MonsterEntity {
 
         this.currentSpriteIndex = this.getAngleToPlayer(world);
         if (this.currentSpriteIndex == 0) {
-            // IF player is in front of the soldier, check if he is visible
+            // If player is in front of the soldier, check if he is visible
             EntityRaycastResult res = world.castRayEntity(this.position, playerDir.normalize(), this);
             if (res.hit && res.entity instanceof Player) {
                 // If so, alert this soldier
@@ -54,10 +55,9 @@ public class SoldierEntity extends MonsterEntity {
                 this.sprites.get(this.currentSpriteIndex).update(delta);
             }
 
-            // Check if player in range and the soldier can bite again
+            // Check if player in range and the soldier can attack again
             EntityRaycastResult res = world.castRayEntity(this.position, playerDir.normalize(), this);
             if (playerDir.len() < 8 && this.elapsedTime - this.attackDelay > this.lastAttack && res.hit && res.entity instanceof Player) {
-                this.fire(world);
                 this.lastAttack = this.elapsedTime;
             }
         }
@@ -67,6 +67,7 @@ public class SoldierEntity extends MonsterEntity {
             this.sprites.get(this.currentSpriteIndex).update(delta);
 
             if (this.sprites.get(this.currentSpriteIndex).getCurrentIndex() == 1 && !this.attackSound.isPlaying()) {
+                this.fire(world);
                 this.attackSound.play();
             }
         } else {
@@ -75,7 +76,11 @@ public class SoldierEntity extends MonsterEntity {
     }
 
     private void fire(World world) {
+        Random r = new Random();
         Vec2 dir = world.getPlayer().getPosition().sub(this.position).normalize();
+        double angle = dir.toAngle() + (r.nextBoolean() ? 1 : -1) * (r.nextDouble() * this.spread);
+        dir = Vec2.fromAngle(angle);
+
         EntityRaycastResult res = world.castRayEntity(this.position, dir, this);
 
         if (res.hit) {
@@ -114,6 +119,7 @@ public class SoldierEntity extends MonsterEntity {
     private final double attackDelay = 2;
     private final double attackAnimationTime = 0.48;
     private final int damage = 15;
+    private final double spread = 3;
 
     private AudioClip hurtSound;
     private AudioClip attackSound;
