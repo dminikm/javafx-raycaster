@@ -3,39 +3,43 @@ package app;
 import java.util.List;
 
 public class AnimatedSprite {
-    public AnimatedSprite(List<Number> sprites, double cycleTime, boolean repeat) {
-        this.sprites = sprites;
-        this.elapsedTime = 0;
-        this.cycleTime = cycleTime;
-        this.repeat = repeat;
+  public AnimatedSprite(List<Number> sprites, double cycleTime,
+      boolean repeat) {
+    this.sprites = sprites;
+    this.elapsedTime = 0;
+    this.cycleTime = cycleTime;
+    this.repeat = repeat;
+  }
+
+  public void update(double delta) {
+    this.elapsedTime += delta;
+
+    if (this.elapsedTime >= this.cycleTime * this.sprites.size()
+        && this.repeat) {
+      this.elapsedTime -= this.cycleTime * this.sprites.size();
     }
+  }
 
-    public void update(double delta) {
-        this.elapsedTime += delta;
+  public void setElapsedTime(double time) {
+    this.elapsedTime = time;
+  }
 
-        if (this.elapsedTime >= this.cycleTime * this.sprites.size() && this.repeat) {
-            this.elapsedTime -= this.cycleTime * this.sprites.size();
-        }
-    }
+  public Sprite getSprite(Vec2 pos, boolean solid) {
+    return new Sprite(pos, this.sprites.get(this.getCurrentIndex()).intValue(),
+        solid);
+  }
 
-    public void setElapsedTime(double time) {
-        this.elapsedTime = time;
-    }
+  public int getTextureId() {
+    return this.sprites.get(this.getCurrentIndex()).intValue();
+  }
 
-    public Sprite getSprite(Vec2 pos, boolean solid) {
-        return new Sprite(pos, this.sprites.get(this.getCurrentIndex()).intValue(), solid);
-    }
+  public int getCurrentIndex() {
+    return Math.min((int) (this.elapsedTime / this.cycleTime),
+        this.sprites.size() - 1);
+  }
 
-    public int getTextureId() {
-        return this.sprites.get(this.getCurrentIndex()).intValue();
-    }
-
-    public int getCurrentIndex() {
-        return Math.min((int)(this.elapsedTime / this.cycleTime), this.sprites.size() - 1);
-    }
-
-    private List<Number> sprites;
-    private double cycleTime;
-    private double elapsedTime;
-    private boolean repeat;
+  private List<Number> sprites;
+  private double cycleTime;
+  private double elapsedTime;
+  private boolean repeat;
 }

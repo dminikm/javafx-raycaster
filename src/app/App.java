@@ -7,31 +7,29 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    public static void main(String[] args) throws Exception {
-        launch(args);
-    }
+  public static void main(String[] args) throws Exception {
+    launch(args);
+  }
 
-    @Override
-    public void start(Stage stage) 
-    {
-        stage.setTitle("Raycaster - Dominik Meca (MEC0037)");
-        
-        Group root = new Group();
-        Scene scene = new Scene( root );
-        stage.setScene( scene );
-        
-        final int width = 1280;
-        final int height = 720;
+  @Override
+  public void start(Stage stage) {
+    stage.setTitle("Raycaster - Dominik Meca (MEC0037)");
 
-        Canvas canvas = new Canvas( width, height );
-        root.getChildren().add( canvas );
+    Group root = new Group();
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
 
-        KeyRegistry.constructInstance(scene);
+    final int width = 1280;
+    final int height = 720;
 
-        Gameloop g = new Gameloop(canvas);
-        g.start();
+    Canvas canvas = new Canvas(width, height);
+    root.getChildren().add(canvas);
 
+    KeyRegistry.constructInstance(scene);
 
-        stage.show();
-    }
+    Gameloop g = new Gameloop(canvas);
+    g.start();
+
+    stage.show();
+  }
 }
