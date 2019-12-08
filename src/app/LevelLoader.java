@@ -24,7 +24,7 @@ public class LevelLoader
         
         Player p = parsePlayer(json);
 
-        var w = new World(
+        World w = new World(
             fileName,
             parseLevel(json),
             p,
@@ -90,8 +90,8 @@ public class LevelLoader
     }
 
     private static Player parsePlayer(JSONObject json) {
-        var position = JSONUtils.vecFromJson(json, "player.start");
-        var direction = JSONUtils.vecFromJson(json, "player.dir");
+        Vec2 position = JSONUtils.vecFromJson(json, "player.start");
+        Vec2 direction = JSONUtils.vecFromJson(json, "player.dir");
         List<Weapon> weapons = parseWeapons(JSONUtils.getFromComplexPath(json, "player"));
         AudioClip hurtSound = JSONUtils.getAudioClipFromJson(json, "player.hurtSound");
 

@@ -31,7 +31,7 @@ public class KeyRegistry {
 
     private KeyRegistry(Scene scene) {
         this.keys = new HashMap<KeyCode, KeyState>();
-        var self = this;
+        KeyRegistry self = this;
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -53,7 +53,7 @@ public class KeyRegistry {
             this.keys.put(key, KeyState.KeyStateUp);
         }
 
-        var keyState = this.keys.get(key);
+        KeyState keyState = this.keys.get(key);
         return keyState != KeyState.KeyStateUp && keyState != KeyState.KeyStateReleased;
     }
 
