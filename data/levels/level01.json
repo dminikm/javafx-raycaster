@@ -314,7 +314,7 @@
             {"template": "DoorTileEntity", "position": { "x": 10, "y": 5 }, "textureId": 28, "startOffset": {"x": 0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
 
             {"template": "DoorTileEntity", "position": { "x": 3, "y": 14 }, "textureId": 27, "startOffset": {"x": 0.5, "y": 1.0}, "endOffset": {"x": 0.5, "y": 0.0}, "sound": "data/assets/door.wav"},
-            {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 14}, "nextLevel": "data/levels/level01.json", "textureId": 25}
+            {"template": "LevelChangeTileEntity", "position": {"x": 1, "y": 14}, "nextLevel": "data/levels/level02.json", "textureId": 25}
         ],
 
         "entities": [
