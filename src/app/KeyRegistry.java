@@ -65,6 +65,16 @@ public class KeyRegistry {
         return this.keys.get(key) == KeyState.KeyStateReleased;
     }
 
+    public boolean hasAnyKeyBeenReleased() {
+        for (KeyState key : this.keys.values()) {
+            if (key == KeyState.KeyStateReleased) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public KeyState getKeyState(KeyCode key) {
         if (!this.keys.containsKey(key)) {
             this.keys.put(key, KeyState.KeyStateUp);

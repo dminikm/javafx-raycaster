@@ -5,10 +5,15 @@ public class GameEndTileEntity extends TileEntity {
         super(pos);
 
         this.textureId = textureId;
+        this.gameEnd = false;
     }
 
     @Override
-    public void update(double delta, World world) {}
+    public void update(double delta, World world) {
+        if (this.gameEnd) {
+            world.endGame();
+        }
+    }
 
     @Override
     public int getTextureId() {
@@ -17,8 +22,7 @@ public class GameEndTileEntity extends TileEntity {
 
     @Override
     public void onInteract() {
-        // TODO: Implement end screen?
-        System.exit(0);
+        this.gameEnd = true;
     }
 
     @Override
@@ -42,4 +46,5 @@ public class GameEndTileEntity extends TileEntity {
     }
 
     private int textureId;
+    private boolean gameEnd;
 }

@@ -28,6 +28,8 @@ public class World implements RayCastable {
         for (TileEntity tent : this.tileEntities) {
             this.worldMap[(int)tent.position.y][(int)tent.position.x] = -1;
         }
+
+        this.gameShouldEnd = false;
     }
 
     public void resetTo(World w) {
@@ -421,6 +423,14 @@ public class World implements RayCastable {
         return this.name;
     }
 
+    public void endGame() {
+        this.gameShouldEnd = true;
+    }
+
+    public boolean shouldEnd() {
+        return this.gameShouldEnd;
+    }
+
     private String name;
     private int[][] worldMap;
 
@@ -431,4 +441,7 @@ public class World implements RayCastable {
 
     // Pathfinding stuff
     private Vec2[][] toPlayerPaths;
+
+    // Should the game end
+    private boolean gameShouldEnd;
 }

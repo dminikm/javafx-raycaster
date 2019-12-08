@@ -1,9 +1,12 @@
 package app;
 
+import java.io.File;
+
 import javafx.animation.AnimationTimer;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,21 +26,35 @@ public class Gameloop extends AnimationTimer {
         this.textureRegistry = TextureRegistry.getInstance();
         this.world = LevelLoader.loadLevel("data/levels/level02.json", textureRegistry);
         this.renderer = new Renderer(canvasWidth, canvasHeight, this.world, textureRegistry);
+
+        try {
+            this.endImage = new Image(new File("data/assets/end_screen.png").toURI().toString());
+        } catch(Exception e) {}
     }
 
     @Override
     public void handle(long currentNanoTime) {
-        double delta = (currentNanoTime - lastNanoTime) / 1000000000.0;
-        this.lastNanoTime = currentNanoTime;
+        if (!this.world.shouldEnd()) {
+            double delta = (currentNanoTime - lastNanoTime) / 1000000000.0;
+            this.lastNanoTime = currentNanoTime;
 
-        this.udpate(delta);
-        this.render(delta);
+            this.udpate(delta);
+            this.render(delta);
 
-        if (this.world.getPlayer().health <= 0) {
-            this.world.resetTo(LevelLoader.loadLevel(this.world.getName(), this.textureRegistry));
+            if (this.world.getPlayer().health <= 0) {
+                this.world.resetTo(LevelLoader.loadLevel(this.world.getName(), this.textureRegistry));
+            }
+
+            KeyRegistry.getInstance().update(delta);
+        } else {
+            this.renderEndScreen();
+
+            if (KeyRegistry.getInstance().hasAnyKeyBeenReleased()) {
+                System.exit(0);
+            }
+
+            KeyRegistry.getInstance().update(1);
         }
-
-        KeyRegistry.getInstance().update(delta);
     }
 
     private void render(double delta) {
@@ -87,6 +104,10 @@ public class Gameloop extends AnimationTimer {
         gc.fillRect(centerX - 1, centerY + 4, 2, 10);
     }
 
+    private void renderEndScreen() {
+        this.gc.drawImage(this.endImage, 0, 0, this.endImage.getWidth(), this.endImage.getHeight(), 0, 0, this.canvasWidth, this.canvasHeight);
+    }
+
     private void udpate(double delta) {
         this.world.update(delta);
     }
@@ -104,4 +125,6 @@ public class Gameloop extends AnimationTimer {
     private TextureRegistry textureRegistry;
     private Renderer renderer;
     private World world;
+
+    private Image endImage;
 }
