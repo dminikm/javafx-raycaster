@@ -35,11 +35,11 @@ public class ColorBuffer {
     }
 
     public int getPixel(int x, int y) {
-        return this.data[y * this.width + x];
+        return this.data[Math.abs(y * this.width + x)];
     }
 
     public void setPixel(int x, int y, int color) {
-        this.data[y * this.width + x] = color;
+        this.data[Math.abs(y * this.width + x)] = color;
     }
 
     public void setPixelTransparent(int x, int y, int color) {
