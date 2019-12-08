@@ -19,6 +19,7 @@ public class AmmoPickupEntity extends PickupEntity {
         if (w != null) {
             if (this.makeAvailable) {
                 w.setAvailable(true);
+                p.setWeapon(w);
             }
 
             w.addAmmo(amount);

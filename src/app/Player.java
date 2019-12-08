@@ -10,6 +10,13 @@ public class Player extends Entity {
         this.weapons = weapons;
         this.currentWeapon = 0;
 
+        // Start with the latest available weapon
+        for (int i = 0; i < this.weapons.size(); i++) {
+            if (this.weapons.get(i).isAvailable()) {
+                this.currentWeapon = i;
+            }
+        }
+
         this.hurtSound = hurtSound;
     }
 
@@ -105,6 +112,15 @@ public class Player extends Entity {
         }
 
         return null;
+    }
+
+    public void setWeapon(Weapon w) {
+        for (int i = 0; i < this.weapons.size(); i++) {
+            if (w.getName().equals(this.weapons.get(i).getName())) {
+                this.currentWeapon = i;
+                return;
+            }
+        }
     }
 
     private List<Weapon> weapons;
