@@ -5,7 +5,7 @@
 
     "player": {
         "start": {"x": 1.5, "y": 16.5},
-        "dir": {"x": -1, "y": 0},
+        "dir": {"x": 1, "y": 0},
         "hurtSound": "data/assets/player_hurt.wav",
         "weapons": [
             {
@@ -182,6 +182,13 @@
         {"id": 156,  "name": "data/assets/soldier/soldier_dead04.png"       },
         {"id": 157,  "name": "data/assets/soldier/soldier_dead05.png"       },
 
+        {"id": 170, "name": "data/assets/turret/turret_idle.png"},
+        {"id": 171, "name": "data/assets/turret/turret_firing01.png"},
+        {"id": 172, "name": "data/assets/turret/turret_firing02.png"},
+        {"id": 173, "name": "data/assets/turret/turret_firing03.png"},
+        {"id": 174, "name": "data/assets/turret/turret_firing04.png"},
+        {"id": 175, "name": "data/assets/turret/turret_dead.png"},
+
         {"id": 200, "name": "data/assets/weapons/knife/knife01.png" },
         {"id": 201, "name": "data/assets/weapons/knife/knife02.png" }, 
         {"id": 202, "name": "data/assets/weapons/knife/knife03.png" }, 
@@ -207,47 +214,580 @@
 
     "map": {
         "level": [
-            [6,9,10,8,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [6,9,8,8,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [6,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [10,0,0,0,8,8,6,7,7,7,10,6,6,8,10,6,6,8,6,6,8,7,6,6,0,0,0,0,0,0,0,0],
+            [8,0,0,0,8,8,6,7,7,7,10,6,6,8,6,6,6,8,6,6,8,7,6,6,0,0,0,0,0,0,0,0],
             [6,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0],
-            [8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0],
+            [8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0],
             [6,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,26,0,0,0,0],
             [7,0,0,0,6,8,0,6,8,6,0,8,7,0,0,7,6,0,8,7,8,0,8,8,0,0,26,0,26,0,0,0],
             [6,0,0,0,6,0,0,0,7,0,0,0,7,0,0,7,0,0,0,7,0,0,0,8,0,0,26,0,26,0,0,0],
             [6,0,0,0,8,0,0,0,6,0,0,0,7,0,0,6,0,0,0,6,0,0,0,7,0,0,6,0,8,0,0,0],
             [6,0,0,0,7,0,0,0,8,0,0,0,6,0,0,10,0,0,0,8,0,0,0,6,0,0,6,0,6,0,0,0],
-            [21,21,0,21,21,8,9,7,6,8,6,7,8,0,0,7,7,9,10,6,6,7,7,10,0,0,10,0,7,0,0,0],
+            [21,21,0,21,21,8,8,7,6,8,6,7,8,0,0,7,7,7,6,6,6,7,7,8,0,0,7,0,7,0,0,0],
             [21,0,0,0,21,0,0,7,0,0,0,0,8,0,0,7,15,15,12,15,15,15,12,11,15,15,15,0,11,11,11,11],
-            [21,0,0,0,22,0,0,7,0,0,0,0,7,0,0,6,15,0,0,0,0,0,0,0,0,0,13,0,13,0,0,15],
-            [21,0,0,0,21,0,0,6,0,0,0,0,6,0,0,8,15,0,0,0,0,0,0,0,0,0,15,0,11,0,0,14],
-            [21,22,21,21,21,8,7,7,0,0,0,0,6,0,0,7,12,14,14,12,11,11,11,11,11,11,15,0,13,0,0,15],
-            [0,26,8,6,8,7,7,7,6,7,6,8,10,0,0,8,15,0,0,0,0,0,0,0,0,0,0,0,11,0,0,15],
-            [25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,12,0,0,0,0,0,0,0,0,0,0,0,11,0,0,15],
-            [0,26,8,8,8,7,7,7,6,9,8,6,8,0,0,6,13,0,0,11,11,15,15,11,14,15,15,12,11,0,0,15],
-            [0,0,0,20,0,0,0,0,0,0,0,0,9,0,0,8,13,0,0,11,15,11,15,11,14,11,12,13,11,15,14,11],
-            [17,17,16,16,0,16,16,17,17,16,17,0,7,0,0,7,15,0,0,12,0,0,0,15,0,0,0,15,0,0,0,11],
-            [18,0,0,0,0,0,17,0,0,0,17,0,6,0,0,8,11,0,0,15,0,0,0,11,0,0,0,15,0,0,0,14],
+            [21,0,0,0,0,0,0,7,0,0,0,0,7,0,0,6,15,0,0,0,0,0,0,0,0,0,13,0,13,0,0,15],
+            [21,0,0,0,21,22,21,6,0,0,0,0,6,0,0,8,15,0,0,0,0,0,0,0,0,0,15,0,11,0,0,14],
+            [21,22,21,21,21,8,7,7,0,0,0,0,6,0,0,7,12,15,11,12,11,11,11,11,11,11,15,0,15,0,0,15],
+            [0,26,8,6,8,7,7,7,6,7,6,8,7,0,0,8,15,0,0,0,0,0,0,0,0,0,0,0,11,0,0,15],
+            [25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,15,0,0,0,0,0,0,0,0,0,0,0,11,0,0,15],
+            [0,26,8,8,8,7,7,7,6,8,8,6,8,0,0,6,13,0,0,11,11,15,15,11,15,15,15,12,11,0,0,15],
+            [0,0,0,20,0,0,0,0,0,0,0,0,9,0,0,8,15,0,0,11,15,12,11,11,11,12,11,13,11,12,11,11],
+            [17,17,16,16,0,16,16,17,17,16,17,0,7,0,0,7,15,0,0,11,0,0,0,15,0,0,0,15,0,0,0,11],
+            [18,0,0,0,0,0,17,0,0,0,17,0,6,0,0,8,11,0,0,15,0,0,0,11,0,0,0,15,0,0,0,11],
             [17,0,0,0,0,0,17,0,0,0,17,0,7,0,0,8,15,0,0,15,0,0,0,11,0,0,0,11,0,0,0,15],
-            [16,0,0,0,0,0,16,0,0,0,17,0,10,0,0,8,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11],
-            [18,0,0,0,0,0,16,0,0,0,16,0,8,0,0,9,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],
-            [17,0,0,0,0,0,16,0,16,16,18,0,8,0,0,6,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],
-            [17,0,0,0,0,0,16,0,20,16,16,0,9,0,0,8,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11],
-            [17,18,0,0,19,16,16,0,16,16,18,0,7,0,0,6,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],
-            [0,6,0,0,7,0,0,0,0,0,0,0,6,0,0,10,14,15,15,15,11,15,11,14,0,11,11,12,13,11,11,11],
-            [6,7,0,0,8,9,8,9,8,8,8,7,6,0,0,9,6,6,7,7,7,8,8,6,0,7,8,8,7,7,8,7],
+            [16,0,0,0,0,0,16,0,0,0,17,0,8,0,0,8,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11],
+            [18,0,0,0,0,0,16,0,0,0,16,0,8,0,0,6,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],
+            [17,0,0,0,0,0,16,0,16,16,18,0,8,0,0,6,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],
+            [17,0,0,0,0,0,16,0,20,16,16,0,7,0,0,8,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11],
+            [17,18,0,0,19,16,16,0,16,16,18,0,7,0,0,6,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],
+            [0,6,0,0,7,0,0,0,0,0,0,0,6,0,0,10,11,15,15,15,11,15,11,12,0,11,11,12,13,11,11,11],
+            [6,7,0,0,8,6,8,9,8,8,8,7,6,0,0,9,6,6,7,7,7,8,8,6,0,7,8,8,7,7,8,7],
             [7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7],
             [8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8],
             [8,7,8,7,6,7,8,8,7,6,8,6,8,10,6,7,8,8,7,7,6,7,7,6,6,7,7,8,9,6,6,7]
         ],
 
         "sprites": [
+            {"position": {"x": 5.5, "y": 7.5}, "textureId": 57, "solid": true},
+            {"position": {"x": 5.5, "y": 8.5}, "textureId": 57, "solid": true},
+            {"position": {"x": 5.5, "y": 9.5}, "textureId": 57, "solid": true},
+            {"position": {"x": 6.5, "y": 9.5}, "textureId": 57, "solid": true},
+            {"position": {"x": 7.5, "y": 7.5}, "textureId": 57, "solid": true},
+            {"position": {"x": 7.5, "y": 8.5}, "textureId": 57, "solid": true},
+            {"position": {"x": 7.5, "y": 9.5}, "textureId": 57, "solid": true},
+
+            {"position": {"x": 9.5, "y": 7.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 9.5, "y": 8.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 9.5, "y": 9.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 10.5, "y": 9.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 11.5, "y": 7.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 11.5, "y": 8.5}, "textureId": 32, "solid": true},
+            {"position": {"x": 11.5, "y": 9.5}, "textureId": 32, "solid": true},
+
+            {"position": {"x": 16.5, "y": 7.5}, "textureId": 49, "solid": false},
+            {"position": {"x": 16.5, "y": 8.5}, "textureId": 49, "solid": false},
+            {"position": {"x": 16.5, "y": 9.5}, "textureId": 51, "solid": false},
+            {"position": {"x": 17.5, "y": 9.5}, "textureId": 52, "solid": false},
+            {"position": {"x": 18.5, "y": 7.5}, "textureId": 53, "solid": false},
+            {"position": {"x": 18.5, "y": 8.5}, "textureId": 49, "solid": false},
+            {"position": {"x": 18.5, "y": 9.5}, "textureId": 50, "solid": false},
+
+            {"position": {"x": 20.5, "y": 7.5}, "textureId": 33, "solid": true},
+            {"position": {"x": 20.5, "y": 8.5}, "textureId": 33, "solid": true},
+            {"position": {"x": 20.5, "y": 9.5}, "textureId": 33, "solid": true},
+            {"position": {"x": 21.5, "y": 9.5}, "textureId": 33, "solid": true},
+            {"position": {"x": 22.5, "y": 7.5}, "textureId": 33, "solid": true},
+            {"position": {"x": 22.5, "y": 8.5}, "textureId": 33, "solid": true},
+            {"position": {"x": 22.5, "y": 9.5}, "textureId": 33, "solid": true},
+
+            {"position": {"x": 2.5, "y": 5.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 13.5, "y": 4.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 14.5, "y": 10.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 13.5, "y": 15.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 14.5, "y": 20.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 14.5, "y": 27.5}, "textureId": 42, "solid": false},
+            {"position": {"x": 23.5, "y": 15.5}, "textureId": 42, "solid": false},
+
+            {"position": {"x": 3.5, "y": 23.5}, "textureId": 41, "solid": false},
+            {"position": {"x": 20.5, "y": 24.5}, "textureId": 41, "solid": false},
+            {"position": {"x": 28.5, "y": 24.5}, "textureId": 41, "solid": false},
+
+            {"position": {"x": 1.5, "y": 11.5}, "textureId": 39, "solid": true},
+            {"position": {"x": 1.5, "y": 12.5}, "textureId": 39, "solid": true},
+            {"position": {"x": 1.5, "y": 13.5}, "textureId": 39, "solid": true},
+            {"position": {"x": 2.5, "y": 13.5}, "textureId": 39, "solid": true},
+            {"position": {"x": 3.5, "y": 13.5}, "textureId": 39, "solid": true},
+
+            {"position": {"x": 21.5, "y": 19.5}, "textureId": 45, "solid": true},
+            {"position": {"x": 25.5, "y": 19.5}, "textureId": 45, "solid": true},
+            {"position": {"x": 29.5, "y": 19.5}, "textureId": 45, "solid": true}
         ],
 
         "tileEntities": [
+            {"template": "SecretDoorTileEntity", "position": {"x": 4, "y": 12}, "path": [{"x": 4.5, "y": 12.5}, {"x": 5.5, "y": 12.5}, {"x": 5.5, "y": 13.5}], "textureId": 22},
+            {"template": "SecretDoorTileEntity", "position": {"x": 4, "y": 19}, "path": [{"x": 4.5, "y": 19.5}, {"x": 4.5, "y": 18.5}, {"x": 3.5, "y": 18.5}], "textureId": 20},
+            {"template": "SecretDoorTileEntity", "position": {"x": 7, "y": 26}, "path": [{"x": 7.5, "y": 26.5}, {"x": 7.5, "y": 25.5}, {"x": 8.5, "y": 25.5}], "textureId": 20},
+
+            {"template": "DoorTileEntity", "position": { "x": 2, "y": 16 }, "textureId": 27, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 12, "y": 16 }, "textureId": 28, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 6, "y": 6 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 10, "y": 6 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 17, "y": 6 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 21, "y": 6 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 2, "y": 10 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 2, "y": 26 }, "textureId": 28, "startOffset": {"x": 1.0, "y": 0.5}, "endOffset": {"x": 0.1, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 3, "y": 26 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 24, "y": 28 }, "textureId": 28, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 27, "y": 8 }, "textureId": 27, "startOffset": {"x": 0.0, "y": 0.5}, "endOffset": {"x": 1.0, "y": 0.5}, "sound": "data/assets/door.wav"},
+            {"template": "DoorTileEntity", "position": { "x": 4, "y": 4 }, "textureId": 28, "startOffset": {"x": 0.5, "y": 0.0}, "endOffset": {"x": 0.5, "y": 1.0}, "sound": "data/assets/door.wav"},
+
+            {"template": "GameEndTileEntity", "position": {"x": 27, "y": 6}, "textureId": 25}
         ],
 
         "entities": [
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 2.5, "y": 8.5},
+                "direction": {"x": 0, "y": -1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 7.5, "y": 4.5},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 19.5, "y": 4.5},
+                "direction": {"x": -1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 2.5, "y": 21.5},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 4.5, "y": 21.5},
+                "direction": {"x": -1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 2.5, "y": 24.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 4.5, "y": 24.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 22.5, "y": 21.5},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "SoldierEntity",
+                "position": {"x": 26.5, "y": 21.5},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [130, 131, 132, 133, 134]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [135, 136, 137, 138, 139]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [140, 141, 142, 143, 144]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [145, 146, 147, 148, 149]
+                }, {
+                    "cycleTime": 0.12,
+                    "repeat": false,
+                    "textureIds": [150, 151, 152, 151]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [153, 154, 155, 156, 157]
+                }],
+                "hurtSound": "data/assets/soldier/soldier_hurt.wav",
+                "attackSound": "data/assets/soldier/soldier_attack.wav"
+            },
+
+            {
+                "template": "DogEntity",
+                "position": {"x": 21.5, "y": 21.5},
+                "direction": {"x": 0, "y": -1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [100, 101, 102, 103]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [104, 105, 106, 107]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [108, 109, 110, 111]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [112, 113, 114, 115]
+                }, {
+                    "cycleTime": 0.33,
+                    "repeat": true,
+                    "textureIds": [116, 117, 118]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [119, 120, 121, 122]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
+            },
+
+            {
+                "template": "DogEntity",
+                "position": {"x": 25.5, "y": 21.5},
+                "direction": {"x": 1, "y": 0},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [100, 101, 102, 103]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [104, 105, 106, 107]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [108, 109, 110, 111]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [112, 113, 114, 115]
+                }, {
+                    "cycleTime": 0.33,
+                    "repeat": true,
+                    "textureIds": [116, 117, 118]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [119, 120, 121, 122]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
+            },
+
+            {
+                "template": "DogEntity",
+                "position": {"x": 29.5, "y": 21.5},
+                "direction": {"x": 0, "y": 1},
+                "sprites": [{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [100, 101, 102, 103]
+                }, {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [104, 105, 106, 107]
+                },{
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [108, 109, 110, 111]
+                }
+                , {
+                    "cycleTime": 0.1,
+                    "repeat": true,
+                    "textureIds": [112, 113, 114, 115]
+                }, {
+                    "cycleTime": 0.33,
+                    "repeat": true,
+                    "textureIds": [116, 117, 118]
+                },
+                {
+                    "cycleTime": 0.1,
+                    "repeat": false,
+                    "textureIds": [119, 120, 121, 122]
+                }],
+                "hurtSound": "data/assets/dog/dog_hurt.wav",
+                "attackSound": "data/assets/dog/dog_attack.wav"
+            },
+
+            {
+                "template": "TurretEntity",
+                "position": {"x": 13.5, "y": 30.5},
+                "sprite": {
+                    "cycleTime": 0.2,
+                    "repeat": true,
+                    "textureIds": [170, 171, 172, 173, 174]
+                },
+                "deadSprite": {
+                    "cycleTime": 1,
+                    "repeat": false,
+                    "textureIds": [175]
+                },
+                "firingSound": "data/assets/turret/turret_firing.wav",
+                "hurtSound": "data/assets/turret/turret_hurt.wav"
+            },
+
+            {
+                "template": "TurretEntity",
+                "position": {"x": 27.5, "y": 16.5},
+                "sprite": {
+                    "cycleTime": 0.2,
+                    "repeat": true,
+                    "textureIds": [170, 171, 172, 173, 174]
+                },
+                "deadSprite": {
+                    "cycleTime": 1,
+                    "repeat": false,
+                    "textureIds": [175]
+                },
+                "firingSound": "data/assets/turret/turret_firing.wav",
+                "hurtSound": "data/assets/turret/turret_hurt.wav"
+            },
+            
+            {"template": "HealthPickupEntity", "position": {"x": 6.5, "y": 8.5}, "textureId": 72, "amount": 35},
+            {"template": "HealthPickupEntity", "position": {"x": 9.5, "y": 23.5}, "textureId": 72, "amount": 35},
+            {"template": "HealthPickupEntity", "position": {"x": 30.5, "y": 19.5}, "textureId": 72, "amount": 35},
+
+            {"template": "HealthPickupEntity", "position": {"x": 6.5, "y": 12.5}, "textureId": 71, "amount": 25},
+
+            {"template": "AmmoPickupEntity", "position": {"x": 5.5, "y": 11.5}, "textureId": 225, "amount": 15, "makeAvailable": true, "weaponName": "Machinegun"},
+            {"template": "AmmoPickupEntity", "position": {"x": 8.5, "y": 20.5}, "textureId": 225, "amount": 15, "makeAvailable": true, "weaponName": "Machinegun"},
+            {"template": "AmmoPickupEntity", "position": {"x": 3.5, "y": 20.5}, "textureId": 225, "amount": 15, "makeAvailable": true, "weaponName": "Machinegun"},
+
+            {"template": "AmmoPickupEntity", "position": {"x": 2.5, "y": 20.5}, "textureId": 226, "amount": 25, "makeAvailable": false, "weaponName": "Machinegun"},
+            {"template": "AmmoPickupEntity", "position": {"x": 4.5, "y": 20.5}, "textureId": 226, "amount": 25, "makeAvailable": false, "weaponName": "Machinegun"},
+            {"template": "AmmoPickupEntity", "position": {"x": 6.5, "y": 11.5}, "textureId": 226, "amount": 25, "makeAvailable": false, "weaponName": "Machinegun"},
+
+            {"template": "TreasurePickupEntity", "position": { "x": 9.5, "y": 20.5 }, "textureId": 59},
+            {"template": "TreasurePickupEntity", "position": { "x": 9.5, "y": 21.5 }, "textureId": 60},
+            {"template": "TreasurePickupEntity", "position": { "x": 9.5, "y": 22.5 }, "textureId": 59}
         ]
     }
 }

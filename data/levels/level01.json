@@ -182,6 +182,13 @@
         {"id": 156,  "name": "data/assets/soldier/soldier_dead04.png"       },
         {"id": 157,  "name": "data/assets/soldier/soldier_dead05.png"       },
 
+        {"id": 170, "name": "data/assets/turret/turret_idle.png"},
+        {"id": 171, "name": "data/assets/turret/turret_firing01.png"},
+        {"id": 172, "name": "data/assets/turret/turret_firing02.png"},
+        {"id": 173, "name": "data/assets/turret/turret_firing03.png"},
+        {"id": 174, "name": "data/assets/turret/turret_firing04.png"},
+        {"id": 175, "name": "data/assets/turret/turret_dead.png"},
+
         {"id": 200, "name": "data/assets/weapons/knife/knife01.png" },
         {"id": 201, "name": "data/assets/weapons/knife/knife02.png" }, 
         {"id": 202, "name": "data/assets/weapons/knife/knife03.png" }, 
